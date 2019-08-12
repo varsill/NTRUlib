@@ -1,0 +1,2 @@
+/usr/bin/ar qc libntrulib.a  CMakeFiles/ntrulib.dir/src/main.c.o
+/usr/bin/ranlib libntrulib.a

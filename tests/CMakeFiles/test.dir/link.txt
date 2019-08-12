@@ -1,0 +1,1 @@
+/usr/bin/cc   -rdynamic CMakeFiles/test.dir/src/polynominal_test.c.o  -o test ../libntrulib.a -lpthread -lcheck -lrt -lsubunit 

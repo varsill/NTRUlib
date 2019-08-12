@@ -1,0 +1,3 @@
+/home/tadeusz/Desktop/ntru/tests/CMakeFiles/rebuild_cache.dir
+/home/tadeusz/Desktop/ntru/tests/CMakeFiles/test.dir
+/home/tadeusz/Desktop/ntru/tests/CMakeFiles/edit_cache.dir

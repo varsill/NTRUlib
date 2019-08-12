@@ -1,0 +1,34 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/tadeusz/Desktop/ntru/tests/src/polynominal_test.c
+check.h
+-
+stdlib.h
+-
+stdio.h
+-
+quotient_polynominal_ring.h
+/home/tadeusz/Desktop/ntru/tests/src/quotient_polynominal_ring.h
+polynominal.h
+/home/tadeusz/Desktop/ntru/tests/src/polynominal.h
+stdbool.h
+-
+config.h
+/home/tadeusz/Desktop/ntru/tests/src/config.h
+
+include/config.h
+
+include/polynominal.h
+quotient_polynominal_ring.h
+include/quotient_polynominal_ring.h
+
+include/quotient_polynominal_ring.h
+polynominal.h
+include/polynominal.h
+
