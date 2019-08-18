@@ -25,10 +25,14 @@ config.h
 include/config.h
 
 include/polynominal.h
-quotient_polynominal_ring.h
-include/quotient_polynominal_ring.h
+config.h
+include/config.h
+stdbool.h
+-
 
 include/quotient_polynominal_ring.h
 polynominal.h
 include/polynominal.h
+stdlib.h
+include/stdlib.h
 

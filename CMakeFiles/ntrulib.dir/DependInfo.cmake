@@ -5,6 +5,8 @@ set(CMAKE_DEPENDS_LANGUAGES
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_C
   "/home/tadeusz/Desktop/ntru/src/main.c" "/home/tadeusz/Desktop/ntru/CMakeFiles/ntrulib.dir/src/main.c.o"
+  "/home/tadeusz/Desktop/ntru/src/polynominal.c" "/home/tadeusz/Desktop/ntru/CMakeFiles/ntrulib.dir/src/polynominal.c.o"
+  "/home/tadeusz/Desktop/ntru/src/quotient_polynominal_ring.c" "/home/tadeusz/Desktop/ntru/CMakeFiles/ntrulib.dir/src/quotient_polynominal_ring.c.o"
   )
 set(CMAKE_C_COMPILER_ID "GNU")
 

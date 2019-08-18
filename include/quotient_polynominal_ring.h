@@ -2,13 +2,9 @@
 #define _quotient_polynominal_ring_H_
 
 #include "polynominal.h"
+#include "stdlib.h"
 
-
-
-typedef enum {INTEGER, REAL} Type;
-
-
-QuotientPolynominalRing * createQuotientPolynominalRing(Polynominal *, Type, int*);
+QuotientPolynominalRing * createQuotientPolynominalRing(Polynominal *, int*);
 void freeQuotientPolynominalRing(QuotientPolynominalRing *);
 
 

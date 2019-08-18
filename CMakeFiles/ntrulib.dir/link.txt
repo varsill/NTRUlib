@@ -1,2 +1,2 @@
-/usr/bin/ar qc libntrulib.a  CMakeFiles/ntrulib.dir/src/main.c.o
+/usr/bin/ar qc libntrulib.a  CMakeFiles/ntrulib.dir/src/main.c.o CMakeFiles/ntrulib.dir/src/polynominal.c.o CMakeFiles/ntrulib.dir/src/quotient_polynominal_ring.c.o
 /usr/bin/ranlib libntrulib.a

@@ -9,32 +9,30 @@ START_TEST(generation)
 {
 	int error;
 
-	Polynominal *poly = createPolynominal(5,&error, 2, 3, 0, 2, 1);
+	Polynominal *poly = createPolynominal(INTEGER, &error, 2, 3, 0, 2, 1);
+	
 	ck_assert(error==OK);
 	freePolynominal(poly);
 
-	poly=createPolynominal(5,&error, 2, 3);
-	ck_assert(error==WRONG_POLYNOMINAL_COEFFICIENTS);
+	
+	poly=createPolynominal(INTEGER, &error, 0, 2, 1, 2, 1);
+	ck_assert_msg(error==WRONG_POLYNOMINAL_COEFFICIENTS, "LOOOOl");
 	freePolynominal(poly);
 
-	poly=createPolynominal(5, &error, 0, 2, 1, 2, 1);
-	ck_assert(error==WRONG_POLYNOMINAL_COEFFICIENTS);
-	freePolynominal(poly);
-
-	Polynominal *ideal = createPolynominal(5, &error, 2.5, 3.1, 0, 2.1, 1.4);
+	Polynominal *ideal = createPolynominal(REAL,  &error, 2.5, 3.1, 0, 2.1, 1.4);
 	ck_assert(error==OK);
 
-	QuotientPolynominalRing *ring = createQuotientPolynominalRing(ideal, REAL, &error);
+	QuotientPolynominalRing *ring = createQuotientPolynominalRing(ideal, &error);
 	ck_assert(error==OK);
+	freeQuotientPolynominalRing(ring);
 
-	ring=createQuotientPolynominalRing(ideal, INTEGER, &error);
-	ck_assert(error==WRONG_POLYNOMINAL_COEFFICIENTS);
-
-	ring=createQuotientPolynominalRing(NULL, INTEGER, &error);
-	ck_assert(error==OK);
-
-
+	ideal=createPolynominal(INTEGER, &error, 2.5, 3, 12, 2);
+	ck_assert(error=WRONG_POLYNOMINAL_COEFFICIENTS);
 	freePolynominal(ideal);
+	
+	ring=createQuotientPolynominalRing(NULL, &error);
+	ck_assert(error==UNITIALIZED_POLYNOMINALS);
+
 	freeQuotientPolynominalRing(ring);
 }
 END_TEST
@@ -42,24 +40,24 @@ END_TEST
 START_TEST(comparison)
 {
 	int error;
-	Polynominal *poly1=createPolynominal(5,&error, 2, 3, 0, 2, 1);
-	Polynominal *poly2=createPolynominal(5,&error, 2, 3, 0, 2, 1);
+	Polynominal *poly1=createPolynominal(REAL,&error, 2, 3, 0, 2, 1);
+	Polynominal *poly2=createPolynominal(REAL,&error, 2, 3, 0, 2, 1);
 
-	ck_assert(comparePolynominals(NULL, poly1, poly2)==true);
+	ck_assert(comparePolynominals(NULL, poly1, poly2, NULL)==true);
 
-	Polynominal *poly3=createPolynominal(4, &error,2, 3, 1, 2);
+	Polynominal *poly3=createPolynominal(REAL, &error,2, 3, 1, 2);
 
-	ck_assert(comparePolynominals(NULL, poly1, poly3)==false);
+	ck_assert(comparePolynominals(NULL, poly1, poly3, NULL)==false);
 
-	Polynominal *poly4=createPolynominal(5, &error,2.0, 3.0, 0, 2.0, 1.0);
-	ck_assert(comparePolynominals(NULL, poly1, poly4)==true);
+	Polynominal *poly4=createPolynominal(REAL, &error,2.0, 3.0, 0, 2.0, 1.0);
+	ck_assert(comparePolynominals(NULL, poly1, poly4, NULL)==true);
 
-	Polynominal *poly5 = createPolynominal(4,&error, 1, 2, 0, 0);
-	Polynominal *poly6 = createPolynominal(3,&error, 2, 1, 2);
-	Polynominal *ideal = createPolynominal(4,&error, 1, 0, 2, 1);
-	QuotientPolynominalRing *ring = createQuotientPolynominalRing(ideal, INTEGER, &error);
-	ck_assert(comparePolynominals(ring, poly5, poly6)==true);
-	ck_assert(comparePolynominals(ring, poly5,poly1)==false);
+	Polynominal *poly5 = createPolynominal(REAL,&error, 1, 2, 0, 0);
+	Polynominal *poly6 = createPolynominal(REAL,&error, 2, 1, 2);
+	Polynominal *ideal = createPolynominal(REAL,&error, 1, 0, 2, 1);
+	QuotientPolynominalRing *ring = createQuotientPolynominalRing(ideal, &error);
+	ck_assert(comparePolynominals(ring, poly5, poly6, NULL)==true);
+	ck_assert(comparePolynominals(ring, poly5,poly1, NULL)==false);
 	
 	freePolynominal(poly1);
 	freePolynominal(poly2);
@@ -74,11 +72,12 @@ END_TEST
 
 START_TEST(addition)
 {
-	Polynominal *poly1 = createPolynominal(4,NULL, 2, 3, 1, 2);
-	Polynominal *poly2 = createPolynominal(3, NULL,2, 1, 0);
 	
-	Polynominal *result = createPolynominal(4, NULL, 2, 5, 2, 2);
-	ck_assert(comparePolynominals(NULL, addPolynominals(NULL, poly1, poly2, NULL), result));
+ 	Polynominal *poly1 = createPolynominal(INTEGER,NULL, 2, 3, 1, 2);
+	Polynominal *poly2 = createPolynominal(INTEGER, NULL,2, 1, 0);
+	
+	Polynominal *result = createPolynominal(INTEGER, NULL, 2, 5, 2, 2);
+	ck_assert(comparePolynominals(NULL, addPolynominals(NULL, poly1, poly2, NULL), result, NULL));
 	
 	
 	freePolynominal(poly1);
@@ -90,48 +89,56 @@ END_TEST
 
 START_TEST(substraction)
 {
-        Polynominal *poly1 = createPolynominal(3,NULL, 2, 1, 2);
-        Polynominal *poly2 = createPolynominal(3, NULL, 2, 1, 0);
-        Polynominal *result = createPolynominal(1,NULL, 2);
-        ck_assert(comparePolynominals(NULL, substractPolynominals(NULL, poly1, poly2, NULL), result));
+        Polynominal *poly1 = createPolynominal(INTEGER,NULL, 2, 1, 2);
+        Polynominal *poly2 = createPolynominal(INTEGER,NULL, 2, 1, 0);
+        Polynominal *result = createPolynominal(INTEGER,NULL, 2);
+		Polynominal *_result=substractPolynominals(NULL, poly1, poly2, NULL);
+        ck_assert(comparePolynominals(NULL, _result, result, NULL));
 
-	freePolynominal(poly1);
+		freePolynominal(poly1);
         freePolynominal(poly2);
         freePolynominal(result);
-
+		freePolynominal(_result);
 }
 END_TEST
 
 START_TEST(multiplication)
 {
-	Polynominal *poly1 = createPolynominal(3, NULL, 2, 1, 2);
-        Polynominal *poly2 = createPolynominal(3, NULL,2, 1, 0);
-        Polynominal *result = createPolynominal(5, NULL,4, 4, 5, 2, 0);
-        ck_assert(comparePolynominals(NULL, multiplyPolynominals(NULL, poly1, poly2, NULL), result));
+	Polynominal *poly1 = createPolynominal(REAL,NULL, 2, 1, 2);
+        Polynominal *poly2 = createPolynominal(REAL,NULL,2, 1, 0);
+        Polynominal *result = createPolynominal(REAL,NULL,4, 4, 5, 2, 0);
+		Polynominal *_result=multiplyPolynominals(NULL, poly1, poly2, NULL);
+        ck_assert(comparePolynominals(NULL, _result, result, NULL));
 
         freePolynominal(poly1);
         freePolynominal(poly2);
         freePolynominal(result);
+		free(_result);
 }
 END_TEST
 
 START_TEST(division)
 {
-	Polynominal *poly1 = createPolynominal(4, NULL,1, -4, 2, -3);
-        Polynominal *poly2 = createPolynominal(2, NULL,1, 2);
-        Polynominal *result = createPolynominal(3,NULL, 1, -6, 14);
-        Polynominal *rest = createPolynominal(1, NULL, -31);
+	Polynominal *poly1 = createPolynominal(INTEGER,NULL,1, -4, 2, -3);
+    Polynominal *poly2 = createPolynominal(INTEGER, NULL,1, 2);
+    Polynominal *result = createPolynominal(INTEGER,NULL, 1, -6, 14);
+    Polynominal *rest = createPolynominal(INTEGER, NULL, -31);
 	Polynominal _rest;
-	ck_assert(comparePolynominals(NULL, dividePolynominals(NULL, poly1, poly2,&_rest, NULL), result)==true);
-	ck_assert(comparePolynominals(NULL, &_rest, rest)==true);
-        freePolynominal(poly1);
-        freePolynominal(poly2);
-        freePolynominal(result);
+	Polynominal * _result= dividePolynominals(NULL, poly1, poly2, &_rest, NULL);
+	
+	ck_assert(comparePolynominals(NULL,_result, result, NULL)==true);
+	ck_assert(comparePolynominals(NULL, &_rest, rest, NULL)==true);
+	moduloPolynominal(&poly1, poly2, NULL);
+	ck_assert(comparePolynominals(NULL, rest, poly1, NULL)==true);
+    freePolynominal(poly1);
+    freePolynominal(poly2);
+    freePolynominal(result);
 	freePolynominal(rest);
+	freePolynominal(_result);
 }
 END_TEST
 
-START_TEST(inversion)
+/* START_TEST(inversion)
 {
 	int error;
 	Polynominal *poly = createPolynominal(3,NULL, 1, 0, 1);
@@ -148,7 +155,7 @@ START_TEST(inversion)
 	freeQuotientPolynominalRing(ring);
 
 }
-END_TEST
+END_TEST*/
 
 
 
@@ -162,17 +169,17 @@ Suite * polynominal_suite(void)
 
 	tc_generation=tcase_create("Generate and polynominals");
 	tcase_add_test(tc_generation, generation );
-
-	tc_comparison=tcase_create("Compraing two polynominals");
-	tcase_add_test(tc_basic_operations, comparison);
-
+	suite_add_tcase(s, tc_generation);
+	tc_comparison=tcase_create("Comparing two polynominals");
+	tcase_add_test(tc_comparison, comparison);
+	suite_add_tcase(s, tc_generation);
 
 	tc_basic_operations=tcase_create("Basic operations on polynominal");
 	tcase_add_test(tc_basic_operations, addition);
 	tcase_add_test(tc_basic_operations, substraction);
 	tcase_add_test(tc_basic_operations, multiplication);
 	tcase_add_test(tc_basic_operations, division);
-	tcase_add_test(tc_basic_operations, inversion);
+	
  	suite_add_tcase(s, tc_basic_operations);
 
 	return s;
@@ -185,7 +192,7 @@ Suite * polynominal_suite(void)
 
 int main(void)
 {
-
+	
     int number_failed;
     Suite *s;
     SRunner *sr;

@@ -8,3 +8,35 @@
 
 /home/tadeusz/Desktop/ntru/src/main.c
 
+/home/tadeusz/Desktop/ntru/src/polynominal.c
+polynominal.h
+/home/tadeusz/Desktop/ntru/src/polynominal.h
+stdarg.h
+-
+stdlib.h
+-
+string.h
+-
+stdio.h
+-
+math.h
+-
+
+/home/tadeusz/Desktop/ntru/src/quotient_polynominal_ring.c
+quotient_polynominal_ring.h
+/home/tadeusz/Desktop/ntru/src/quotient_polynominal_ring.h
+
+include/config.h
+
+include/polynominal.h
+config.h
+include/config.h
+stdbool.h
+-
+
+include/quotient_polynominal_ring.h
+polynominal.h
+include/polynominal.h
+stdlib.h
+include/stdlib.h
+

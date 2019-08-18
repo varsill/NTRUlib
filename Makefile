@@ -163,6 +163,60 @@ src/main.c.s:
 	$(MAKE) -f CMakeFiles/ntrulib.dir/build.make CMakeFiles/ntrulib.dir/src/main.c.s
 .PHONY : src/main.c.s
 
+src/polynominal.o: src/polynominal.c.o
+
+.PHONY : src/polynominal.o
+
+# target to build an object file
+src/polynominal.c.o:
+	$(MAKE) -f CMakeFiles/ntrulib.dir/build.make CMakeFiles/ntrulib.dir/src/polynominal.c.o
+.PHONY : src/polynominal.c.o
+
+src/polynominal.i: src/polynominal.c.i
+
+.PHONY : src/polynominal.i
+
+# target to preprocess a source file
+src/polynominal.c.i:
+	$(MAKE) -f CMakeFiles/ntrulib.dir/build.make CMakeFiles/ntrulib.dir/src/polynominal.c.i
+.PHONY : src/polynominal.c.i
+
+src/polynominal.s: src/polynominal.c.s
+
+.PHONY : src/polynominal.s
+
+# target to generate assembly for a file
+src/polynominal.c.s:
+	$(MAKE) -f CMakeFiles/ntrulib.dir/build.make CMakeFiles/ntrulib.dir/src/polynominal.c.s
+.PHONY : src/polynominal.c.s
+
+src/quotient_polynominal_ring.o: src/quotient_polynominal_ring.c.o
+
+.PHONY : src/quotient_polynominal_ring.o
+
+# target to build an object file
+src/quotient_polynominal_ring.c.o:
+	$(MAKE) -f CMakeFiles/ntrulib.dir/build.make CMakeFiles/ntrulib.dir/src/quotient_polynominal_ring.c.o
+.PHONY : src/quotient_polynominal_ring.c.o
+
+src/quotient_polynominal_ring.i: src/quotient_polynominal_ring.c.i
+
+.PHONY : src/quotient_polynominal_ring.i
+
+# target to preprocess a source file
+src/quotient_polynominal_ring.c.i:
+	$(MAKE) -f CMakeFiles/ntrulib.dir/build.make CMakeFiles/ntrulib.dir/src/quotient_polynominal_ring.c.i
+.PHONY : src/quotient_polynominal_ring.c.i
+
+src/quotient_polynominal_ring.s: src/quotient_polynominal_ring.c.s
+
+.PHONY : src/quotient_polynominal_ring.s
+
+# target to generate assembly for a file
+src/quotient_polynominal_ring.c.s:
+	$(MAKE) -f CMakeFiles/ntrulib.dir/build.make CMakeFiles/ntrulib.dir/src/quotient_polynominal_ring.c.s
+.PHONY : src/quotient_polynominal_ring.c.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -176,6 +230,12 @@ help:
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"
+	@echo "... src/polynominal.o"
+	@echo "... src/polynominal.i"
+	@echo "... src/polynominal.s"
+	@echo "... src/quotient_polynominal_ring.o"
+	@echo "... src/quotient_polynominal_ring.i"
+	@echo "... src/quotient_polynominal_ring.s"
 .PHONY : help
 
 

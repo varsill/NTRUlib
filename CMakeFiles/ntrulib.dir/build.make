@@ -81,17 +81,69 @@ CMakeFiles/ntrulib.dir/src/main.c.o.provides: CMakeFiles/ntrulib.dir/src/main.c.
 CMakeFiles/ntrulib.dir/src/main.c.o.provides.build: CMakeFiles/ntrulib.dir/src/main.c.o
 
 
+CMakeFiles/ntrulib.dir/src/polynominal.c.o: CMakeFiles/ntrulib.dir/flags.make
+CMakeFiles/ntrulib.dir/src/polynominal.c.o: src/polynominal.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/tadeusz/Desktop/ntru/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building C object CMakeFiles/ntrulib.dir/src/polynominal.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/ntrulib.dir/src/polynominal.c.o   -c /home/tadeusz/Desktop/ntru/src/polynominal.c
+
+CMakeFiles/ntrulib.dir/src/polynominal.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/ntrulib.dir/src/polynominal.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/tadeusz/Desktop/ntru/src/polynominal.c > CMakeFiles/ntrulib.dir/src/polynominal.c.i
+
+CMakeFiles/ntrulib.dir/src/polynominal.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/ntrulib.dir/src/polynominal.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/tadeusz/Desktop/ntru/src/polynominal.c -o CMakeFiles/ntrulib.dir/src/polynominal.c.s
+
+CMakeFiles/ntrulib.dir/src/polynominal.c.o.requires:
+
+.PHONY : CMakeFiles/ntrulib.dir/src/polynominal.c.o.requires
+
+CMakeFiles/ntrulib.dir/src/polynominal.c.o.provides: CMakeFiles/ntrulib.dir/src/polynominal.c.o.requires
+	$(MAKE) -f CMakeFiles/ntrulib.dir/build.make CMakeFiles/ntrulib.dir/src/polynominal.c.o.provides.build
+.PHONY : CMakeFiles/ntrulib.dir/src/polynominal.c.o.provides
+
+CMakeFiles/ntrulib.dir/src/polynominal.c.o.provides.build: CMakeFiles/ntrulib.dir/src/polynominal.c.o
+
+
+CMakeFiles/ntrulib.dir/src/quotient_polynominal_ring.c.o: CMakeFiles/ntrulib.dir/flags.make
+CMakeFiles/ntrulib.dir/src/quotient_polynominal_ring.c.o: src/quotient_polynominal_ring.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/tadeusz/Desktop/ntru/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building C object CMakeFiles/ntrulib.dir/src/quotient_polynominal_ring.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/ntrulib.dir/src/quotient_polynominal_ring.c.o   -c /home/tadeusz/Desktop/ntru/src/quotient_polynominal_ring.c
+
+CMakeFiles/ntrulib.dir/src/quotient_polynominal_ring.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/ntrulib.dir/src/quotient_polynominal_ring.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/tadeusz/Desktop/ntru/src/quotient_polynominal_ring.c > CMakeFiles/ntrulib.dir/src/quotient_polynominal_ring.c.i
+
+CMakeFiles/ntrulib.dir/src/quotient_polynominal_ring.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/ntrulib.dir/src/quotient_polynominal_ring.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/tadeusz/Desktop/ntru/src/quotient_polynominal_ring.c -o CMakeFiles/ntrulib.dir/src/quotient_polynominal_ring.c.s
+
+CMakeFiles/ntrulib.dir/src/quotient_polynominal_ring.c.o.requires:
+
+.PHONY : CMakeFiles/ntrulib.dir/src/quotient_polynominal_ring.c.o.requires
+
+CMakeFiles/ntrulib.dir/src/quotient_polynominal_ring.c.o.provides: CMakeFiles/ntrulib.dir/src/quotient_polynominal_ring.c.o.requires
+	$(MAKE) -f CMakeFiles/ntrulib.dir/build.make CMakeFiles/ntrulib.dir/src/quotient_polynominal_ring.c.o.provides.build
+.PHONY : CMakeFiles/ntrulib.dir/src/quotient_polynominal_ring.c.o.provides
+
+CMakeFiles/ntrulib.dir/src/quotient_polynominal_ring.c.o.provides.build: CMakeFiles/ntrulib.dir/src/quotient_polynominal_ring.c.o
+
+
 # Object files for target ntrulib
 ntrulib_OBJECTS = \
-"CMakeFiles/ntrulib.dir/src/main.c.o"
+"CMakeFiles/ntrulib.dir/src/main.c.o" \
+"CMakeFiles/ntrulib.dir/src/polynominal.c.o" \
+"CMakeFiles/ntrulib.dir/src/quotient_polynominal_ring.c.o"
 
 # External object files for target ntrulib
 ntrulib_EXTERNAL_OBJECTS =
 
 libntrulib.a: CMakeFiles/ntrulib.dir/src/main.c.o
+libntrulib.a: CMakeFiles/ntrulib.dir/src/polynominal.c.o
+libntrulib.a: CMakeFiles/ntrulib.dir/src/quotient_polynominal_ring.c.o
 libntrulib.a: CMakeFiles/ntrulib.dir/build.make
 libntrulib.a: CMakeFiles/ntrulib.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/tadeusz/Desktop/ntru/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking C static library libntrulib.a"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/tadeusz/Desktop/ntru/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Linking C static library libntrulib.a"
 	$(CMAKE_COMMAND) -P CMakeFiles/ntrulib.dir/cmake_clean_target.cmake
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/ntrulib.dir/link.txt --verbose=$(VERBOSE)
 
@@ -101,6 +153,8 @@ CMakeFiles/ntrulib.dir/build: libntrulib.a
 .PHONY : CMakeFiles/ntrulib.dir/build
 
 CMakeFiles/ntrulib.dir/requires: CMakeFiles/ntrulib.dir/src/main.c.o.requires
+CMakeFiles/ntrulib.dir/requires: CMakeFiles/ntrulib.dir/src/polynominal.c.o.requires
+CMakeFiles/ntrulib.dir/requires: CMakeFiles/ntrulib.dir/src/quotient_polynominal_ring.c.o.requires
 
 .PHONY : CMakeFiles/ntrulib.dir/requires
 

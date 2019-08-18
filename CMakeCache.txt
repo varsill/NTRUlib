@@ -196,7 +196,7 @@ NTRU_BINARY_DIR:STATIC=/home/tadeusz/Desktop/ntru
 //Value Computed by CMake
 NTRU_SOURCE_DIR:STATIC=/home/tadeusz/Desktop/ntru
 
-//ON whene project is abous to be tested using unit tests
+//ON when the project is about to be tested using unit tests
 TEST:BOOL=ON
 
 //Value Computed by CMake

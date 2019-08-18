@@ -3,3 +3,12 @@
 
 CMakeFiles/ntrulib.dir/src/main.c.o: src/main.c
 
+CMakeFiles/ntrulib.dir/src/polynominal.c.o: src/polynominal.c
+CMakeFiles/ntrulib.dir/src/polynominal.c.o: include/config.h
+CMakeFiles/ntrulib.dir/src/polynominal.c.o: include/polynominal.h
+
+CMakeFiles/ntrulib.dir/src/quotient_polynominal_ring.c.o: src/quotient_polynominal_ring.c
+CMakeFiles/ntrulib.dir/src/quotient_polynominal_ring.c.o: include/config.h
+CMakeFiles/ntrulib.dir/src/quotient_polynominal_ring.c.o: include/polynominal.h
+CMakeFiles/ntrulib.dir/src/quotient_polynominal_ring.c.o: include/quotient_polynominal_ring.h
+
