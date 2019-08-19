@@ -130,25 +130,41 @@ Polynominal * addPolynominals(const QuotientPolynominalRing * ring, const Polyno
 Polynominal * substractPolynominals(const QuotientPolynominalRing *ring, const Polynominal *p1, const Polynominal *p2, int *error)
 {
      
-    SET_ERROR(error, OK);
+   SET_ERROR(error, OK);
     if(p1==NULL || p2==NULL)
     {
-        SET_ERROR(error, UNITIALIZED_POLYNOMINALS);
+        SET_ERROR(error,  UNITIALIZED_POLYNOMINALS);
         return NULL;   
     }
-    
-   Polynominal *p2_negation = (Polynominal *)malloc(sizeof(Polynominal));
-    p2_negation->coefficients=(float*)malloc(p2->degree*sizeof(float));
-    p2_negation->type=p2->type;
-    p2_negation->degree=p2->degree;
-    for(int i=0; i<p2->degree; i++)p2_negation->coefficients[i]= p2->coefficients[i]*(-1.0);
+
+    unsigned int smaller_degree;
+    Polynominal * result = (Polynominal*)malloc(sizeof(Polynominal));
    
-    Polynominal *result=addPolynominals(ring, p1, p2_negation, error);
-    
-    freePolynominal(p2_negation);
-    
+    if(p1->type==INTEGER && p2->type==INTEGER) result->type=INTEGER;
+    else result->type=REAL;
+   
+    if(p1->degree<=p2->degree) 
+    {
+        smaller_degree=p1->degree;
+        result->degree=p2->degree;
+        result->coefficients=(float*)malloc(p2->degree*sizeof(float));
+        for(int i=0; i<result->degree; i++) result->coefficients[i]=p2->coefficients[i]*(-1.0);
+        for(int i=smaller_degree-1; i>=0; i--) result->coefficients[i]+=p1->coefficients[i];
+    }
+    else 
+    {
+        smaller_degree=p2->degree;
+        result->degree=p1->degree;
+        result->coefficients=(float*)malloc(p1->degree*sizeof(float));
+        for(int i=0; i<result->degree; i++) result->coefficients[i]=p1->coefficients[i];
+        for(int i=smaller_degree-1; i>=0; i--) result->coefficients[i]-=p2->coefficients[i];
+    }
+
+    if(ring!=NULL)
+    {   
+        moduloPolynominal(&result, ring->ideal, NULL);
+    }
     repairPolynominal(result);
-    
     return result;
 
 }
