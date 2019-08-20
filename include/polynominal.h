@@ -42,6 +42,7 @@ typedef struct{
 
 typedef struct{
     Polynominal *ideal;
+    int q;
 }QuotientPolynominalRing;
 
 
@@ -56,5 +57,7 @@ void printPolynominal(const Polynominal*);
 
 static bool isPolynominalValid(Polynominal*, bool);
 void moduloPolynominal(Polynominal ** , const Polynominal *, int *error);
+static void moduloRing(Polynominal**, const QuotientPolynominalRing*);
+static void moduloInteger(Polynominal*, int , int*);
 static void repairPolynominal(Polynominal *);
 #endif

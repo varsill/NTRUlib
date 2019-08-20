@@ -1,16 +1,13 @@
 #include "quotient_polynominal_ring.h"
 
-QuotientPolynominalRing * createQuotientPolynominalRing(Polynominal *ideal, int *error)
+QuotientPolynominalRing * createQuotientPolynominalRing(Polynominal *ideal, int q, int *error)
 {
     SET_ERROR(error, OK);
-    if(ideal==NULL)
-    {
-        SET_ERROR(error, UNITIALIZED_POLYNOMINALS);
-        return NULL;
-    }
+
     
     QuotientPolynominalRing *ring = (QuotientPolynominalRing*)malloc(sizeof(QuotientPolynominalRing));
     ring->ideal=ideal;
+    ring->q=q;
     return ring;
 }
 void freeQuotientPolynominalRing(QuotientPolynominalRing *ring)

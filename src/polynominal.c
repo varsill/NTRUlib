@@ -57,7 +57,6 @@ void freePolynominal(Polynominal * p)
 }
 
 
-
 bool comparePolynominals(const QuotientPolynominalRing *ring,const Polynominal *p1, const Polynominal *p2, int* error)
 {
     SET_ERROR(error, OK);
@@ -76,11 +75,24 @@ bool comparePolynominals(const QuotientPolynominalRing *ring,const Polynominal *
 
     Polynominal rest1;
     Polynominal rest2;
-    
+    if(ring->ideal!=NULL)
+    {
     dividePolynominals(NULL, p1, ring->ideal, &rest1, NULL);
     dividePolynominals(NULL, p2, ring->ideal, &rest2, NULL);
+    moduloInteger(&rest1, ring->q, NULL);
+    moduloInteger(&rest2, ring->q, NULL); 
+    return comparePolynominals(NULL,&rest1, &rest2, NULL);
+    }
+    if(ring->q>0 && p1->type==INTEGER && p2->type == INTEGER){
+        for(int i=0; i<p1->degree; i++) if((int)p1->coefficients[i]%ring->q != (int)p2->coefficients[i]%ring->q) return false;   
+        return true;
+    }
+    else 
+    {
+        SET_ERROR(error, WRONG_POLYNOMINAL_COEFFICIENTS);
+    }
     
-    return comparePolynominals(NULL, &rest1, &rest2, NULL);
+   
 }
 
 
@@ -118,7 +130,7 @@ Polynominal * addPolynominals(const QuotientPolynominalRing * ring, const Polyno
 
     if(ring!=NULL)
     {   
-        moduloPolynominal(&result, ring->ideal, NULL);
+       moduloRing(&result, ring);
         
     }
     
@@ -162,7 +174,7 @@ Polynominal * substractPolynominals(const QuotientPolynominalRing *ring, const P
 
     if(ring!=NULL)
     {   
-        moduloPolynominal(&result, ring->ideal, NULL);
+        moduloRing(&result, ring);
     }
     repairPolynominal(result);
     return result;
@@ -178,7 +190,7 @@ Polynominal * multiplyPolynominals(const QuotientPolynominalRing * ring, const P
         SET_ERROR(error, UNITIALIZED_POLYNOMINALS);
         return NULL;   
     }
-
+  
     Polynominal *result=(Polynominal*)malloc(sizeof(Polynominal));
     result->degree=p1->degree+p2->degree-1;
     result->coefficients=(float*)malloc((result->degree)*sizeof(float));
@@ -188,21 +200,23 @@ Polynominal * multiplyPolynominals(const QuotientPolynominalRing * ring, const P
     for(int k=0; k<result->degree; k++)
     {
         result->coefficients[k]=0;
-        for(int i=MAX((k-p2->degree+1), 0); i<p1->degree; i++)
+ //       for(int i=MAX((k-p2->degree+1), 0); i<p1->degree; i++)
+        for(int i=0; i<k; i++)
         {
             result->coefficients[k]+=p1->coefficients[i]*p2->coefficients[k-i];
         }
     }
 
-
     if(ring!=NULL)
     {   
-        moduloPolynominal(&result, ring->ideal, NULL);
+       
+        moduloRing(&result, ring);
     }
     
     return result;
 
 }
+
 
 Polynominal * dividePolynominals(const QuotientPolynominalRing *ring, const Polynominal *p1, const Polynominal *p2, Polynominal *rest, int *error)
 {
@@ -250,9 +264,15 @@ Polynominal * dividePolynominals(const QuotientPolynominalRing *ring, const Poly
     repairPolynominal(rest);
   
     freePolynominal(bufor);
+    if(ring!=NULL)
+    {   
+        moduloRing(&result, ring);
+    }
     return result;
 
 }
+
+
 void printPolynominal(const Polynominal* poly)
 {
     if(poly==NULL) return;
@@ -280,6 +300,7 @@ static bool isPolynominalValid(Polynominal *p, bool check_type)
 
 }
 
+
 void moduloPolynominal(Polynominal ** divident,const Polynominal * divisor, int* error)
 {
     SET_ERROR(error, OK);
@@ -299,6 +320,38 @@ void moduloPolynominal(Polynominal ** divident,const Polynominal * divisor, int*
     *divident=rest;
     rest=NULL;
     repairPolynominal(*divident);
+}
+
+
+static void moduloRing(Polynominal **poly, const QuotientPolynominalRing *ring)
+{
+    if(ring==NULL)return;
+    moduloPolynominal(poly, ring->ideal, NULL);
+   
+    moduloInteger(*poly, ring->q, NULL);
+    repairPolynominal(*poly);
+}
+
+
+static void moduloInteger(Polynominal *poly, int q, int *error)
+{
+    SET_ERROR(error, OK);
+         
+    if(q<0) return;
+    if(poly==NULL)
+    {
+         SET_ERROR(error, UNITIALIZED_POLYNOMINALS);
+         return;
+    } 
+    if(poly->type==REAL)
+    {
+        SET_ERROR(error, WRONG_POLYNOMINAL_COEFFICIENTS);
+        return;
+    } 
+    for(int i=0; i<poly->degree; i++)
+    {
+        poly->coefficients[i]=((int)poly->coefficients[i])%q;
+    }
 }
 
 

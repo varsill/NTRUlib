@@ -4,7 +4,7 @@
 #include "polynominal.h"
 #include "stdlib.h"
 
-QuotientPolynominalRing * createQuotientPolynominalRing(Polynominal *, int*);
+QuotientPolynominalRing * createQuotientPolynominalRing(Polynominal *,int, int*);
 void freeQuotientPolynominalRing(QuotientPolynominalRing *);
 
 
