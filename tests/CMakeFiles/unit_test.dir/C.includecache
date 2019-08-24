@@ -21,8 +21,18 @@ stdbool.h
 -
 config.h
 /home/tadeusz/Desktop/ntru/tests/src/config.h
+debug_memory.h
+/home/tadeusz/Desktop/ntru/tests/src/debug_memory.h
 
 include/config.h
+
+include/debug_memory.h
+memory.h
+include/memory.h
+
+include/memory.h
+stdlib.h
+-
 
 include/polynominal.h
 config.h

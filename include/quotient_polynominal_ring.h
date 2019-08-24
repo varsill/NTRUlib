@@ -7,6 +7,8 @@
 QuotientPolynominalRing * createQuotientPolynominalRing(Polynominal *,int, int*);
 void freeQuotientPolynominalRing(QuotientPolynominalRing *);
 
+void * my_malloc(int);
+void my_free(void*);
 
 
 #endif

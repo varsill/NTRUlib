@@ -1,5 +1,6 @@
 file(REMOVE_RECURSE
   "CMakeFiles/ntrulib.dir/src/main.c.o"
+  "CMakeFiles/ntrulib.dir/src/memory.c.o"
   "CMakeFiles/ntrulib.dir/src/polynominal.c.o"
   "CMakeFiles/ntrulib.dir/src/quotient_polynominal_ring.c.o"
   "libntrulib.pdb"

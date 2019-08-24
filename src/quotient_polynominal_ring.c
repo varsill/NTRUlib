@@ -1,5 +1,5 @@
 #include "quotient_polynominal_ring.h"
-
+extern int elements_allocated;
 QuotientPolynominalRing * createQuotientPolynominalRing(Polynominal *ideal, int q, int *error)
 {
     SET_ERROR(error, OK);
@@ -16,3 +16,4 @@ void freeQuotientPolynominalRing(QuotientPolynominalRing *ring)
     free(ring);
     
 }
+

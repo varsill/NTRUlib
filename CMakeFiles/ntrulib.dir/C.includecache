@@ -8,6 +8,10 @@
 
 /home/tadeusz/Desktop/ntru/src/main.c
 
+/home/tadeusz/Desktop/ntru/src/memory.c
+memory.h
+/home/tadeusz/Desktop/ntru/src/memory.h
+
 /home/tadeusz/Desktop/ntru/src/polynominal.c
 polynominal.h
 /home/tadeusz/Desktop/ntru/src/polynominal.h
@@ -21,12 +25,24 @@ stdio.h
 -
 math.h
 -
+quotient_polynominal_ring.h
+/home/tadeusz/Desktop/ntru/src/quotient_polynominal_ring.h
+debug_memory.h
+/home/tadeusz/Desktop/ntru/src/debug_memory.h
 
 /home/tadeusz/Desktop/ntru/src/quotient_polynominal_ring.c
 quotient_polynominal_ring.h
 /home/tadeusz/Desktop/ntru/src/quotient_polynominal_ring.h
 
 include/config.h
+
+include/debug_memory.h
+memory.h
+include/memory.h
+
+include/memory.h
+stdlib.h
+-
 
 include/polynominal.h
 config.h

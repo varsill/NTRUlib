@@ -4,6 +4,7 @@
 
 #include "config.h"
 #include <stdbool.h>
+//#include "quotient_polynominal_ring.h"
 
 #define MAX(a, b) a>b?a:b
 
@@ -47,17 +48,21 @@ typedef struct{
 
 
 Polynominal * _createPolynominal(unsigned int,Type, int*, ...);
+Polynominal * createZeroPolynominal(Type, int *);
 void freePolynominal(Polynominal *);
 bool comparePolynominals(const QuotientPolynominalRing *, const Polynominal *, const Polynominal *, int *);
 Polynominal * addPolynominals(const QuotientPolynominalRing *, const Polynominal *, const Polynominal *, int*);
 Polynominal * substractPolynominals(const QuotientPolynominalRing *, const Polynominal *, const Polynominal *, int*);
 Polynominal * multiplyPolynominals(const QuotientPolynominalRing *, const Polynominal *, const Polynominal *, int*);
 Polynominal * dividePolynominals(const QuotientPolynominalRing *, const Polynominal *, const Polynominal *,Polynominal *, int*);
-void printPolynominal(const Polynominal*);
+void printPolynominal(const Polynominal*, const char *);
 
 static bool isPolynominalValid(Polynominal*, bool);
 void moduloPolynominal(Polynominal ** , const Polynominal *, int *error);
 static void moduloRing(Polynominal**, const QuotientPolynominalRing*);
 static void moduloInteger(Polynominal*, int , int*);
 static void repairPolynominal(Polynominal *);
+static Polynominal* copyPolynominal(const Polynominal* );
+Polynominal* extendecEuclid(const Polynominal *,const Polynominal *, Polynominal **, Polynominal **);
+Polynominal* extendedEuclid(const Polynominal *,const Polynominal *, Polynominal **, Polynominal **);
 #endif

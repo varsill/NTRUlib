@@ -3,10 +3,16 @@
 
 CMakeFiles/ntrulib.dir/src/main.c.o
  /home/tadeusz/Desktop/ntru/src/main.c
+CMakeFiles/ntrulib.dir/src/memory.c.o
+ /home/tadeusz/Desktop/ntru/src/memory.c
+ include/memory.h
 CMakeFiles/ntrulib.dir/src/polynominal.c.o
  /home/tadeusz/Desktop/ntru/src/polynominal.c
  include/config.h
+ include/debug_memory.h
+ include/memory.h
  include/polynominal.h
+ include/quotient_polynominal_ring.h
 CMakeFiles/ntrulib.dir/src/quotient_polynominal_ring.c.o
  /home/tadeusz/Desktop/ntru/src/quotient_polynominal_ring.c
  include/config.h
