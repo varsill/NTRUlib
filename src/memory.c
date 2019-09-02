@@ -1,6 +1,6 @@
 #include "memory.h"
-
-int elements_allocated=0;
+#include <stdio.h>
+int elements_allocated;
 
 void * debug_malloc(size_t size)
 {
@@ -23,4 +23,12 @@ void debug_free(void** p)
 void printMemoryStatus()
 {
     printf("\n Memory status: %d unallocated memory chunks. \n", elements_allocated);
+    fflush(stdout);
 }
+
+void pause ( void ) 
+{ 
+  printf ( "Press [Enter] to continue . . ." );
+  fflush ( stdout );
+  getchar();
+} 

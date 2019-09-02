@@ -11,6 +11,8 @@
 /home/tadeusz/Desktop/ntru/src/memory.c
 memory.h
 /home/tadeusz/Desktop/ntru/src/memory.h
+stdio.h
+-
 
 /home/tadeusz/Desktop/ntru/src/polynominal.c
 polynominal.h

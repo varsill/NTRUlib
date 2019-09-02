@@ -254,13 +254,28 @@ Polynominal * dividePolynominals(const QuotientPolynominalRing *ring, const Poly
     
     result->degree=p1->degree-p2->degree+1;
     result->coefficients=(float*)malloc(sizeof(float)*result->degree);
-   
-    if(rest==NULL)rest=(Polynominal*)malloc(sizeof(Polynominal));
-    
-    rest->coefficients=(float*)malloc(sizeof(float)*p2->degree-1);
+
+  /*  
+    if(rest==NULL)
+    {
+        rest=(Polynominal*)malloc(sizeof(Polynominal));
+        rest->coefficients=NULL;
+    }
+    if(rest->coefficients==NULL)rest->coefficients=(float*)malloc(sizeof(float)*(p2->degree-1));
     rest->degree=result->degree;
     rest->type=result->type;
-
+*/
+    bool save_rest;
+    if(rest==NULL)
+    {
+        save_rest=false;
+    }
+    else
+    {   
+        save_rest=true;
+        
+    }
+    
     Polynominal *bufor = (Polynominal*)malloc(sizeof(Polynominal));
     bufor->degree=p1->degree;
     bufor->type=p1->type;
@@ -277,13 +292,17 @@ Polynominal * dividePolynominals(const QuotientPolynominalRing *ring, const Poly
             bufor->coefficients[j+(i-p2->degree+1)]-=result->coefficients[i-p2->degree+1]*p2->coefficients[j];
         }
     }
+    if(save_rest==true)
+    {
+        rest->degree=bufor->degree;
+        rest->type=bufor->type;
+        if(rest->coefficients==NULL)rest->coefficients=(float*)malloc(sizeof(float)*rest->degree);
+        memcpy(rest->coefficients, bufor->coefficients, bufor->degree*sizeof(float));
+        repairPolynominal(rest);
+    }
 
-    rest->degree=bufor->degree;
-    rest->type=bufor->type;
-    memcpy(rest->coefficients, bufor->coefficients, bufor->degree*sizeof(float));
-    repairPolynominal(rest);
-  
     freePolynominal(bufor);
+    
     if(ring!=NULL)
     {   
         moduloRing(&result, ring);
@@ -338,11 +357,14 @@ void moduloPolynominal(Polynominal ** divident,const Polynominal * divisor, int*
         return;   
     }
     Polynominal * rest;
+   
     rest=(Polynominal*)malloc(sizeof(Polynominal));
-    rest->coefficients=(float*)malloc(sizeof(float)*divisor->degree-1);
+    rest->coefficients=(float*)malloc(sizeof(float)*(divisor->degree-1));
+    
     rest->degree=divisor->degree-1;
+    
     rest->type=(*divident)->type;
-    Polynominal * garbage = dividePolynominals(NULL, *divident, divisor, rest, NULL);
+    Polynominal * garbage = dividePolynominals(NULL, *divident, divisor, rest, error);
     freePolynominal(*divident);
     freePolynominal(garbage);
     *divident=rest;
@@ -482,12 +504,7 @@ static void repairPolynominal(Polynominal* p)
 }
 
 
-void pause ( void ) 
-{ 
-  printf ( "Press [Enter] to continue . . ." );
-  fflush ( stdout );
-  getchar();
-} 
+
 
 
 

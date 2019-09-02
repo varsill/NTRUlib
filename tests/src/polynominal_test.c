@@ -107,7 +107,7 @@ END_TEST
 
 START_TEST(multiplication)
 {
-	Polynominal *poly1 = createPolynominal(INTEGER,NULL, 2, 1, 2);
+		Polynominal *poly1 = createPolynominal(INTEGER,NULL, 2, 1, 2);
         Polynominal *poly2 = createPolynominal(INTEGER,NULL,2, 1, 0);
         Polynominal *result = createPolynominal(INTEGER,NULL,4, 4, 5, 2, 0);
 		
@@ -142,8 +142,10 @@ START_TEST(division)
 	
 	ck_assert(comparePolynominals(NULL,_result, result, NULL)==true);
 	ck_assert(comparePolynominals(NULL, _rest, rest, NULL)==true);
-	
-	moduloPolynominal(&poly1, poly2, NULL);
+	int error;
+	moduloPolynominal(&poly1, poly2, &error);
+	if(error!=OK)printf("\n\n\n\nELOO\n\n\n\n");
+	fflush(stdout);
 	ck_assert(comparePolynominals(NULL, rest, poly1, NULL)==true);
     freePolynominal(poly1);
     freePolynominal(poly2);
@@ -208,21 +210,31 @@ Suite * polynominal_suite(void)
 
 int main(void)
 {
+	/* 
+	Polynominal *poly1 = createPolynominal(INTEGER,NULL,1, -4, 2, -3);
+    Polynominal *poly2 = createPolynominal(INTEGER, NULL,1, 2);
+	int error;
+	moduloPolynominal(&poly1, poly2, &error);
 
-
+	freePolynominal(poly1);
+	freePolynominal(poly2);
+	printMemoryStatus();
+	*/
+	
 	//Polynominal * x = createPolynominal(INTEGER, NULL,1);
     int number_failed;
     Suite *s; 
     SRunner *sr;
-
+	//createPolynominal(INTEGER, NULL, 1, 2, 1);
     s = polynominal_suite();
     sr = srunner_create(s);
 
     srunner_run_all(sr, CK_NORMAL);
     number_failed = srunner_ntests_failed(sr);
     srunner_free(sr);
+	
    // printf("%d", number_failed);
-	//printf("\nMEMORY_DEBUG: %d \n", elements_allocated);
+	printf("\nMEMORY_DEBUG: %d \n", elements_allocated);
 	printMemoryStatus();
     return (number_failed == 0) ? EXIT_SUCCESS : EXIT_FAILURE;
 
