@@ -3,12 +3,11 @@
 
 #include "polynominal.h"
 #include "stdlib.h"
-
+#include "debug_memory.h"
 QuotientPolynominalRing * createQuotientPolynominalRing(Polynominal *,int, int*);
 void freeQuotientPolynominalRing(QuotientPolynominalRing *);
 
-void * my_malloc(int);
-void my_free(void*);
+
 
 
 #endif

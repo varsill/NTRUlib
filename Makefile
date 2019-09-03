@@ -136,6 +136,33 @@ unit_test/fast:
 	$(MAKE) -f tests/CMakeFiles/unit_test.dir/build.make tests/CMakeFiles/unit_test.dir/build
 .PHONY : unit_test/fast
 
+src/hashtable.o: src/hashtable.c.o
+
+.PHONY : src/hashtable.o
+
+# target to build an object file
+src/hashtable.c.o:
+	$(MAKE) -f CMakeFiles/ntrulib.dir/build.make CMakeFiles/ntrulib.dir/src/hashtable.c.o
+.PHONY : src/hashtable.c.o
+
+src/hashtable.i: src/hashtable.c.i
+
+.PHONY : src/hashtable.i
+
+# target to preprocess a source file
+src/hashtable.c.i:
+	$(MAKE) -f CMakeFiles/ntrulib.dir/build.make CMakeFiles/ntrulib.dir/src/hashtable.c.i
+.PHONY : src/hashtable.c.i
+
+src/hashtable.s: src/hashtable.c.s
+
+.PHONY : src/hashtable.s
+
+# target to generate assembly for a file
+src/hashtable.c.s:
+	$(MAKE) -f CMakeFiles/ntrulib.dir/build.make CMakeFiles/ntrulib.dir/src/hashtable.c.s
+.PHONY : src/hashtable.c.s
+
 src/main.o: src/main.c.o
 
 .PHONY : src/main.o
@@ -254,6 +281,9 @@ help:
 	@echo "... ntrulib"
 	@echo "... edit_cache"
 	@echo "... unit_test"
+	@echo "... src/hashtable.o"
+	@echo "... src/hashtable.i"
+	@echo "... src/hashtable.s"
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"

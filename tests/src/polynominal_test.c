@@ -5,7 +5,7 @@
 #include "polynominal.h"
 #include <stdbool.h>
 #include "config.h"
-
+#include "hashtable.h"
 #ifdef DEBUG_MEMORY
 #include "debug_memory.h"
 #endif
@@ -15,7 +15,7 @@ START_TEST(generation)
 {
 	int error;
 
-	Polynominal *poly = createPolynominal(INTEGER, &error, 2, 3, 0, 2, 1);
+	Polynominal *poly = createPolynominal(INTEGER,NULL,&error, 2, 3, 0, 2, 1);
 	
 	ck_assert(error==OK);
 
@@ -25,14 +25,14 @@ START_TEST(generation)
 	ck_assert_msg(error==WRONG_POLYNOMINAL_COEFFICIENTS);
 	freePolynominal(poly);
 
-	Polynominal *ideal = createPolynominal(REAL,  &error, 2.5, 3.1, 0, 2.1, 1.4);
+	Polynominal *ideal = createPolynominal(REAL, NULL, &error, 2.5, 3.1, 0, 2.1, 1.4);
 	ck_assert(error==OK);
 
 	QuotientPolynominalRing *ring = createQuotientPolynominalRing(ideal,-1, &error);
 	ck_assert(error==OK);
 	freeQuotientPolynominalRing(ring);
 
-	ideal=createPolynominal(INTEGER, &error, 2.5, 3, 12, 2);
+	ideal=createPolynominal(INTEGER,NULL, &error, 2.5, 3, 12, 2);
 	ck_assert(error=WRONG_POLYNOMINAL_COEFFICIENTS);
 	freePolynominal(ideal);
 
@@ -42,21 +42,21 @@ END_TEST
 START_TEST(comparison)
 {
 	int error;
-	Polynominal *poly1=createPolynominal(REAL,&error, 2, 3, 0, 2, 1);
-	Polynominal *poly2=createPolynominal(REAL,&error, 2, 3, 0, 2, 1);
+	Polynominal *poly1=createPolynominal(REAL,NULL,&error, 2, 3, 0, 2, 1);
+	Polynominal *poly2=createPolynominal(REAL,NULL,&error, 2, 3, 0, 2, 1);
 
 	ck_assert(comparePolynominals(NULL, poly1, poly2, NULL)==true);
 
-	Polynominal *poly3=createPolynominal(REAL, &error,2, 3, 1, 2);
+	Polynominal *poly3=createPolynominal(REAL,NULL, &error,2, 3, 1, 2);
 
 	ck_assert(comparePolynominals(NULL, poly1, poly3, NULL)==false);
 
-	Polynominal *poly4=createPolynominal(REAL, &error,2.0, 3.0, 0, 2.0, 1.0);
+	Polynominal *poly4=createPolynominal(REAL,NULL, &error,2.0, 3.0, 0, 2.0, 1.0);
 	ck_assert(comparePolynominals(NULL, poly1, poly4, NULL)==true);
 
-	Polynominal *poly5 = createPolynominal(REAL,&error, 1, 2, 0, 0);
-	Polynominal *poly6 = createPolynominal(REAL,&error, 2, 1, 2);
-	Polynominal *ideal = createPolynominal(REAL,&error, 1, 0, 2, 1);
+	Polynominal *poly5 = createPolynominal(REAL,NULL,&error, 1, 2, 0, 0);
+	Polynominal *poly6 = createPolynominal(REAL,NULL,&error, 2, 1, 2);
+	Polynominal *ideal = createPolynominal(REAL,NULL,&error, 1, 0, 2, 1);
 	QuotientPolynominalRing *ring = createQuotientPolynominalRing(ideal,-1, &error);
 	ck_assert(comparePolynominals(ring, poly5, poly6, NULL)==true);
 	ck_assert(comparePolynominals(ring, poly5,poly1, NULL)==false);
@@ -75,10 +75,10 @@ END_TEST
 START_TEST(addition)
 {
 	
- 	Polynominal *poly1 = createPolynominal(INTEGER,NULL, 2, 3, 1, 2);
-	Polynominal *poly2 = createPolynominal(INTEGER, NULL,2, 1, 0);
+ 	Polynominal *poly1 = createPolynominal(INTEGER,NULL,NULL, 2, 3, 1, 2);
+	Polynominal *poly2 = createPolynominal(INTEGER, NULL,NULL,2, 1, 0);
 	
-	Polynominal *result = createPolynominal(INTEGER, NULL, 2, 5, 2, 2);
+	Polynominal *result = createPolynominal(INTEGER, NULL,NULL, 2, 5, 2, 2);
 	Polynominal * _result = addPolynominals(NULL, poly1, poly2, NULL);
 	ck_assert(comparePolynominals(NULL, _result , result, NULL));
 	
@@ -92,9 +92,9 @@ END_TEST
 
 START_TEST(substraction)
 {
-        Polynominal *poly1 = createPolynominal(INTEGER,NULL, 2, 1, 2);
-        Polynominal *poly2 = createPolynominal(INTEGER,NULL, 2, 1, 0);
-        Polynominal *result = createPolynominal(INTEGER,NULL, 2);
+        Polynominal *poly1 = createPolynominal(INTEGER,NULL,NULL, 2, 1, 2);
+        Polynominal *poly2 = createPolynominal(INTEGER,NULL,NULL, 2, 1, 0);
+        Polynominal *result = createPolynominal(INTEGER,NULL,NULL, 2);
 		Polynominal *_result=substractPolynominals(NULL, poly1, poly2, NULL);
         ck_assert(comparePolynominals(NULL, _result, result, NULL));
 
@@ -107,14 +107,14 @@ END_TEST
 
 START_TEST(multiplication)
 {
-		Polynominal *poly1 = createPolynominal(INTEGER,NULL, 2, 1, 2);
-        Polynominal *poly2 = createPolynominal(INTEGER,NULL,2, 1, 0);
-        Polynominal *result = createPolynominal(INTEGER,NULL,4, 4, 5, 2, 0);
+		Polynominal *poly1 = createPolynominal(INTEGER,NULL,NULL, 2, 1, 2);
+        Polynominal *poly2 = createPolynominal(INTEGER,NULL,NULL,2, 1, 0);
+        Polynominal *result = createPolynominal(INTEGER,NULL,NULL,4, 4, 5, 2, 0);
 		
 		Polynominal *_result=multiplyPolynominals(NULL, poly1, poly2, NULL);
 		
 		QuotientPolynominalRing * ring = createQuotientPolynominalRing(NULL, 3, NULL);
-		Polynominal * result_modulo=createPolynominal(INTEGER, NULL, 1,1,2,2,0);
+		Polynominal * result_modulo=createPolynominal(INTEGER, NULL,NULL, 1,1,2,2,0);
 		
 		Polynominal *_result_modulo=multiplyPolynominals(ring, poly1, poly2, NULL);
 		
@@ -133,19 +133,17 @@ END_TEST
 
 START_TEST(division)
 {
-	Polynominal *poly1 = createPolynominal(INTEGER,NULL,1, -4, 2, -3);
-    Polynominal *poly2 = createPolynominal(INTEGER, NULL,1, 2);
-    Polynominal *result = createPolynominal(INTEGER,NULL, 1, -6, 14);
-    Polynominal *rest = createPolynominal(INTEGER, NULL, -31);
+	Polynominal *poly1 = createPolynominal(INTEGER,NULL, NULL,1, -4, 2, -3);
+    Polynominal *poly2 = createPolynominal(INTEGER,NULL, NULL,1, 2);
+    Polynominal *result = createPolynominal(INTEGER,NULL,NULL, 1, -6, 14);
+    Polynominal *rest = createPolynominal(INTEGER,NULL, NULL, -31);
 	Polynominal *_rest=createZeroPolynominal(INTEGER, NULL);
 	Polynominal * _result= dividePolynominals(NULL, poly1, poly2, _rest, NULL);
 	
 	ck_assert(comparePolynominals(NULL,_result, result, NULL)==true);
 	ck_assert(comparePolynominals(NULL, _rest, rest, NULL)==true);
-	int error;
-	moduloPolynominal(&poly1, poly2, &error);
-	if(error!=OK)printf("\n\n\n\nELOO\n\n\n\n");
-	fflush(stdout);
+	
+	moduloPolynominal(&poly1, poly2, NULL);
 	ck_assert(comparePolynominals(NULL, rest, poly1, NULL)==true);
     freePolynominal(poly1);
     freePolynominal(poly2);
@@ -155,8 +153,8 @@ START_TEST(division)
 	freePolynominal(_rest);
 }
 END_TEST
-
-/* START_TEST(inversion)
+/* 
+START_TEST(inversion)
 {
 	int error;
 	Polynominal *poly = createPolynominal(3,NULL, 1, 0, 1);
@@ -205,21 +203,98 @@ Suite * polynominal_suite(void)
 }
 
 
-
-
+unsigned long fun(int k)
+{
+	return k;
+}
 
 int main(void)
 {
-	/* 
-	Polynominal *poly1 = createPolynominal(INTEGER,NULL,1, -4, 2, -3);
-    Polynominal *poly2 = createPolynominal(INTEGER, NULL,1, 2);
-	int error;
-	moduloPolynominal(&poly1, poly2, &error);
+#ifdef DEBUG_MEMORY	
+START_DEBUG
+#endif
+/* 
+Hashtable* h = createHashtable(fun);
 
-	freePolynominal(poly1);
-	freePolynominal(poly2);
-	printMemoryStatus();
+insertElement(h, 10002, "xDDD");
+
+removeElement(h, 10002);
+insertElement(h, 3, "lels");
+printf("%d", insertElement(h, 10002, "lels"));
+
+//printf("%s", h->elements_tab[]);
+//printf("%s",h->elements_tab[2].data);
+
+
+
+deleteHashtable(h);
+	
+	return 1;*/
+
+ /*	Polynominal *a1 = createPolynominal(INTEGER, NULL, 4, 4);
+	Polynominal *a2 = createPolynominal(INTEGER, NULL, 1, 3);
+
+	Polynominal *result = multiplyPolynominals(ring, a1, a2, NULL);
+	result = multiplyPolynominals(ring, a1, a2, NULL);
+	result = multiplyPolynominals(ring, a1, a2, NULL);
+	result = multiplyPolynominals(ring, a1, a2, NULL);
+	printPolynominal(result, "");
+	freePolynominal(a1);
+	freePolynominal(a2);
+	freePolynominal(result);
+	//freeQuotientPolynominalRing(ring);
+	printf()
 	*/
+   
+	
+/* 
+	QuotientPolynominalRing * ring = createQuotientPolynominalRing(createPolynominal(INTEGER,NULL, NULL, 1, 2,0,6,1), 7, NULL);
+//Polynominal *a = createPolynominal(INTEGER,ring, NULL, 1, 2,0,6,0);
+	Polynominal *b = createPolynominal(INTEGER, ring, NULL, 1,2, 0, 6, 0, 2);
+	//Polynominal *u;
+	//Polynominal *v;
+	//Polynominal *x  = extendedEuclid(a, b, &u, &v, ring);
+	//printf("GCD: %d", gcdOfPolynomialCoefficients(a));
+	//Polynominal * x = dividePolynominals(ring, a, b, u, NULL);
+	//printPolynominal(a, "");
+  //  printPolynominal(x, "FINALE: ");
+//	printPolynominal(u, "FIRST:");
+//	printPolynominal(v, "SECOND: ");
+//	freePolynominal(x);
+	Polynominal *t = invertPolynominal(b, ring);
+	//printf("%d ", t);fflush(stdout);
+	printPolynominal(t,"INVERTED POLYNOMINAL");
+	freeQuotientPolynominalRing(ring);
+	freePolynominal(b);
+	freePolynominal(t);
+//	freePolynominal(a);
+//	freePolynominal(u);
+  // freePolynominal(v);
+*/	
+//	printf("%d", countElements(h));
+
+	QuotientPolynominalRing * ring = createQuotientPolynominalRing(createPolynominal(INTEGER,NULL, NULL, 1, 2,0,6,1), 0, NULL);
+	Polynominal *a = createPolynominal(INTEGER,ring, NULL, 1, 2,0,6,1);
+	Polynominal *b = createPolynominal(INTEGER, ring, NULL, 1,2, 0, 6, 0, 2);
+	Polynominal *u;
+	Polynominal *v;
+	Polynominal *x  = extendedEuclid(a, b, &u, &v, ring);
+	printPolynominal(x, "FINALE: ");
+	printPolynominal(u, "FIRST:");
+	printPolynominal(v, "SECOND: ");
+	freePolynominal(b);
+	freePolynominal(a);
+	freePolynominal(u);
+    freePolynominal(v);
+	freePolynominal(x);
+	freeQuotientPolynominalRing(ring);
+
+	printUnallocatedMemory();
+	
+#ifdef DEBUG_MEMORY
+	STOP_DEBUG;
+#endif
+	return 1;
 	
 	//Polynominal * x = createPolynominal(INTEGER, NULL,1);
     int number_failed;

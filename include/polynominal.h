@@ -8,7 +8,7 @@
 
 #define MAX(a, b) a>b?a:b
 
-#define createPolynominal(type, error, ...) _createPolynominal(PP_NARG(__VA_ARGS__), type, error, __VA_ARGS__)
+#define createPolynominal(type, ring, error, ...) _createPolynominal(PP_NARG(__VA_ARGS__), type, ring, error, __VA_ARGS__)
 
 #define PP_NARG(...) \
          PP_NARG_(__VA_ARGS__,PP_RSEQ_N())
@@ -47,7 +47,7 @@ typedef struct{
 }QuotientPolynominalRing;
 
 
-Polynominal * _createPolynominal(unsigned int,Type, int*, ...);
+Polynominal * _createPolynominal(unsigned int, Type,QuotientPolynominalRing*, int*, ...);
 Polynominal * createZeroPolynominal(Type, int *);
 void freePolynominal(Polynominal *);
 bool comparePolynominals(const QuotientPolynominalRing *, const Polynominal *, const Polynominal *, int *);
@@ -55,6 +55,7 @@ Polynominal * addPolynominals(const QuotientPolynominalRing *, const Polynominal
 Polynominal * substractPolynominals(const QuotientPolynominalRing *, const Polynominal *, const Polynominal *, int*);
 Polynominal * multiplyPolynominals(const QuotientPolynominalRing *, const Polynominal *, const Polynominal *, int*);
 Polynominal * dividePolynominals(const QuotientPolynominalRing *, const Polynominal *, const Polynominal *,Polynominal *, int*);
+void multiplyPolynominalByConstant(Polynominal *poly, float c, QuotientPolynominalRing* ring);
 void printPolynominal(const Polynominal*, const char *);
 
 static bool isPolynominalValid(Polynominal*, bool);
@@ -63,6 +64,15 @@ static void moduloRing(Polynominal**, const QuotientPolynominalRing*);
 static void moduloInteger(Polynominal*, int , int*);
 static void repairPolynominal(Polynominal *);
 static Polynominal* copyPolynominal(const Polynominal* );
-Polynominal* extendecEuclid(const Polynominal *,const Polynominal *, Polynominal **, Polynominal **);
-Polynominal* extendedEuclid(const Polynominal *,const Polynominal *, Polynominal **, Polynominal **);
+Polynominal* invertPolynominal(Polynominal* poly, QuotientPolynominalRing* ring);
+Polynominal* extendedEuclid(const Polynominal *,const Polynominal *, Polynominal **, Polynominal **, const QuotientPolynominalRing* );
+int invertInteger(int, int);
+int ExtendedIntegerGCD(int a, int b, int* i, int*v);
+unsigned int mod(int x, int N);
+int divideInteger(int a, int b, int N);
+int gcdOfPolynomialCoefficients(Polynominal* poly);
+float inverseOfNumber(float number, QuotientPolynominalRing*ring);
 #endif
+
+
+ 

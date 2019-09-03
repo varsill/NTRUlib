@@ -21,18 +21,30 @@ stdbool.h
 -
 config.h
 /home/tadeusz/Desktop/ntru/tests/src/config.h
+hashtable.h
+/home/tadeusz/Desktop/ntru/tests/src/hashtable.h
 debug_memory.h
 /home/tadeusz/Desktop/ntru/tests/src/debug_memory.h
 
 include/config.h
 
 include/debug_memory.h
+config.h
+include/config.h
 memory.h
 include/memory.h
+
+include/hashtable.h
+stdbool.h
+-
+stdlib.h
+-
 
 include/memory.h
 stdlib.h
 -
+hashtable.h
+include/hashtable.h
 
 include/polynominal.h
 config.h
@@ -45,4 +57,6 @@ polynominal.h
 include/polynominal.h
 stdlib.h
 include/stdlib.h
+debug_memory.h
+include/debug_memory.h
 

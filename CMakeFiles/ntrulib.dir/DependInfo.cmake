@@ -4,6 +4,7 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_C
+  "/home/tadeusz/Desktop/ntru/src/hashtable.c" "/home/tadeusz/Desktop/ntru/CMakeFiles/ntrulib.dir/src/hashtable.c.o"
   "/home/tadeusz/Desktop/ntru/src/main.c" "/home/tadeusz/Desktop/ntru/CMakeFiles/ntrulib.dir/src/main.c.o"
   "/home/tadeusz/Desktop/ntru/src/memory.c" "/home/tadeusz/Desktop/ntru/CMakeFiles/ntrulib.dir/src/memory.c.o"
   "/home/tadeusz/Desktop/ntru/src/polynominal.c" "/home/tadeusz/Desktop/ntru/CMakeFiles/ntrulib.dir/src/polynominal.c.o"

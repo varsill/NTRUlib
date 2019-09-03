@@ -12,7 +12,8 @@ QuotientPolynominalRing * createQuotientPolynominalRing(Polynominal *ideal, int 
 }
 void freeQuotientPolynominalRing(QuotientPolynominalRing *ring)
 {   
-    if(ring!=NULL)freePolynominal(ring->ideal);
+    if(ring==NULL)return;
+    freePolynominal(ring->ideal);
     free(ring);
     
 }

@@ -6,6 +6,10 @@
 
 #IncludeRegexTransform: 
 
+/home/tadeusz/Desktop/ntru/src/hashtable.c
+hashtable.h
+/home/tadeusz/Desktop/ntru/src/hashtable.h
+
 /home/tadeusz/Desktop/ntru/src/main.c
 
 /home/tadeusz/Desktop/ntru/src/memory.c
@@ -13,6 +17,8 @@ memory.h
 /home/tadeusz/Desktop/ntru/src/memory.h
 stdio.h
 -
+hashtable.h
+/home/tadeusz/Desktop/ntru/src/hashtable.h
 
 /home/tadeusz/Desktop/ntru/src/polynominal.c
 polynominal.h
@@ -39,12 +45,22 @@ quotient_polynominal_ring.h
 include/config.h
 
 include/debug_memory.h
+config.h
+include/config.h
 memory.h
 include/memory.h
+
+include/hashtable.h
+stdbool.h
+-
+stdlib.h
+-
 
 include/memory.h
 stdlib.h
 -
+hashtable.h
+include/hashtable.h
 
 include/polynominal.h
 config.h
@@ -57,4 +73,6 @@ polynominal.h
 include/polynominal.h
 stdlib.h
 include/stdlib.h
+debug_memory.h
+include/debug_memory.h
 

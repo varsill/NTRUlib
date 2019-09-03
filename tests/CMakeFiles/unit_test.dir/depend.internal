@@ -5,6 +5,7 @@ tests/CMakeFiles/unit_test.dir/src/polynominal_test.c.o
  /home/tadeusz/Desktop/ntru/tests/src/polynominal_test.c
  include/config.h
  include/debug_memory.h
+ include/hashtable.h
  include/memory.h
  include/polynominal.h
  include/quotient_polynominal_ring.h
