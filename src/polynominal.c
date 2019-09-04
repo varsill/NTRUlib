@@ -230,7 +230,7 @@ Polynominal * multiplyPolynominals(const QuotientPolynominalRing * ring, const P
   // printPolynominal(result, "PRZED MODULO:");
     moduloRing(&result, ring);
    // printPolynominal(result, "PO MODULO:");
-    repairPolynominal(result);
+   // repairPolynominal(result);
     return result;
 
 }
@@ -246,13 +246,27 @@ Polynominal * dividePolynominals(const QuotientPolynominalRing *ring, const Poly
         return NULL;   
     }
     Polynominal *result = (Polynominal*)malloc(sizeof(Polynominal));
-    
+     
     if(p1->type==INTEGER && p2->type==INTEGER) result->type=INTEGER;
     else result->type=REAL;
-    
+   
     result->degree=p1->degree-p2->degree+1;
-    result->coefficients=(float*)malloc(sizeof(float)*result->degree);
-
+    result->coefficients=NULL;
+    printf("STOPIEN: %d \n", result->degree);
+    if(result->degree>0)
+    {
+        
+    //   printf("STOPIEN: %d \n", result->degree);fflush(stdout);
+        result->coefficients=(float*)malloc(sizeof(float)*result->degree);
+        
+    }
+    else
+    {
+        Polynominal *result_buf=createZeroPolynominal(result->type, NULL);
+        freePolynominal(result);
+        result=result_buf; 
+        
+    } 
   /*  
     if(rest==NULL)
     {
@@ -280,47 +294,57 @@ Polynominal * dividePolynominals(const QuotientPolynominalRing *ring, const Poly
     bufor->coefficients=(float*)malloc(sizeof(float)*bufor->degree);
     
     memcpy(bufor->coefficients, p1->coefficients, bufor->degree*sizeof(float));
+     
     if(ring==NULL || ring->q<=0)//division in Q[x] polynomials ring
     {
+        
         for(int i=bufor->degree-1; i>=0; i--)
         {
-        if(i<p2->degree-1)break;
-        result->coefficients[i-p2->degree+1]=bufor->coefficients[i]/p2->coefficients[p2->degree-1];
-        for(int j=0; j<p2->degree; j++)    
-        {
-            bufor->coefficients[j+(i-p2->degree+1)]-=result->coefficients[i-p2->degree+1]*p2->coefficients[j];
+            
+            if(i<p2->degree-1)break;
+            result->coefficients[i-p2->degree+1]=bufor->coefficients[i]/p2->coefficients[p2->degree-1];
+            for(int j=0; j<p2->degree; j++)    
+            {
+                bufor->coefficients[j+(i-p2->degree+1)]-=result->coefficients[i-p2->degree+1]*p2->coefficients[j];
+            }
         }
-    }
-
+          
+    
     }
     else//division in Z_n[x] polynomials ring, where n is ring->q
     {
+          
+        for(int i=bufor->degree-1; i>=0; i--)
+        { 
         
-    for(int i=bufor->degree-1; i>=0; i--)
-    {
-        if(i<p2->degree-1)break;
-        result->coefficients[i-p2->degree+1]=divideInteger(bufor->coefficients[i], p2->coefficients[p2->degree-1], ring->q);
-        for(int j=0; j<p2->degree; j++)    
-        {
-            bufor->coefficients[j+(i-p2->degree+1)]-=mod((result->coefficients[i-p2->degree+1]*p2->coefficients[j]), ring->q);
+            if(i<p2->degree-1)break; 
+        // printf("%d %d ", i, p2->degree);
+            result->coefficients[i-p2->degree+1]=divideInteger(bufor->coefficients[i], p2->coefficients[p2->degree-1], ring->q);
+            for(int j=0; j<p2->degree; j++)    
+            {
+                bufor->coefficients[j+(i-p2->degree+1)]-=mod((result->coefficients[i-p2->degree+1]*p2->coefficients[j]), ring->q);
+            }
         }
     }
-    }
+    
     if(save_rest==true)
     {
+        
         rest->degree=bufor->degree;
         rest->type=bufor->type;
         if(rest->coefficients==NULL)rest->coefficients=(float*)malloc(sizeof(float)*rest->degree);
         memcpy(rest->coefficients, bufor->coefficients, bufor->degree*sizeof(float));
-        repairPolynominal(rest);
+   //     repairPolynominal(rest);
+     
         moduloRing(&rest, ring);
+          
     }
-
+   
     freePolynominal(bufor);
+  
     moduloRing(&result, ring);
     
-    
-    repairPolynominal(result);
+   // repairPolynominal(result);
     return result;
 
 }
@@ -388,10 +412,16 @@ void moduloPolynominal(Polynominal ** divident,const Polynominal * divisor, int*
 
 static void moduloRing(Polynominal **poly, const QuotientPolynominalRing *ring)
 {
-    if(ring==NULL)return;
-   // moduloPolynominal(poly, ring->ideal, NULL);
    
+    if(ring==NULL) 
+    {
+       
+        return;
+    }
+   // moduloPolynominal(poly, ring->ideal, NULL);
+  //  pause();
     moduloInteger(*poly, ring->q, NULL);
+  //  pause();
     repairPolynominal(*poly);
 }
 
@@ -413,6 +443,7 @@ static void moduloInteger(Polynominal *poly, int q, int *error)
     } 
     for(int i=0; i<poly->degree; i++)
     {
+        
         poly->coefficients[i]=mod((int)poly->coefficients[i],q);   
     }
 }
@@ -431,10 +462,15 @@ static Polynominal* copyPolynominal(const Polynominal* p)
 
 static void repairPolynominal(Polynominal* p)
 {
+    if(p->type==REAL)
+    {
+    //    for(int i=0; i<p->degree; i++)p->coefficients[i]=roundf(1000*p->coefficients[i])/1000;//round to 3th decimal 
+    }
     int i = p->degree-1;
     //while(i<p->degree&&p->coefficients[i]==0)i--;
     while(i>=0&&p->coefficients[i]==0)i--;
     p->degree=i+1;
+   
 }
 
 #define P -1
@@ -459,11 +495,12 @@ Polynominal* extendedEuclid(const Polynominal *a,const Polynominal *b, Polynomin
    
     while(comparePolynominals(NULL, r1, zero, NULL)==false)
     {
-
-       
+        //  printf("elo");fflush(stdout);
+       // pause();
         q = dividePolynominals(ring, r0, r1,NULL, NULL);
-         
-         
+       
+        //pause();
+      //  printf("cotam");fflush(stdout);
         x = multiplyPolynominals(ring, q, r1, NULL); 
         r2=substractPolynominals(ring, r0,x, NULL);
         printPolynominal(r0, "r0 ");

@@ -273,11 +273,12 @@ deleteHashtable(h);
 */	
 //	printf("%d", countElements(h));
 
-	QuotientPolynominalRing * ring = createQuotientPolynominalRing(createPolynominal(INTEGER,NULL, NULL, 1, 2,0,6,1), 0, NULL);
-	Polynominal *a = createPolynominal(INTEGER,ring, NULL, 1, 2,0,6,1);
-	Polynominal *b = createPolynominal(INTEGER, ring, NULL, 1,2, 0, 6, 0, 2);
+	QuotientPolynominalRing * ring = createQuotientPolynominalRing(NULL,211, NULL);
+	Polynominal *a = createPolynominal(INTEGER,ring, NULL, 1, 0,6,1, 12);
+	Polynominal *b = createPolynominal(INTEGER, ring, NULL, 1,52, 1, 6, 0, 2, 4, 3);
 	Polynominal *u;
 	Polynominal *v;
+	
 	Polynominal *x  = extendedEuclid(a, b, &u, &v, ring);
 	printPolynominal(x, "FINALE: ");
 	printPolynominal(u, "FIRST:");
@@ -289,7 +290,7 @@ deleteHashtable(h);
 	freePolynominal(x);
 	freeQuotientPolynominalRing(ring);
 
-	printUnallocatedMemory();
+//	printUnallocatedMemory();
 	
 #ifdef DEBUG_MEMORY
 	STOP_DEBUG;

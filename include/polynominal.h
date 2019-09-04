@@ -36,7 +36,7 @@
 typedef enum {INTEGER, REAL} Type;
 
 typedef struct{
-    unsigned int degree;
+    int degree;
     float* coefficients;
     Type type;
 } Polynominal;
