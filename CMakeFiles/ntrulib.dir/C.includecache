@@ -43,12 +43,20 @@ math.h
 -
 quotient_polynomial_ring.h
 /home/tadeusz/Desktop/ntru/src/quotient_polynomial_ring.h
+rationals.h
+/home/tadeusz/Desktop/ntru/src/rationals.h
 
 /home/tadeusz/Desktop/ntru/src/quotient_polynomial_ring.c
 quotient_polynomial_ring.h
 /home/tadeusz/Desktop/ntru/src/quotient_polynomial_ring.h
 
+/home/tadeusz/Desktop/ntru/src/rationals.c
+rationals.h
+/home/tadeusz/Desktop/ntru/src/rationals.h
+
 include/config.h
+debug.h
+include/debug.h
 
 include/debug.h
 stdio.h
@@ -61,8 +69,6 @@ stdbool.h
 -
 stdlib.h
 -
-config.h
-include/config.h
 
 include/integer_arithmetic.h
 stdlib.h
@@ -89,4 +95,16 @@ stdlib.h
 include/stdlib.h
 config.h
 include/config.h
+
+include/rationals.h
+float.h
+-
+math.h
+-
+stdbool.h
+-
+stdio.h
+-
+integer_arithmetic.h
+include/integer_arithmetic.h
 

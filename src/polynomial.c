@@ -6,7 +6,7 @@
 #include <math.h>
 
 #include "quotient_polynomial_ring.h"
-
+#include "rationals.h"
 
 Polynomial * _createPolynomial(unsigned int _degree, Type _type,QuotientPolynomialRing* ring, int* error,  ...)
 {
@@ -27,7 +27,7 @@ Polynomial * _createPolynomial(unsigned int _degree, Type _type,QuotientPolynomi
         
             if(b==0)SET_ERROR(error, WRONG_POLYNOMINAL_COEFFICIENTS);
             p->coefficients[_degree-1]=b;
-            for(int i=1; i<_degree; i++) p->coefficients[_degree-i-1]=va_arg(coefficients_list, double);
+       //    for(int i=1; i<_degree; i++) p->coefficients[_degree-i-1]=createRational(va_arg(coefficients_list, double));
            
         }
         else if(_type==INTEGER)
@@ -36,7 +36,7 @@ Polynomial * _createPolynomial(unsigned int _degree, Type _type,QuotientPolynomi
         
             if(b==0)SET_ERROR(error, WRONG_POLYNOMINAL_COEFFICIENTS);
             p->coefficients[_degree-1]=b;
-            for(int i=1; i<_degree; i++)p->coefficients[_degree-i-1]=va_arg(coefficients_list, int);
+         //   for(int i=1; i<_degree; i++)p->coefficients[_degree-i-1]=createRational(va_arg(coefficients_list, int));
             
             
         }
@@ -199,6 +199,7 @@ Polynomial * substractPolynomials(const QuotientPolynomialRing *ring, const Poly
 
 Polynomial * multiplyPolynomials(const QuotientPolynomialRing * ring, const Polynomial *p1, const Polynomial *p2, int *error)
 {
+    pause();
     SET_ERROR(error, OK);
     if(p1==NULL || p2==NULL)
     {
@@ -208,10 +209,9 @@ Polynomial * multiplyPolynomials(const QuotientPolynomialRing * ring, const Poly
     if(p1->degree==0||p2->degree==0)return createZeroPolynomial(INTEGER, NULL); //DO NAPRAWY
     Polynomial *result=(Polynomial*)malloc(sizeof(Polynomial));
     result->degree=p1->degree+p2->degree-1;
-    result->coefficients=(float*)malloc((result->degree)*sizeof(float));
+    result->coefficients=(float*)malloc(result->degree*sizeof(float));
     if(p1->type==INTEGER && p2->type==INTEGER) result->type=INTEGER;
     else result->type=REAL;
-    
     for(int k=0; k<result->degree; k++)
     {
         result->coefficients[k]=0;
@@ -219,12 +219,13 @@ Polynomial * multiplyPolynomials(const QuotientPolynomialRing * ring, const Poly
         for(int i=0; i<=k; i++)
         {
             result->coefficients[k]+=(p1->coefficients[i]*p2->coefficients[k-i]);
+            if(ring!=NULL && ring->q>0)result->coefficients[k]=mod(result->coefficients[k], ring->q);
         }
     }
-  // printPolynomial(result, "PRZED MODULO:");
-    moduloRing(&result, ring);
+   printPolynomial(result, "PRZED MODULO:");
+  //   moduloRing(&result, ring);
    // printPolynomial(result, "PO MODULO:");
-   // repairPolynomial(result);
+    repairPolynomial(result);
     return result;
 
 }
@@ -510,7 +511,6 @@ static void moduloRing(Polynomial **poly, const QuotientPolynomialRing *ring)
    
     if(ring==NULL) 
     {
-       
         return;
     }
    // moduloPolynomial(poly, ring->ideal, NULL);

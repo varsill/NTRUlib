@@ -3,13 +3,11 @@
 
 CMakeFiles/ntrulib.dir/src/debug.c.o
  /home/tadeusz/Desktop/ntru/src/debug.c
- include/config.h
  include/debug.h
  include/hashtable.h
  include/memory.h
 CMakeFiles/ntrulib.dir/src/hashtable.c.o
  /home/tadeusz/Desktop/ntru/src/hashtable.c
- include/config.h
  include/hashtable.h
 CMakeFiles/ntrulib.dir/src/integer_arithmetic.c.o
  /home/tadeusz/Desktop/ntru/src/integer_arithmetic.c
@@ -18,18 +16,28 @@ CMakeFiles/ntrulib.dir/src/main.c.o
  /home/tadeusz/Desktop/ntru/src/main.c
 CMakeFiles/ntrulib.dir/src/memory.c.o
  /home/tadeusz/Desktop/ntru/src/memory.c
- include/config.h
  include/hashtable.h
  include/memory.h
 CMakeFiles/ntrulib.dir/src/polynomial.c.o
  /home/tadeusz/Desktop/ntru/src/polynomial.c
  include/config.h
+ include/debug.h
+ include/hashtable.h
  include/integer_arithmetic.h
+ include/memory.h
  include/polynomial.h
  include/quotient_polynomial_ring.h
+ include/rationals.h
 CMakeFiles/ntrulib.dir/src/quotient_polynomial_ring.c.o
  /home/tadeusz/Desktop/ntru/src/quotient_polynomial_ring.c
  include/config.h
+ include/debug.h
+ include/hashtable.h
  include/integer_arithmetic.h
+ include/memory.h
  include/polynomial.h
  include/quotient_polynomial_ring.h
+CMakeFiles/ntrulib.dir/src/rationals.c.o
+ /home/tadeusz/Desktop/ntru/src/rationals.c
+ include/integer_arithmetic.h
+ include/rationals.h

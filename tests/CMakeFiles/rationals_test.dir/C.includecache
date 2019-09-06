@@ -1,0 +1,36 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/tadeusz/Desktop/ntru/tests/src/rationals_test.c
+rationals.h
+/home/tadeusz/Desktop/ntru/tests/src/rationals.h
+check.h
+-
+stdlib.h
+-
+stdio.h
+-
+stdbool.h
+-
+
+include/integer_arithmetic.h
+stdlib.h
+-
+
+include/rationals.h
+float.h
+-
+math.h
+-
+stdbool.h
+-
+stdio.h
+-
+integer_arithmetic.h
+include/integer_arithmetic.h
+

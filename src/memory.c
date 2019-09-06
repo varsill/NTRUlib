@@ -24,7 +24,12 @@ void debug_free(void** p)
 {
     if(*p==NULL)return;
      int x = findElement(h, *p);
-    if(removeElement(h, *p)==false)printf("ATTEMPTED TO FREE UNALLOCATED MEMORY \n");
+    if(removeElement(h, *p)==false)
+    {
+        printf("\033[0;31m"); //red ouput color
+        printf("ATTEMPTED TO FREE UNALLOCATED MEMORY \n");
+        printf("\033[0m");//default, white output color
+    }
     else
     { 
         elements_allocated--;    

@@ -9,7 +9,9 @@ START_TEST(generation)
     Rational a=createRational(2, 5);
     Rational b = createRational(2, -5);
     ck_assert(a.nominator==2 && a.denominator==5);
-    ck_assert(a.nominator==2&&b.denominator==-5);
+    ck_assert(b.nominator==-2&&b.denominator==5);
+    Rational c=createRational(2.5);
+    ck_assert((float)c.nominator/c.denominator==2.5);
 
 }
 END_TEST
@@ -42,8 +44,8 @@ END_TEST
 
 START_TEST(substraction)
 {
-    Rational a=createRational29, 60);
-    Rational b=createRational1, 12);
+    Rational a=createRational(29, 60);
+    Rational b=createRational(1, 12);
     Rational result=substractRationals(&a, &b);
     Rational expected_result = {2, 5};
     ck_assert(compareRationals(&result, &expected_result)==true);
@@ -94,17 +96,21 @@ Suite * rationals_suite()
     
     tc_generation=tcase_create("Generating rational numbers");
     tcase_add_test(tc_generation, generation);
-    
+    suite_add_tcase(s,tc_generation);
+
     tc_comparison=tcase_create("Comparing rational numbers");
     tcase_add_test(tc_comparison, comparison);
+    suite_add_tcase(s,tc_comparison);
 
-    tc_basic_operations=tcase_create("Testing basic arithmetic operations onn rational numbers");
+
+    tc_basic_operations=tcase_create("Testing basic arithmetic operations on rational numbers");
     tcase_add_test(tc_basic_operations, addition);
     tcase_add_test(tc_basic_operations, substraction);
     tcase_add_test(tc_basic_operations, multiplication);
     tcase_add_test(tc_basic_operations, division);
     tcase_add_test(tc_basic_operations, inversion);
 
+    suite_add_tcase(s,tc_basic_operations);
     return s;
 }
 

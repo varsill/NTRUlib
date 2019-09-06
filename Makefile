@@ -123,6 +123,32 @@ ntrulib/fast:
 	$(MAKE) -f CMakeFiles/ntrulib.dir/build.make CMakeFiles/ntrulib.dir/build
 .PHONY : ntrulib/fast
 
+#=============================================================================
+# Target rules for targets named polynomial_test
+
+# Build rule for target.
+polynomial_test: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 polynomial_test
+.PHONY : polynomial_test
+
+# fast build rule for target.
+polynomial_test/fast:
+	$(MAKE) -f tests/CMakeFiles/polynomial_test.dir/build.make tests/CMakeFiles/polynomial_test.dir/build
+.PHONY : polynomial_test/fast
+
+#=============================================================================
+# Target rules for targets named rationals_test
+
+# Build rule for target.
+rationals_test: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 rationals_test
+.PHONY : rationals_test
+
+# fast build rule for target.
+rationals_test/fast:
+	$(MAKE) -f tests/CMakeFiles/rationals_test.dir/build.make tests/CMakeFiles/rationals_test.dir/build
+.PHONY : rationals_test/fast
+
 src/debug.o: src/debug.c.o
 
 .PHONY : src/debug.o
@@ -312,6 +338,33 @@ src/quotient_polynomial_ring.c.s:
 	$(MAKE) -f CMakeFiles/ntrulib.dir/build.make CMakeFiles/ntrulib.dir/src/quotient_polynomial_ring.c.s
 .PHONY : src/quotient_polynomial_ring.c.s
 
+src/rationals.o: src/rationals.c.o
+
+.PHONY : src/rationals.o
+
+# target to build an object file
+src/rationals.c.o:
+	$(MAKE) -f CMakeFiles/ntrulib.dir/build.make CMakeFiles/ntrulib.dir/src/rationals.c.o
+.PHONY : src/rationals.c.o
+
+src/rationals.i: src/rationals.c.i
+
+.PHONY : src/rationals.i
+
+# target to preprocess a source file
+src/rationals.c.i:
+	$(MAKE) -f CMakeFiles/ntrulib.dir/build.make CMakeFiles/ntrulib.dir/src/rationals.c.i
+.PHONY : src/rationals.c.i
+
+src/rationals.s: src/rationals.c.s
+
+.PHONY : src/rationals.s
+
+# target to generate assembly for a file
+src/rationals.c.s:
+	$(MAKE) -f CMakeFiles/ntrulib.dir/build.make CMakeFiles/ntrulib.dir/src/rationals.c.s
+.PHONY : src/rationals.c.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -321,6 +374,8 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... ntrulib"
 	@echo "... edit_cache"
+	@echo "... polynomial_test"
+	@echo "... rationals_test"
 	@echo "... src/debug.o"
 	@echo "... src/debug.i"
 	@echo "... src/debug.s"
@@ -342,6 +397,9 @@ help:
 	@echo "... src/quotient_polynomial_ring.o"
 	@echo "... src/quotient_polynomial_ring.i"
 	@echo "... src/quotient_polynomial_ring.s"
+	@echo "... src/rationals.o"
+	@echo "... src/rationals.i"
+	@echo "... src/rationals.s"
 .PHONY : help
 
 

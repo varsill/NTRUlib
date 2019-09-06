@@ -22,7 +22,7 @@
 	#target_link_libraries(ntrulib ${LIBS})
 
 if(TEST)
-#add_subdirectory(tests)
+add_subdirectory(tests)
 endif()
 
 

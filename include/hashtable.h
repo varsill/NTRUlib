@@ -3,7 +3,7 @@
 #define HASHTABLE_SIZE 10000
 #include <stdbool.h>
 #include <stdlib.h>
-#include "config.h"
+
 typedef struct 
 {
     void* data;

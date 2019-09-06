@@ -167,6 +167,33 @@ src/polynomial_test.c.s:
 	cd /home/tadeusz/Desktop/ntru && $(MAKE) -f tests/CMakeFiles/polynomial_test.dir/build.make tests/CMakeFiles/polynomial_test.dir/src/polynomial_test.c.s
 .PHONY : src/polynomial_test.c.s
 
+src/rationals_test.o: src/rationals_test.c.o
+
+.PHONY : src/rationals_test.o
+
+# target to build an object file
+src/rationals_test.c.o:
+	cd /home/tadeusz/Desktop/ntru && $(MAKE) -f tests/CMakeFiles/rationals_test.dir/build.make tests/CMakeFiles/rationals_test.dir/src/rationals_test.c.o
+.PHONY : src/rationals_test.c.o
+
+src/rationals_test.i: src/rationals_test.c.i
+
+.PHONY : src/rationals_test.i
+
+# target to preprocess a source file
+src/rationals_test.c.i:
+	cd /home/tadeusz/Desktop/ntru && $(MAKE) -f tests/CMakeFiles/rationals_test.dir/build.make tests/CMakeFiles/rationals_test.dir/src/rationals_test.c.i
+.PHONY : src/rationals_test.c.i
+
+src/rationals_test.s: src/rationals_test.c.s
+
+.PHONY : src/rationals_test.s
+
+# target to generate assembly for a file
+src/rationals_test.c.s:
+	cd /home/tadeusz/Desktop/ntru && $(MAKE) -f tests/CMakeFiles/rationals_test.dir/build.make tests/CMakeFiles/rationals_test.dir/src/rationals_test.c.s
+.PHONY : src/rationals_test.c.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -180,6 +207,9 @@ help:
 	@echo "... src/polynomial_test.o"
 	@echo "... src/polynomial_test.i"
 	@echo "... src/polynomial_test.s"
+	@echo "... src/rationals_test.o"
+	@echo "... src/rationals_test.i"
+	@echo "... src/rationals_test.s"
 .PHONY : help
 
 

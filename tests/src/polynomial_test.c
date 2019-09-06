@@ -32,7 +32,7 @@ START_TEST(generation)
 	freeQuotientPolynomialRing(ring);
 
 	ideal=createPolynomial(INTEGER,NULL, &error, 2.5, 3, 12, 2);
-	ck_assert(error=WRONG_POLYNOMINAL_COEFFICIENTS);
+	ck_assert(error==WRONG_POLYNOMINAL_COEFFICIENTS);
 	freePolynomial(ideal);
 
 }
@@ -206,7 +206,7 @@ unsigned long fun(int k)
 {
 	return k;
 }
-
+#include "rationals.h"
 int main(void)
 {
 
@@ -243,8 +243,8 @@ deleteHashtable(h);
 	printf()
 	*/
    
-	
-/* 
+/* 	
+
 	QuotientPolynomialRing * ring = createQuotientPolynomialRing(createPolynomial(INTEGER,NULL, NULL, 1, 2,0,6,1), 7, NULL);
 //Polynomial *a = createPolynomial(INTEGER,ring, NULL, 1, 2,0,6,0);
 	Polynomial *b = createPolynomial(INTEGER, ring, NULL, 1,2, 0, 6, 0, 2);
@@ -267,27 +267,42 @@ deleteHashtable(h);
 //	freePolynomial(a);
 //	freePolynomial(u);
   // freePolynomial(v);
-*/	
-//	printf("%d", countElements(h));
-
 	
-	Polynomial *a = createPolynomial(INTEGER,NULL, NULL, 1, 41,6,1, 12);
-	QuotientPolynomialRing * ring = createQuotientPolynomialRing(a,211, NULL);
+//	printf("%d", countElements(h));*/ 
+return 1;
+		/* 
+	
+	
+	QuotientPolynomialRing * ring = createQuotientPolynomialRing(createPolynomial(INTEGER,NULL, NULL, 1, 41,6,1, 12),211, NULL);
 	Polynomial *b = createPolynomial(INTEGER, ring, NULL, 1,52, 1, 6, 0, 2, 4, 3);
 	Polynomial *u;
 	Polynomial *v;
 	
-	Polynomial *x  = invertPolynomial(b, ring);
-	printPolynomial(x, "INVERSION");
+	Polynomial *x  = invertPolynomial(ring,b);
+	printPolynomial(x, "INVERSION ");
 	freePolynomial(x);
-	freePolynomial(a);
+	//freePolynomial(a);
 	freePolynomial(b);
 	freeQuotientPolynomialRing(ring);
-
-//	printUnallocatedMemory();
-	
-
 	return 1;
+//	printUnallocatedMemory();
+	*/
+/* 
+	START_DEBUG
+	QuotientPolynomialRing * ring = createQuotientPolynomialRing(NULL, 211, NULL);
+	Polynomial *a = createPolynomial(INTEGER, ring, NULL, 99, 151);
+	Polynomial *b = createPolynomial(INTEGER, ring, NULL, 200, 97, 195);
+
+	Polynomial *r = multiplyPolynomials(ring, a, b, NULL);
+
+	printPolynomial(r);
+
+	freePolynomial(a);
+	freePolynomial(b);
+	freePolynomial(r);
+	freeQuotientPolynomialRing(ring);
+	STOP_DEBUG
+	*/
 	
 	//Polynomial * x = createPolynomial(INTEGER, NULL,1);
     int number_failed;
@@ -304,6 +319,7 @@ deleteHashtable(h);
    // printf("%d", number_failed);
 	printf("\nMEMORY_DEBUG: %d \n", elements_allocated);
 	printMemoryStatus();
+	STOP_DEBUG
     return (number_failed == 0) ? EXIT_SUCCESS : EXIT_FAILURE;
 
 

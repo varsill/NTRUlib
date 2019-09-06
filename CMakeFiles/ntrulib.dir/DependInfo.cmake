@@ -11,6 +11,7 @@ set(CMAKE_DEPENDS_CHECK_C
   "/home/tadeusz/Desktop/ntru/src/memory.c" "/home/tadeusz/Desktop/ntru/CMakeFiles/ntrulib.dir/src/memory.c.o"
   "/home/tadeusz/Desktop/ntru/src/polynomial.c" "/home/tadeusz/Desktop/ntru/CMakeFiles/ntrulib.dir/src/polynomial.c.o"
   "/home/tadeusz/Desktop/ntru/src/quotient_polynomial_ring.c" "/home/tadeusz/Desktop/ntru/CMakeFiles/ntrulib.dir/src/quotient_polynomial_ring.c.o"
+  "/home/tadeusz/Desktop/ntru/src/rationals.c" "/home/tadeusz/Desktop/ntru/CMakeFiles/ntrulib.dir/src/rationals.c.o"
   )
 set(CMAKE_C_COMPILER_ID "GNU")
 

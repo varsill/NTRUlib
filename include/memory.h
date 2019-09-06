@@ -2,7 +2,6 @@
 #define _memory_h_
 
 #include <stdlib.h>
-
 #include "hashtable.h"
 extern int elements_allocated;
 extern Hashtable * h;

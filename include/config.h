@@ -5,4 +5,5 @@
 #define WRONG_POLYNOMINAL_COEFFICIENTS 1
 #define UNITIALIZED_POLYNOMINALS 3
 
-#define DEBUG_MEMORY 
+//#define DEBUG_MEMORY 
+#include "debug.h"
