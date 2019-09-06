@@ -123,18 +123,32 @@ ntrulib/fast:
 	$(MAKE) -f CMakeFiles/ntrulib.dir/build.make CMakeFiles/ntrulib.dir/build
 .PHONY : ntrulib/fast
 
-#=============================================================================
-# Target rules for targets named unit_test
+src/debug.o: src/debug.c.o
 
-# Build rule for target.
-unit_test: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 unit_test
-.PHONY : unit_test
+.PHONY : src/debug.o
 
-# fast build rule for target.
-unit_test/fast:
-	$(MAKE) -f tests/CMakeFiles/unit_test.dir/build.make tests/CMakeFiles/unit_test.dir/build
-.PHONY : unit_test/fast
+# target to build an object file
+src/debug.c.o:
+	$(MAKE) -f CMakeFiles/ntrulib.dir/build.make CMakeFiles/ntrulib.dir/src/debug.c.o
+.PHONY : src/debug.c.o
+
+src/debug.i: src/debug.c.i
+
+.PHONY : src/debug.i
+
+# target to preprocess a source file
+src/debug.c.i:
+	$(MAKE) -f CMakeFiles/ntrulib.dir/build.make CMakeFiles/ntrulib.dir/src/debug.c.i
+.PHONY : src/debug.c.i
+
+src/debug.s: src/debug.c.s
+
+.PHONY : src/debug.s
+
+# target to generate assembly for a file
+src/debug.c.s:
+	$(MAKE) -f CMakeFiles/ntrulib.dir/build.make CMakeFiles/ntrulib.dir/src/debug.c.s
+.PHONY : src/debug.c.s
 
 src/hashtable.o: src/hashtable.c.o
 
@@ -162,6 +176,33 @@ src/hashtable.s: src/hashtable.c.s
 src/hashtable.c.s:
 	$(MAKE) -f CMakeFiles/ntrulib.dir/build.make CMakeFiles/ntrulib.dir/src/hashtable.c.s
 .PHONY : src/hashtable.c.s
+
+src/integer_arithmetic.o: src/integer_arithmetic.c.o
+
+.PHONY : src/integer_arithmetic.o
+
+# target to build an object file
+src/integer_arithmetic.c.o:
+	$(MAKE) -f CMakeFiles/ntrulib.dir/build.make CMakeFiles/ntrulib.dir/src/integer_arithmetic.c.o
+.PHONY : src/integer_arithmetic.c.o
+
+src/integer_arithmetic.i: src/integer_arithmetic.c.i
+
+.PHONY : src/integer_arithmetic.i
+
+# target to preprocess a source file
+src/integer_arithmetic.c.i:
+	$(MAKE) -f CMakeFiles/ntrulib.dir/build.make CMakeFiles/ntrulib.dir/src/integer_arithmetic.c.i
+.PHONY : src/integer_arithmetic.c.i
+
+src/integer_arithmetic.s: src/integer_arithmetic.c.s
+
+.PHONY : src/integer_arithmetic.s
+
+# target to generate assembly for a file
+src/integer_arithmetic.c.s:
+	$(MAKE) -f CMakeFiles/ntrulib.dir/build.make CMakeFiles/ntrulib.dir/src/integer_arithmetic.c.s
+.PHONY : src/integer_arithmetic.c.s
 
 src/main.o: src/main.c.o
 
@@ -217,59 +258,59 @@ src/memory.c.s:
 	$(MAKE) -f CMakeFiles/ntrulib.dir/build.make CMakeFiles/ntrulib.dir/src/memory.c.s
 .PHONY : src/memory.c.s
 
-src/polynominal.o: src/polynominal.c.o
+src/polynomial.o: src/polynomial.c.o
 
-.PHONY : src/polynominal.o
-
-# target to build an object file
-src/polynominal.c.o:
-	$(MAKE) -f CMakeFiles/ntrulib.dir/build.make CMakeFiles/ntrulib.dir/src/polynominal.c.o
-.PHONY : src/polynominal.c.o
-
-src/polynominal.i: src/polynominal.c.i
-
-.PHONY : src/polynominal.i
-
-# target to preprocess a source file
-src/polynominal.c.i:
-	$(MAKE) -f CMakeFiles/ntrulib.dir/build.make CMakeFiles/ntrulib.dir/src/polynominal.c.i
-.PHONY : src/polynominal.c.i
-
-src/polynominal.s: src/polynominal.c.s
-
-.PHONY : src/polynominal.s
-
-# target to generate assembly for a file
-src/polynominal.c.s:
-	$(MAKE) -f CMakeFiles/ntrulib.dir/build.make CMakeFiles/ntrulib.dir/src/polynominal.c.s
-.PHONY : src/polynominal.c.s
-
-src/quotient_polynominal_ring.o: src/quotient_polynominal_ring.c.o
-
-.PHONY : src/quotient_polynominal_ring.o
+.PHONY : src/polynomial.o
 
 # target to build an object file
-src/quotient_polynominal_ring.c.o:
-	$(MAKE) -f CMakeFiles/ntrulib.dir/build.make CMakeFiles/ntrulib.dir/src/quotient_polynominal_ring.c.o
-.PHONY : src/quotient_polynominal_ring.c.o
+src/polynomial.c.o:
+	$(MAKE) -f CMakeFiles/ntrulib.dir/build.make CMakeFiles/ntrulib.dir/src/polynomial.c.o
+.PHONY : src/polynomial.c.o
 
-src/quotient_polynominal_ring.i: src/quotient_polynominal_ring.c.i
+src/polynomial.i: src/polynomial.c.i
 
-.PHONY : src/quotient_polynominal_ring.i
+.PHONY : src/polynomial.i
 
 # target to preprocess a source file
-src/quotient_polynominal_ring.c.i:
-	$(MAKE) -f CMakeFiles/ntrulib.dir/build.make CMakeFiles/ntrulib.dir/src/quotient_polynominal_ring.c.i
-.PHONY : src/quotient_polynominal_ring.c.i
+src/polynomial.c.i:
+	$(MAKE) -f CMakeFiles/ntrulib.dir/build.make CMakeFiles/ntrulib.dir/src/polynomial.c.i
+.PHONY : src/polynomial.c.i
 
-src/quotient_polynominal_ring.s: src/quotient_polynominal_ring.c.s
+src/polynomial.s: src/polynomial.c.s
 
-.PHONY : src/quotient_polynominal_ring.s
+.PHONY : src/polynomial.s
 
 # target to generate assembly for a file
-src/quotient_polynominal_ring.c.s:
-	$(MAKE) -f CMakeFiles/ntrulib.dir/build.make CMakeFiles/ntrulib.dir/src/quotient_polynominal_ring.c.s
-.PHONY : src/quotient_polynominal_ring.c.s
+src/polynomial.c.s:
+	$(MAKE) -f CMakeFiles/ntrulib.dir/build.make CMakeFiles/ntrulib.dir/src/polynomial.c.s
+.PHONY : src/polynomial.c.s
+
+src/quotient_polynomial_ring.o: src/quotient_polynomial_ring.c.o
+
+.PHONY : src/quotient_polynomial_ring.o
+
+# target to build an object file
+src/quotient_polynomial_ring.c.o:
+	$(MAKE) -f CMakeFiles/ntrulib.dir/build.make CMakeFiles/ntrulib.dir/src/quotient_polynomial_ring.c.o
+.PHONY : src/quotient_polynomial_ring.c.o
+
+src/quotient_polynomial_ring.i: src/quotient_polynomial_ring.c.i
+
+.PHONY : src/quotient_polynomial_ring.i
+
+# target to preprocess a source file
+src/quotient_polynomial_ring.c.i:
+	$(MAKE) -f CMakeFiles/ntrulib.dir/build.make CMakeFiles/ntrulib.dir/src/quotient_polynomial_ring.c.i
+.PHONY : src/quotient_polynomial_ring.c.i
+
+src/quotient_polynomial_ring.s: src/quotient_polynomial_ring.c.s
+
+.PHONY : src/quotient_polynomial_ring.s
+
+# target to generate assembly for a file
+src/quotient_polynomial_ring.c.s:
+	$(MAKE) -f CMakeFiles/ntrulib.dir/build.make CMakeFiles/ntrulib.dir/src/quotient_polynomial_ring.c.s
+.PHONY : src/quotient_polynomial_ring.c.s
 
 # Help Target
 help:
@@ -280,22 +321,27 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... ntrulib"
 	@echo "... edit_cache"
-	@echo "... unit_test"
+	@echo "... src/debug.o"
+	@echo "... src/debug.i"
+	@echo "... src/debug.s"
 	@echo "... src/hashtable.o"
 	@echo "... src/hashtable.i"
 	@echo "... src/hashtable.s"
+	@echo "... src/integer_arithmetic.o"
+	@echo "... src/integer_arithmetic.i"
+	@echo "... src/integer_arithmetic.s"
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"
 	@echo "... src/memory.o"
 	@echo "... src/memory.i"
 	@echo "... src/memory.s"
-	@echo "... src/polynominal.o"
-	@echo "... src/polynominal.i"
-	@echo "... src/polynominal.s"
-	@echo "... src/quotient_polynominal_ring.o"
-	@echo "... src/quotient_polynominal_ring.i"
-	@echo "... src/quotient_polynominal_ring.s"
+	@echo "... src/polynomial.o"
+	@echo "... src/polynomial.i"
+	@echo "... src/polynomial.s"
+	@echo "... src/quotient_polynomial_ring.o"
+	@echo "... src/quotient_polynomial_ring.i"
+	@echo "... src/quotient_polynomial_ring.s"
 .PHONY : help
 
 

@@ -13,7 +13,7 @@
 	file(GLOB SRC_FILES ${PROJECT_SOURCE_DIR}/src/*.c)
 
 #Create library
-	add_library(ntrulib ${SRC_FILES}  ${PROJECT_SOURCE_DIR}/src/quotient_polynominal_ring.c)
+	add_library(ntrulib ${SRC_FILES} )
 
 #Add additional dependencies:
 	#set(LIBS ${LIBS} library)
@@ -22,7 +22,7 @@
 	#target_link_libraries(ntrulib ${LIBS})
 
 if(TEST)
-add_subdirectory(tests)
+#add_subdirectory(tests)
 endif()
 
 

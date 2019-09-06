@@ -1,9 +1,11 @@
 file(REMOVE_RECURSE
+  "CMakeFiles/ntrulib.dir/src/debug.c.o"
   "CMakeFiles/ntrulib.dir/src/hashtable.c.o"
+  "CMakeFiles/ntrulib.dir/src/integer_arithmetic.c.o"
   "CMakeFiles/ntrulib.dir/src/main.c.o"
   "CMakeFiles/ntrulib.dir/src/memory.c.o"
-  "CMakeFiles/ntrulib.dir/src/polynominal.c.o"
-  "CMakeFiles/ntrulib.dir/src/quotient_polynominal_ring.c.o"
+  "CMakeFiles/ntrulib.dir/src/polynomial.c.o"
+  "CMakeFiles/ntrulib.dir/src/quotient_polynomial_ring.c.o"
   "libntrulib.pdb"
   "libntrulib.a"
 )

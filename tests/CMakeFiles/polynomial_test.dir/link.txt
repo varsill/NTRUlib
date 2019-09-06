@@ -1,0 +1,1 @@
+/usr/bin/cc   -rdynamic CMakeFiles/polynomial_test.dir/src/polynomial_test.c.o  -o polynomial_test ../libntrulib.a -lpthread -lcheck -lrt -lsubunit -lpthread -lm 

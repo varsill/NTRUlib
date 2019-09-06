@@ -57,9 +57,33 @@ include CMakeFiles/ntrulib.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/ntrulib.dir/flags.make
 
+CMakeFiles/ntrulib.dir/src/debug.c.o: CMakeFiles/ntrulib.dir/flags.make
+CMakeFiles/ntrulib.dir/src/debug.c.o: src/debug.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/tadeusz/Desktop/ntru/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/ntrulib.dir/src/debug.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/ntrulib.dir/src/debug.c.o   -c /home/tadeusz/Desktop/ntru/src/debug.c
+
+CMakeFiles/ntrulib.dir/src/debug.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/ntrulib.dir/src/debug.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/tadeusz/Desktop/ntru/src/debug.c > CMakeFiles/ntrulib.dir/src/debug.c.i
+
+CMakeFiles/ntrulib.dir/src/debug.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/ntrulib.dir/src/debug.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/tadeusz/Desktop/ntru/src/debug.c -o CMakeFiles/ntrulib.dir/src/debug.c.s
+
+CMakeFiles/ntrulib.dir/src/debug.c.o.requires:
+
+.PHONY : CMakeFiles/ntrulib.dir/src/debug.c.o.requires
+
+CMakeFiles/ntrulib.dir/src/debug.c.o.provides: CMakeFiles/ntrulib.dir/src/debug.c.o.requires
+	$(MAKE) -f CMakeFiles/ntrulib.dir/build.make CMakeFiles/ntrulib.dir/src/debug.c.o.provides.build
+.PHONY : CMakeFiles/ntrulib.dir/src/debug.c.o.provides
+
+CMakeFiles/ntrulib.dir/src/debug.c.o.provides.build: CMakeFiles/ntrulib.dir/src/debug.c.o
+
+
 CMakeFiles/ntrulib.dir/src/hashtable.c.o: CMakeFiles/ntrulib.dir/flags.make
 CMakeFiles/ntrulib.dir/src/hashtable.c.o: src/hashtable.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/tadeusz/Desktop/ntru/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/ntrulib.dir/src/hashtable.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/tadeusz/Desktop/ntru/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building C object CMakeFiles/ntrulib.dir/src/hashtable.c.o"
 	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/ntrulib.dir/src/hashtable.c.o   -c /home/tadeusz/Desktop/ntru/src/hashtable.c
 
 CMakeFiles/ntrulib.dir/src/hashtable.c.i: cmake_force
@@ -81,9 +105,33 @@ CMakeFiles/ntrulib.dir/src/hashtable.c.o.provides: CMakeFiles/ntrulib.dir/src/ha
 CMakeFiles/ntrulib.dir/src/hashtable.c.o.provides.build: CMakeFiles/ntrulib.dir/src/hashtable.c.o
 
 
+CMakeFiles/ntrulib.dir/src/integer_arithmetic.c.o: CMakeFiles/ntrulib.dir/flags.make
+CMakeFiles/ntrulib.dir/src/integer_arithmetic.c.o: src/integer_arithmetic.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/tadeusz/Desktop/ntru/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building C object CMakeFiles/ntrulib.dir/src/integer_arithmetic.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/ntrulib.dir/src/integer_arithmetic.c.o   -c /home/tadeusz/Desktop/ntru/src/integer_arithmetic.c
+
+CMakeFiles/ntrulib.dir/src/integer_arithmetic.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/ntrulib.dir/src/integer_arithmetic.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/tadeusz/Desktop/ntru/src/integer_arithmetic.c > CMakeFiles/ntrulib.dir/src/integer_arithmetic.c.i
+
+CMakeFiles/ntrulib.dir/src/integer_arithmetic.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/ntrulib.dir/src/integer_arithmetic.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/tadeusz/Desktop/ntru/src/integer_arithmetic.c -o CMakeFiles/ntrulib.dir/src/integer_arithmetic.c.s
+
+CMakeFiles/ntrulib.dir/src/integer_arithmetic.c.o.requires:
+
+.PHONY : CMakeFiles/ntrulib.dir/src/integer_arithmetic.c.o.requires
+
+CMakeFiles/ntrulib.dir/src/integer_arithmetic.c.o.provides: CMakeFiles/ntrulib.dir/src/integer_arithmetic.c.o.requires
+	$(MAKE) -f CMakeFiles/ntrulib.dir/build.make CMakeFiles/ntrulib.dir/src/integer_arithmetic.c.o.provides.build
+.PHONY : CMakeFiles/ntrulib.dir/src/integer_arithmetic.c.o.provides
+
+CMakeFiles/ntrulib.dir/src/integer_arithmetic.c.o.provides.build: CMakeFiles/ntrulib.dir/src/integer_arithmetic.c.o
+
+
 CMakeFiles/ntrulib.dir/src/main.c.o: CMakeFiles/ntrulib.dir/flags.make
 CMakeFiles/ntrulib.dir/src/main.c.o: src/main.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/tadeusz/Desktop/ntru/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building C object CMakeFiles/ntrulib.dir/src/main.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/tadeusz/Desktop/ntru/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building C object CMakeFiles/ntrulib.dir/src/main.c.o"
 	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/ntrulib.dir/src/main.c.o   -c /home/tadeusz/Desktop/ntru/src/main.c
 
 CMakeFiles/ntrulib.dir/src/main.c.i: cmake_force
@@ -107,7 +155,7 @@ CMakeFiles/ntrulib.dir/src/main.c.o.provides.build: CMakeFiles/ntrulib.dir/src/m
 
 CMakeFiles/ntrulib.dir/src/memory.c.o: CMakeFiles/ntrulib.dir/flags.make
 CMakeFiles/ntrulib.dir/src/memory.c.o: src/memory.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/tadeusz/Desktop/ntru/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building C object CMakeFiles/ntrulib.dir/src/memory.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/tadeusz/Desktop/ntru/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building C object CMakeFiles/ntrulib.dir/src/memory.c.o"
 	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/ntrulib.dir/src/memory.c.o   -c /home/tadeusz/Desktop/ntru/src/memory.c
 
 CMakeFiles/ntrulib.dir/src/memory.c.i: cmake_force
@@ -129,73 +177,77 @@ CMakeFiles/ntrulib.dir/src/memory.c.o.provides: CMakeFiles/ntrulib.dir/src/memor
 CMakeFiles/ntrulib.dir/src/memory.c.o.provides.build: CMakeFiles/ntrulib.dir/src/memory.c.o
 
 
-CMakeFiles/ntrulib.dir/src/polynominal.c.o: CMakeFiles/ntrulib.dir/flags.make
-CMakeFiles/ntrulib.dir/src/polynominal.c.o: src/polynominal.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/tadeusz/Desktop/ntru/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building C object CMakeFiles/ntrulib.dir/src/polynominal.c.o"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/ntrulib.dir/src/polynominal.c.o   -c /home/tadeusz/Desktop/ntru/src/polynominal.c
+CMakeFiles/ntrulib.dir/src/polynomial.c.o: CMakeFiles/ntrulib.dir/flags.make
+CMakeFiles/ntrulib.dir/src/polynomial.c.o: src/polynomial.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/tadeusz/Desktop/ntru/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building C object CMakeFiles/ntrulib.dir/src/polynomial.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/ntrulib.dir/src/polynomial.c.o   -c /home/tadeusz/Desktop/ntru/src/polynomial.c
 
-CMakeFiles/ntrulib.dir/src/polynominal.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/ntrulib.dir/src/polynominal.c.i"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/tadeusz/Desktop/ntru/src/polynominal.c > CMakeFiles/ntrulib.dir/src/polynominal.c.i
+CMakeFiles/ntrulib.dir/src/polynomial.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/ntrulib.dir/src/polynomial.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/tadeusz/Desktop/ntru/src/polynomial.c > CMakeFiles/ntrulib.dir/src/polynomial.c.i
 
-CMakeFiles/ntrulib.dir/src/polynominal.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/ntrulib.dir/src/polynominal.c.s"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/tadeusz/Desktop/ntru/src/polynominal.c -o CMakeFiles/ntrulib.dir/src/polynominal.c.s
+CMakeFiles/ntrulib.dir/src/polynomial.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/ntrulib.dir/src/polynomial.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/tadeusz/Desktop/ntru/src/polynomial.c -o CMakeFiles/ntrulib.dir/src/polynomial.c.s
 
-CMakeFiles/ntrulib.dir/src/polynominal.c.o.requires:
+CMakeFiles/ntrulib.dir/src/polynomial.c.o.requires:
 
-.PHONY : CMakeFiles/ntrulib.dir/src/polynominal.c.o.requires
+.PHONY : CMakeFiles/ntrulib.dir/src/polynomial.c.o.requires
 
-CMakeFiles/ntrulib.dir/src/polynominal.c.o.provides: CMakeFiles/ntrulib.dir/src/polynominal.c.o.requires
-	$(MAKE) -f CMakeFiles/ntrulib.dir/build.make CMakeFiles/ntrulib.dir/src/polynominal.c.o.provides.build
-.PHONY : CMakeFiles/ntrulib.dir/src/polynominal.c.o.provides
+CMakeFiles/ntrulib.dir/src/polynomial.c.o.provides: CMakeFiles/ntrulib.dir/src/polynomial.c.o.requires
+	$(MAKE) -f CMakeFiles/ntrulib.dir/build.make CMakeFiles/ntrulib.dir/src/polynomial.c.o.provides.build
+.PHONY : CMakeFiles/ntrulib.dir/src/polynomial.c.o.provides
 
-CMakeFiles/ntrulib.dir/src/polynominal.c.o.provides.build: CMakeFiles/ntrulib.dir/src/polynominal.c.o
+CMakeFiles/ntrulib.dir/src/polynomial.c.o.provides.build: CMakeFiles/ntrulib.dir/src/polynomial.c.o
 
 
-CMakeFiles/ntrulib.dir/src/quotient_polynominal_ring.c.o: CMakeFiles/ntrulib.dir/flags.make
-CMakeFiles/ntrulib.dir/src/quotient_polynominal_ring.c.o: src/quotient_polynominal_ring.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/tadeusz/Desktop/ntru/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building C object CMakeFiles/ntrulib.dir/src/quotient_polynominal_ring.c.o"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/ntrulib.dir/src/quotient_polynominal_ring.c.o   -c /home/tadeusz/Desktop/ntru/src/quotient_polynominal_ring.c
+CMakeFiles/ntrulib.dir/src/quotient_polynomial_ring.c.o: CMakeFiles/ntrulib.dir/flags.make
+CMakeFiles/ntrulib.dir/src/quotient_polynomial_ring.c.o: src/quotient_polynomial_ring.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/tadeusz/Desktop/ntru/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building C object CMakeFiles/ntrulib.dir/src/quotient_polynomial_ring.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/ntrulib.dir/src/quotient_polynomial_ring.c.o   -c /home/tadeusz/Desktop/ntru/src/quotient_polynomial_ring.c
 
-CMakeFiles/ntrulib.dir/src/quotient_polynominal_ring.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/ntrulib.dir/src/quotient_polynominal_ring.c.i"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/tadeusz/Desktop/ntru/src/quotient_polynominal_ring.c > CMakeFiles/ntrulib.dir/src/quotient_polynominal_ring.c.i
+CMakeFiles/ntrulib.dir/src/quotient_polynomial_ring.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/ntrulib.dir/src/quotient_polynomial_ring.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/tadeusz/Desktop/ntru/src/quotient_polynomial_ring.c > CMakeFiles/ntrulib.dir/src/quotient_polynomial_ring.c.i
 
-CMakeFiles/ntrulib.dir/src/quotient_polynominal_ring.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/ntrulib.dir/src/quotient_polynominal_ring.c.s"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/tadeusz/Desktop/ntru/src/quotient_polynominal_ring.c -o CMakeFiles/ntrulib.dir/src/quotient_polynominal_ring.c.s
+CMakeFiles/ntrulib.dir/src/quotient_polynomial_ring.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/ntrulib.dir/src/quotient_polynomial_ring.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/tadeusz/Desktop/ntru/src/quotient_polynomial_ring.c -o CMakeFiles/ntrulib.dir/src/quotient_polynomial_ring.c.s
 
-CMakeFiles/ntrulib.dir/src/quotient_polynominal_ring.c.o.requires:
+CMakeFiles/ntrulib.dir/src/quotient_polynomial_ring.c.o.requires:
 
-.PHONY : CMakeFiles/ntrulib.dir/src/quotient_polynominal_ring.c.o.requires
+.PHONY : CMakeFiles/ntrulib.dir/src/quotient_polynomial_ring.c.o.requires
 
-CMakeFiles/ntrulib.dir/src/quotient_polynominal_ring.c.o.provides: CMakeFiles/ntrulib.dir/src/quotient_polynominal_ring.c.o.requires
-	$(MAKE) -f CMakeFiles/ntrulib.dir/build.make CMakeFiles/ntrulib.dir/src/quotient_polynominal_ring.c.o.provides.build
-.PHONY : CMakeFiles/ntrulib.dir/src/quotient_polynominal_ring.c.o.provides
+CMakeFiles/ntrulib.dir/src/quotient_polynomial_ring.c.o.provides: CMakeFiles/ntrulib.dir/src/quotient_polynomial_ring.c.o.requires
+	$(MAKE) -f CMakeFiles/ntrulib.dir/build.make CMakeFiles/ntrulib.dir/src/quotient_polynomial_ring.c.o.provides.build
+.PHONY : CMakeFiles/ntrulib.dir/src/quotient_polynomial_ring.c.o.provides
 
-CMakeFiles/ntrulib.dir/src/quotient_polynominal_ring.c.o.provides.build: CMakeFiles/ntrulib.dir/src/quotient_polynominal_ring.c.o
+CMakeFiles/ntrulib.dir/src/quotient_polynomial_ring.c.o.provides.build: CMakeFiles/ntrulib.dir/src/quotient_polynomial_ring.c.o
 
 
 # Object files for target ntrulib
 ntrulib_OBJECTS = \
+"CMakeFiles/ntrulib.dir/src/debug.c.o" \
 "CMakeFiles/ntrulib.dir/src/hashtable.c.o" \
+"CMakeFiles/ntrulib.dir/src/integer_arithmetic.c.o" \
 "CMakeFiles/ntrulib.dir/src/main.c.o" \
 "CMakeFiles/ntrulib.dir/src/memory.c.o" \
-"CMakeFiles/ntrulib.dir/src/polynominal.c.o" \
-"CMakeFiles/ntrulib.dir/src/quotient_polynominal_ring.c.o"
+"CMakeFiles/ntrulib.dir/src/polynomial.c.o" \
+"CMakeFiles/ntrulib.dir/src/quotient_polynomial_ring.c.o"
 
 # External object files for target ntrulib
 ntrulib_EXTERNAL_OBJECTS =
 
+libntrulib.a: CMakeFiles/ntrulib.dir/src/debug.c.o
 libntrulib.a: CMakeFiles/ntrulib.dir/src/hashtable.c.o
+libntrulib.a: CMakeFiles/ntrulib.dir/src/integer_arithmetic.c.o
 libntrulib.a: CMakeFiles/ntrulib.dir/src/main.c.o
 libntrulib.a: CMakeFiles/ntrulib.dir/src/memory.c.o
-libntrulib.a: CMakeFiles/ntrulib.dir/src/polynominal.c.o
-libntrulib.a: CMakeFiles/ntrulib.dir/src/quotient_polynominal_ring.c.o
+libntrulib.a: CMakeFiles/ntrulib.dir/src/polynomial.c.o
+libntrulib.a: CMakeFiles/ntrulib.dir/src/quotient_polynomial_ring.c.o
 libntrulib.a: CMakeFiles/ntrulib.dir/build.make
 libntrulib.a: CMakeFiles/ntrulib.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/tadeusz/Desktop/ntru/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Linking C static library libntrulib.a"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/tadeusz/Desktop/ntru/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Linking C static library libntrulib.a"
 	$(CMAKE_COMMAND) -P CMakeFiles/ntrulib.dir/cmake_clean_target.cmake
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/ntrulib.dir/link.txt --verbose=$(VERBOSE)
 
@@ -204,11 +256,13 @@ CMakeFiles/ntrulib.dir/build: libntrulib.a
 
 .PHONY : CMakeFiles/ntrulib.dir/build
 
+CMakeFiles/ntrulib.dir/requires: CMakeFiles/ntrulib.dir/src/debug.c.o.requires
 CMakeFiles/ntrulib.dir/requires: CMakeFiles/ntrulib.dir/src/hashtable.c.o.requires
+CMakeFiles/ntrulib.dir/requires: CMakeFiles/ntrulib.dir/src/integer_arithmetic.c.o.requires
 CMakeFiles/ntrulib.dir/requires: CMakeFiles/ntrulib.dir/src/main.c.o.requires
 CMakeFiles/ntrulib.dir/requires: CMakeFiles/ntrulib.dir/src/memory.c.o.requires
-CMakeFiles/ntrulib.dir/requires: CMakeFiles/ntrulib.dir/src/polynominal.c.o.requires
-CMakeFiles/ntrulib.dir/requires: CMakeFiles/ntrulib.dir/src/quotient_polynominal_ring.c.o.requires
+CMakeFiles/ntrulib.dir/requires: CMakeFiles/ntrulib.dir/src/polynomial.c.o.requires
+CMakeFiles/ntrulib.dir/requires: CMakeFiles/ntrulib.dir/src/quotient_polynomial_ring.c.o.requires
 
 .PHONY : CMakeFiles/ntrulib.dir/requires
 

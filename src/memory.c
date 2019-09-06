@@ -43,12 +43,7 @@ void printMemoryStatus()
     fflush(stdout);
 }
 
-void pause ( void ) 
-{ 
-  printf ( "Press [Enter] to continue . . ." );
-  fflush ( stdout );
-  getchar();
-} 
+
 
 void printUnallocatedMemory()
 {

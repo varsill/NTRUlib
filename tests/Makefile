@@ -111,46 +111,61 @@ depend:
 .PHONY : depend
 
 # Convenience name for target.
-tests/CMakeFiles/unit_test.dir/rule:
-	cd /home/tadeusz/Desktop/ntru && $(MAKE) -f CMakeFiles/Makefile2 tests/CMakeFiles/unit_test.dir/rule
-.PHONY : tests/CMakeFiles/unit_test.dir/rule
+tests/CMakeFiles/polynomial_test.dir/rule:
+	cd /home/tadeusz/Desktop/ntru && $(MAKE) -f CMakeFiles/Makefile2 tests/CMakeFiles/polynomial_test.dir/rule
+.PHONY : tests/CMakeFiles/polynomial_test.dir/rule
 
 # Convenience name for target.
-unit_test: tests/CMakeFiles/unit_test.dir/rule
+polynomial_test: tests/CMakeFiles/polynomial_test.dir/rule
 
-.PHONY : unit_test
+.PHONY : polynomial_test
 
 # fast build rule for target.
-unit_test/fast:
-	cd /home/tadeusz/Desktop/ntru && $(MAKE) -f tests/CMakeFiles/unit_test.dir/build.make tests/CMakeFiles/unit_test.dir/build
-.PHONY : unit_test/fast
+polynomial_test/fast:
+	cd /home/tadeusz/Desktop/ntru && $(MAKE) -f tests/CMakeFiles/polynomial_test.dir/build.make tests/CMakeFiles/polynomial_test.dir/build
+.PHONY : polynomial_test/fast
 
-src/polynominal_test.o: src/polynominal_test.c.o
+# Convenience name for target.
+tests/CMakeFiles/rationals_test.dir/rule:
+	cd /home/tadeusz/Desktop/ntru && $(MAKE) -f CMakeFiles/Makefile2 tests/CMakeFiles/rationals_test.dir/rule
+.PHONY : tests/CMakeFiles/rationals_test.dir/rule
 
-.PHONY : src/polynominal_test.o
+# Convenience name for target.
+rationals_test: tests/CMakeFiles/rationals_test.dir/rule
+
+.PHONY : rationals_test
+
+# fast build rule for target.
+rationals_test/fast:
+	cd /home/tadeusz/Desktop/ntru && $(MAKE) -f tests/CMakeFiles/rationals_test.dir/build.make tests/CMakeFiles/rationals_test.dir/build
+.PHONY : rationals_test/fast
+
+src/polynomial_test.o: src/polynomial_test.c.o
+
+.PHONY : src/polynomial_test.o
 
 # target to build an object file
-src/polynominal_test.c.o:
-	cd /home/tadeusz/Desktop/ntru && $(MAKE) -f tests/CMakeFiles/unit_test.dir/build.make tests/CMakeFiles/unit_test.dir/src/polynominal_test.c.o
-.PHONY : src/polynominal_test.c.o
+src/polynomial_test.c.o:
+	cd /home/tadeusz/Desktop/ntru && $(MAKE) -f tests/CMakeFiles/polynomial_test.dir/build.make tests/CMakeFiles/polynomial_test.dir/src/polynomial_test.c.o
+.PHONY : src/polynomial_test.c.o
 
-src/polynominal_test.i: src/polynominal_test.c.i
+src/polynomial_test.i: src/polynomial_test.c.i
 
-.PHONY : src/polynominal_test.i
+.PHONY : src/polynomial_test.i
 
 # target to preprocess a source file
-src/polynominal_test.c.i:
-	cd /home/tadeusz/Desktop/ntru && $(MAKE) -f tests/CMakeFiles/unit_test.dir/build.make tests/CMakeFiles/unit_test.dir/src/polynominal_test.c.i
-.PHONY : src/polynominal_test.c.i
+src/polynomial_test.c.i:
+	cd /home/tadeusz/Desktop/ntru && $(MAKE) -f tests/CMakeFiles/polynomial_test.dir/build.make tests/CMakeFiles/polynomial_test.dir/src/polynomial_test.c.i
+.PHONY : src/polynomial_test.c.i
 
-src/polynominal_test.s: src/polynominal_test.c.s
+src/polynomial_test.s: src/polynomial_test.c.s
 
-.PHONY : src/polynominal_test.s
+.PHONY : src/polynomial_test.s
 
 # target to generate assembly for a file
-src/polynominal_test.c.s:
-	cd /home/tadeusz/Desktop/ntru && $(MAKE) -f tests/CMakeFiles/unit_test.dir/build.make tests/CMakeFiles/unit_test.dir/src/polynominal_test.c.s
-.PHONY : src/polynominal_test.c.s
+src/polynomial_test.c.s:
+	cd /home/tadeusz/Desktop/ntru && $(MAKE) -f tests/CMakeFiles/polynomial_test.dir/build.make tests/CMakeFiles/polynomial_test.dir/src/polynomial_test.c.s
+.PHONY : src/polynomial_test.c.s
 
 # Help Target
 help:
@@ -159,11 +174,12 @@ help:
 	@echo "... clean"
 	@echo "... depend"
 	@echo "... rebuild_cache"
-	@echo "... unit_test"
 	@echo "... edit_cache"
-	@echo "... src/polynominal_test.o"
-	@echo "... src/polynominal_test.i"
-	@echo "... src/polynominal_test.s"
+	@echo "... polynomial_test"
+	@echo "... rationals_test"
+	@echo "... src/polynomial_test.o"
+	@echo "... src/polynomial_test.i"
+	@echo "... src/polynomial_test.s"
 .PHONY : help
 
 

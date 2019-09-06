@@ -1,0 +1,1 @@
+/usr/bin/cc   -rdynamic CMakeFiles/rationals_test.dir/src/rationals_test.c.o  -o rationals_test ../libntrulib.a -lpthread -lcheck -lrt -lsubunit -lpthread -lm 

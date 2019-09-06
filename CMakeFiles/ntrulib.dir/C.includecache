@@ -6,9 +6,17 @@
 
 #IncludeRegexTransform: 
 
+/home/tadeusz/Desktop/ntru/src/debug.c
+debug.h
+/home/tadeusz/Desktop/ntru/src/debug.h
+
 /home/tadeusz/Desktop/ntru/src/hashtable.c
 hashtable.h
 /home/tadeusz/Desktop/ntru/src/hashtable.h
+
+/home/tadeusz/Desktop/ntru/src/integer_arithmetic.c
+integer_arithmetic.h
+/home/tadeusz/Desktop/ntru/src/integer_arithmetic.h
 
 /home/tadeusz/Desktop/ntru/src/main.c
 
@@ -20,9 +28,9 @@ stdio.h
 hashtable.h
 /home/tadeusz/Desktop/ntru/src/hashtable.h
 
-/home/tadeusz/Desktop/ntru/src/polynominal.c
-polynominal.h
-/home/tadeusz/Desktop/ntru/src/polynominal.h
+/home/tadeusz/Desktop/ntru/src/polynomial.c
+polynomial.h
+/home/tadeusz/Desktop/ntru/src/polynomial.h
 stdarg.h
 -
 stdlib.h
@@ -33,26 +41,30 @@ stdio.h
 -
 math.h
 -
-quotient_polynominal_ring.h
-/home/tadeusz/Desktop/ntru/src/quotient_polynominal_ring.h
-debug_memory.h
-/home/tadeusz/Desktop/ntru/src/debug_memory.h
+quotient_polynomial_ring.h
+/home/tadeusz/Desktop/ntru/src/quotient_polynomial_ring.h
 
-/home/tadeusz/Desktop/ntru/src/quotient_polynominal_ring.c
-quotient_polynominal_ring.h
-/home/tadeusz/Desktop/ntru/src/quotient_polynominal_ring.h
+/home/tadeusz/Desktop/ntru/src/quotient_polynomial_ring.c
+quotient_polynomial_ring.h
+/home/tadeusz/Desktop/ntru/src/quotient_polynomial_ring.h
 
 include/config.h
 
-include/debug_memory.h
-config.h
-include/config.h
+include/debug.h
+stdio.h
+-
 memory.h
 include/memory.h
 
 include/hashtable.h
 stdbool.h
 -
+stdlib.h
+-
+config.h
+include/config.h
+
+include/integer_arithmetic.h
 stdlib.h
 -
 
@@ -62,17 +74,19 @@ stdlib.h
 hashtable.h
 include/hashtable.h
 
-include/polynominal.h
+include/polynomial.h
 config.h
 include/config.h
 stdbool.h
 -
+integer_arithmetic.h
+include/integer_arithmetic.h
 
-include/quotient_polynominal_ring.h
-polynominal.h
-include/polynominal.h
+include/quotient_polynomial_ring.h
+polynomial.h
+include/polynomial.h
 stdlib.h
 include/stdlib.h
-debug_memory.h
-include/debug_memory.h
+config.h
+include/config.h
 
