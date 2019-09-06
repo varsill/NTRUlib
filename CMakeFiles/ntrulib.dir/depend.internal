@@ -37,7 +37,12 @@ CMakeFiles/ntrulib.dir/src/quotient_polynomial_ring.c.o
  include/memory.h
  include/polynomial.h
  include/quotient_polynomial_ring.h
+ include/rationals.h
 CMakeFiles/ntrulib.dir/src/rationals.c.o
  /home/tadeusz/Desktop/ntru/src/rationals.c
+ include/config.h
+ include/debug.h
+ include/hashtable.h
  include/integer_arithmetic.h
+ include/memory.h
  include/rationals.h

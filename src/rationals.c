@@ -16,11 +16,14 @@ Rational _createRational1(double f)
 
 Rational _createRational2(long n, long d)
 {
+      
     Rational r;
     r.nominator=n;
     r.denominator=d;
+
     reduceRational(&r);
     return r;
+      
 }
 
 
@@ -38,12 +41,15 @@ bool compareRationals(const Rational *a, const Rational *b)
 
 Rational addRationals(const Rational *a, const Rational *b)
 {
+    
     Rational r;
+    if(a->nominator==0||a->denominator==0)return *b;
+    if(b->nominator==0||b->denominator==0)return *a;
     int lcm=getLCM(a->denominator, b->denominator);
   //  printf("LCM: %d \n" , lcm);
     r.denominator=lcm;
     r.nominator=a->nominator*lcm/a->denominator+b->nominator*lcm/b->denominator;
-    reduceRational(&r);
+
     return r;
 }
 
@@ -51,6 +57,14 @@ Rational addRationals(const Rational *a, const Rational *b)
 Rational substractRationals(const Rational *a, const Rational *b)
 {
     Rational r;
+    if(a->nominator==0)return *b;
+    if(b->nominator==0)
+    {
+        r=*a;
+        r.nominator*=-1;
+        reduceRational(&r);
+        return r;
+    }
     int lcm=getLCM(a->denominator, b->denominator);
     r.denominator=lcm;
     r.nominator=a->nominator*lcm/a->denominator-b->nominator*lcm/b->denominator;
@@ -61,10 +75,13 @@ Rational substractRationals(const Rational *a, const Rational *b)
 
 Rational multiplyRationals(const Rational *a, const Rational *b)
 {
+     
     Rational r;
     r.nominator=a->nominator*b->nominator;
     r.denominator=a->denominator*b->denominator;
+   
     reduceRational(&r);
+    
     return r;
 }
 
@@ -87,7 +104,11 @@ Rational inverseRational(const Rational *a)
     reduceRational(&r);
     return r;
 }
-
+int toInt(Rational *r)
+{
+    if(r->denominator==0)return 0;//probably error
+    return r->nominator/r->denominator;
+}
 
 void printRational(const Rational *a)
 {
@@ -107,6 +128,7 @@ void approximate(double x, long *numerator, long *denominator)
 
 static void reduceRational(Rational *x)
 {
+    
     if(x->nominator<0 && x->denominator<0)
     {
         x->nominator*=-1;
@@ -117,17 +139,23 @@ static void reduceRational(Rational *x)
         x->nominator*=-1;
         x->denominator*=-1;
     }
-
+     
     int gcd = ExtendedIntegerGCD(x->nominator, x->denominator, NULL, NULL);
-
-    x->nominator/=gcd;
-    x->denominator/=gcd;
-
+     
+    if(gcd!=0)
+    {
+        
+        x->nominator/=gcd;
+        x->denominator/=gcd;
+    }
+  
+    
 }
 
 
 static int getLCM(int a, int b)
 {
     int gcd = ExtendedIntegerGCD(a, b, NULL, NULL);
+    if(gcd==0)return 0;
     return a*b/gcd;
 }

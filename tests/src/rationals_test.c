@@ -42,6 +42,7 @@ START_TEST(addition)
 }
 END_TEST
 
+
 START_TEST(substraction)
 {
     Rational a=createRational(29, 60);
@@ -53,6 +54,7 @@ START_TEST(substraction)
 }
 END_TEST
 
+
 START_TEST(multiplication)
 {
     Rational a=createRational(3, 7);
@@ -62,6 +64,7 @@ START_TEST(multiplication)
     ck_assert(compareRationals(&result, &expected_result)==true);
 }
 END_TEST
+
 
 START_TEST(division)
 {

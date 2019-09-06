@@ -3,5 +3,9 @@
 
 tests/CMakeFiles/rationals_test.dir/src/rationals_test.c.o
  /home/tadeusz/Desktop/ntru/tests/src/rationals_test.c
+ include/config.h
+ include/debug.h
+ include/hashtable.h
  include/integer_arithmetic.h
+ include/memory.h
  include/rationals.h

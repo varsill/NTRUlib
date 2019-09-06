@@ -18,9 +18,31 @@ stdio.h
 stdbool.h
 -
 
+include/config.h
+debug.h
+include/debug.h
+
+include/debug.h
+stdio.h
+-
+memory.h
+include/memory.h
+
+include/hashtable.h
+stdbool.h
+-
+stdlib.h
+-
+
 include/integer_arithmetic.h
 stdlib.h
 -
+
+include/memory.h
+stdlib.h
+-
+hashtable.h
+include/hashtable.h
 
 include/rationals.h
 float.h
@@ -31,6 +53,8 @@ stdbool.h
 -
 stdio.h
 -
+config.h
+include/config.h
 integer_arithmetic.h
 include/integer_arithmetic.h
 

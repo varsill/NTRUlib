@@ -36,8 +36,13 @@ CMakeFiles/ntrulib.dir/src/quotient_polynomial_ring.c.o: include/integer_arithme
 CMakeFiles/ntrulib.dir/src/quotient_polynomial_ring.c.o: include/memory.h
 CMakeFiles/ntrulib.dir/src/quotient_polynomial_ring.c.o: include/polynomial.h
 CMakeFiles/ntrulib.dir/src/quotient_polynomial_ring.c.o: include/quotient_polynomial_ring.h
+CMakeFiles/ntrulib.dir/src/quotient_polynomial_ring.c.o: include/rationals.h
 
 CMakeFiles/ntrulib.dir/src/rationals.c.o: src/rationals.c
+CMakeFiles/ntrulib.dir/src/rationals.c.o: include/config.h
+CMakeFiles/ntrulib.dir/src/rationals.c.o: include/debug.h
+CMakeFiles/ntrulib.dir/src/rationals.c.o: include/hashtable.h
 CMakeFiles/ntrulib.dir/src/rationals.c.o: include/integer_arithmetic.h
+CMakeFiles/ntrulib.dir/src/rationals.c.o: include/memory.h
 CMakeFiles/ntrulib.dir/src/rationals.c.o: include/rationals.h
 

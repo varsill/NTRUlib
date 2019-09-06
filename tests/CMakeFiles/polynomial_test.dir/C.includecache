@@ -61,6 +61,8 @@ stdbool.h
 -
 integer_arithmetic.h
 include/integer_arithmetic.h
+rationals.h
+include/rationals.h
 
 include/quotient_polynomial_ring.h
 polynomial.h
@@ -79,6 +81,8 @@ stdbool.h
 -
 stdio.h
 -
+config.h
+include/config.h
 integer_arithmetic.h
 include/integer_arithmetic.h
 

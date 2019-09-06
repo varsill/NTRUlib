@@ -5,6 +5,7 @@
 #include "config.h"
 #include <stdbool.h>
 #include "integer_arithmetic.h"
+#include "rationals.h"
 #define MAX(a, b) a>b?a:b
 
 #define createPolynomial(type, ring, error, ...) _createPolynomial(PP_NARG(__VA_ARGS__), type, ring, error, __VA_ARGS__)
@@ -40,7 +41,7 @@ typedef enum {INTEGER, REAL} Type;
 
 typedef struct{
     int degree;
-    float* coefficients;
+    Rational* coefficients;
     Type type;
 } Polynomial;
 
@@ -63,7 +64,7 @@ Polynomial * dividePolynomials(const QuotientPolynomialRing *, const Polynomial 
 void moduloPolynomial(Polynomial ** , const Polynomial *, int *error);
 Polynomial* invertPolynomial(const QuotientPolynomialRing* ring, Polynomial* poly);
 Polynomial* extendedEuclid(const QuotientPolynomialRing* ring, const Polynomial *a,const Polynomial *b, Polynomial **u_ref, Polynomial **v_ref );
-void multiplyPolynomialByConstant(Polynomial *poly, float c, QuotientPolynomialRing* ring);
+void multiplyPolynomialByConstant(Polynomial *poly, Rational* c, QuotientPolynomialRing* ring);
 
 
 void _printPolynomial(const Polynomial* poly);
@@ -74,7 +75,7 @@ static void moduloRing(Polynomial**poly_ref, const QuotientPolynomialRing* ring)
 static void moduloInteger(Polynomial*poly, int q , int* error);
 static void repairPolynomial(Polynomial * poly);
 static Polynomial* copyPolynomial(const Polynomial* poly);
-static float inverseOfNumber(float number, QuotientPolynomialRing*ring);
+static Rational inverseOfNumber(Rational number, QuotientPolynomialRing*ring);
 
 
 

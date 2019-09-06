@@ -4,6 +4,7 @@
 #include <math.h>
 #include <stdbool.h>
 #include <stdio.h>
+#include "config.h"
 #include "integer_arithmetic.h"
 #define ACCURACY 100000
 
@@ -25,6 +26,7 @@ Rational substractRationals(const Rational *a, const Rational *b);
 Rational multiplyRationals(const Rational *a, const Rational *b);
 Rational divideRationals(const Rational *a, const Rational *b);
 Rational inverseRational(const Rational *a);
+int toInt(Rational *r);
 void printRational(const Rational *a);
 
 static void approximate(double x, long *num, long *denom);
