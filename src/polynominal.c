@@ -585,8 +585,11 @@ Polynominal * invertPolynominal(Polynominal* poly, QuotientPolynominalRing* ring
     
     Polynominal *gcd = extendedEuclid(poly, ring->ideal, &a, &b, ring);
 //   printPolynominal(gcd, "gcd: ");
-    if(comparePolynominals(NULL, gcd, one,NULL)!=true)return NULL;//Polynominals are not coprime - poly inversion does not exist
-    
+    if(comparePolynominals(NULL, gcd, one,NULL)!=true)
+    {
+        printPolynominal(gcd, "GCD:");
+        return NULL;//Polynominals are not coprime - poly inversion does not exist
+    }
     freePolynominal(gcd);
     freePolynominal(one);
     freePolynominal(b);
