@@ -8,10 +8,6 @@
 #include "quotient_polynomial_ring.h"
 
 
-
-
-
-
 Polynomial * _createPolynomial(unsigned int _degree, Type _type,QuotientPolynomialRing* ring, int* error,  ...)
 {
     SET_ERROR(error, OK);
@@ -577,7 +573,5 @@ static void repairPolynomial(Polynomial* p)
 static float inverseOfNumber(float number, QuotientPolynomialRing*ring)
 {
     if(ring==NULL||ring->q<=0)return 1.0/number;
-    else return invertInteger(number, ring->q);
-    
+    else return invertInteger(number, ring->q);   
 }
-
