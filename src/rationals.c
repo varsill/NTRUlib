@@ -57,10 +57,10 @@ Rational addRationals(const Rational *a, const Rational *b)
 Rational substractRationals(const Rational *a, const Rational *b)
 {
     Rational r;
-    if(a->nominator==0)return *b;
-    if(b->nominator==0)
+    if(b->nominator==0)return *a;
+    if(a->nominator==0)
     {
-        r=*a;
+        r=*b;
         r.nominator*=-1;
         reduceRational(&r);
         return r;
@@ -128,7 +128,8 @@ void approximate(double x, long *numerator, long *denominator)
 
 static void reduceRational(Rational *x)
 {
-    
+   // printf("PRZED:");
+   // printRational(x);
     if(x->nominator<0 && x->denominator<0)
     {
         x->nominator*=-1;
@@ -148,7 +149,8 @@ static void reduceRational(Rational *x)
         x->nominator/=gcd;
         x->denominator/=gcd;
     }
-  
+    //printf("PO:");
+    //printRational(x);
     
 }
 

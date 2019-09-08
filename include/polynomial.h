@@ -62,7 +62,7 @@ Polynomial * substractPolynomials(const QuotientPolynomialRing *, const Polynomi
 Polynomial * multiplyPolynomials(const QuotientPolynomialRing *, const Polynomial *, const Polynomial *, int* error);
 Polynomial * dividePolynomials(const QuotientPolynomialRing *, const Polynomial *, const Polynomial *,Polynomial *, int* error);
 void moduloPolynomial(Polynomial ** , const Polynomial *, int *error);
-Polynomial* invertPolynomial(const QuotientPolynomialRing* ring, Polynomial* poly);
+Polynomial* inversePolynomial(const QuotientPolynomialRing* ring, Polynomial* poly);
 Polynomial* extendedEuclid(const QuotientPolynomialRing* ring, const Polynomial *a,const Polynomial *b, Polynomial **u_ref, Polynomial **v_ref );
 void multiplyPolynomialByConstant(Polynomial *poly, Rational* c, QuotientPolynomialRing* ring);
 
