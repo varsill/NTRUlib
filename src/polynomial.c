@@ -66,6 +66,49 @@ Polynomial * createZeroPolynomial(Type _type, int* error)
 }
 
 
+Polynomial * createRandomPolynomial(Type type, ...)
+{
+    srand(time(NULL));
+    va_list arg_list;
+     Polynomial * result;
+    if(type==BINARY)
+    {
+        va_start(arg_list, type);
+        int N = va_arg(arg_list, int);
+        int d = va_arg(arg_list, int);
+        va_end(arg_list);
+        result = (Polynomial*)malloc(sizeof(Polynomial));
+
+        result->type=INTEGER;
+        result->degree=N;
+        result->coefficients=(Rational*)malloc(sizeof(Rational)*result->degree);
+      
+        Rational zero = createRational(0, 1);
+        Rational one = createRational(1, 1);
+
+        for(int i=0; i<result->degree; i++)
+        {
+            result->coefficients[i]=zero;
+        }
+        
+        
+        int how_many_left=d;
+        while(how_many_left>0)
+        {
+            int x = rand()%N;
+            if(compareRationals(&result->coefficients[x], &zero)==true)
+            {
+                how_many_left--;
+                result->coefficients[x]=one;
+            }
+        }
+
+
+
+    }
+    return result;
+}
+
 void freePolynomial(Polynomial * p)
 {
     if(p==NULL)return;

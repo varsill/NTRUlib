@@ -6,6 +6,9 @@
 #include <stdbool.h>
 #include "integer_arithmetic.h"
 #include "rationals.h"
+#include <time.h>
+#include <math.h>
+
 #define MAX(a, b) a>b?a:b
 
 #define createPolynomial(type, ring, error, ...) _createPolynomial(PP_NARG(__VA_ARGS__), type, ring, error, __VA_ARGS__)
@@ -37,7 +40,7 @@
 #define GET_FUNCTION(_1, _2, NAME, ...) NAME
 #define printPolynomial(...) GET_FUNCTION(__VA_ARGS__, _printPolynomialWithExtraMessage, _printPolynomial)(__VA_ARGS__)
 
-typedef enum {INTEGER, REAL} Type;
+typedef enum {INTEGER, REAL, BINARY} Type;
 
 typedef struct{
     int degree;
@@ -53,6 +56,7 @@ typedef struct{
 //PUBLIC FUNCTIONS
 Polynomial * _createPolynomial(unsigned int degree, Type type,QuotientPolynomialRing* ring, int* error, ...);
 Polynomial * createZeroPolynomial(Type type, int * error);
+Polynomial * createRandomPolynomial(Type type, ...);
 void freePolynomial(Polynomial * poly);
 
 bool comparePolynomials(const QuotientPolynomialRing * ring, const Polynomial * a, const Polynomial *b, int * error);

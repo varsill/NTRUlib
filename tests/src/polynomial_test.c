@@ -36,6 +36,18 @@ START_TEST(generation)
 //	ck_assert(error==WRONG_POLYNOMINAL_COEFFICIENTS);
 	freePolynomial(ideal);
 
+	Polynomial *x = createRandomPolynomial(BINARY, 10, 3);
+ 	ck_assert(x->degree==10);
+	int d = 0;
+	Rational one = createRational(1, 1);
+	for(int i=0; i<x->degree; i++)
+	{
+		if(compareRationals(&x->coefficients[i], &one)==true)d++;
+	}
+	ck_assert(d==3);
+	freePolynomial(x);
+
+
 }
 END_TEST
 
@@ -202,11 +214,8 @@ Suite * polynomial_suite(void)
 }
 
 
-unsigned long fun(int k)
-{
-	return k;
-}
-#include "rationals.h"
+
+
 int main(void)
 {
 
@@ -331,7 +340,7 @@ int error;
 	freePolynomial(poly6);
 	freeQuotientPolynomialRing(ring);
 	return 1;
-*/
+*/START_DEBUG
     int number_failed;
     Suite *s; 
     SRunner *sr;
@@ -344,9 +353,9 @@ int error;
     srunner_free(sr);
 	
    // printf("%d", number_failed);
-	printf("\nMEMORY_DEBUG: %d \n", elements_allocated);
-	printMemoryStatus();
-
+	//printf("\nMEMORY_DEBUG: %d \n", elements_allocated);
+	//printMemoryStatus();
+STOP_DEBUG
     return (number_failed == 0) ? EXIT_SUCCESS : EXIT_FAILURE;
 
 
