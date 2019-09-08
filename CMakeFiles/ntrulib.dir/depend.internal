@@ -18,6 +18,17 @@ CMakeFiles/ntrulib.dir/src/memory.c.o
  /home/tadeusz/Desktop/ntru/src/memory.c
  include/hashtable.h
  include/memory.h
+CMakeFiles/ntrulib.dir/src/ntru.c.o
+ /home/tadeusz/Desktop/ntru/src/ntru.c
+ include/config.h
+ include/debug.h
+ include/hashtable.h
+ include/integer_arithmetic.h
+ include/memory.h
+ include/ntru.h
+ include/polynomial.h
+ include/quotient_polynomial_ring.h
+ include/rationals.h
 CMakeFiles/ntrulib.dir/src/polynomial.c.o
  /home/tadeusz/Desktop/ntru/src/polynomial.c
  include/config.h

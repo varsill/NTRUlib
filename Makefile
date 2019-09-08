@@ -284,6 +284,33 @@ src/memory.c.s:
 	$(MAKE) -f CMakeFiles/ntrulib.dir/build.make CMakeFiles/ntrulib.dir/src/memory.c.s
 .PHONY : src/memory.c.s
 
+src/ntru.o: src/ntru.c.o
+
+.PHONY : src/ntru.o
+
+# target to build an object file
+src/ntru.c.o:
+	$(MAKE) -f CMakeFiles/ntrulib.dir/build.make CMakeFiles/ntrulib.dir/src/ntru.c.o
+.PHONY : src/ntru.c.o
+
+src/ntru.i: src/ntru.c.i
+
+.PHONY : src/ntru.i
+
+# target to preprocess a source file
+src/ntru.c.i:
+	$(MAKE) -f CMakeFiles/ntrulib.dir/build.make CMakeFiles/ntrulib.dir/src/ntru.c.i
+.PHONY : src/ntru.c.i
+
+src/ntru.s: src/ntru.c.s
+
+.PHONY : src/ntru.s
+
+# target to generate assembly for a file
+src/ntru.c.s:
+	$(MAKE) -f CMakeFiles/ntrulib.dir/build.make CMakeFiles/ntrulib.dir/src/ntru.c.s
+.PHONY : src/ntru.c.s
+
 src/polynomial.o: src/polynomial.c.o
 
 .PHONY : src/polynomial.o
@@ -391,6 +418,9 @@ help:
 	@echo "... src/memory.o"
 	@echo "... src/memory.i"
 	@echo "... src/memory.s"
+	@echo "... src/ntru.o"
+	@echo "... src/ntru.i"
+	@echo "... src/ntru.s"
 	@echo "... src/polynomial.o"
 	@echo "... src/polynomial.i"
 	@echo "... src/polynomial.s"

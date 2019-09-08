@@ -28,6 +28,10 @@ stdio.h
 hashtable.h
 /home/tadeusz/Desktop/ntru/src/hashtable.h
 
+/home/tadeusz/Desktop/ntru/src/ntru.c
+ntru.h
+/home/tadeusz/Desktop/ntru/src/ntru.h
+
 /home/tadeusz/Desktop/ntru/src/polynomial.c
 polynomial.h
 /home/tadeusz/Desktop/ntru/src/polynomial.h
@@ -79,6 +83,16 @@ stdlib.h
 -
 hashtable.h
 include/hashtable.h
+
+include/ntru.h
+stdbool.h
+-
+config.h
+include/config.h
+polynomial.h
+include/polynomial.h
+quotient_polynomial_ring.h
+include/quotient_polynomial_ring.h
 
 include/polynomial.h
 config.h

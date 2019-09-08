@@ -37,7 +37,7 @@ START_TEST(generation)
 	freePolynomial(ideal);
 
 	Polynomial *x = createRandomPolynomial(BINARY, 10, 3);
- 	ck_assert(x->degree==10);
+ 	ck_assert(x->degree<=10);
 	int d = 0;
 	Rational one = createRational(1, 1);
 	for(int i=0; i<x->degree; i++)
@@ -215,10 +215,39 @@ Suite * polynomial_suite(void)
 
 
 
-
+#include "ntru.h"
 int main(void)
-{
+{START_DEBUG
 
+/* 	printf("%d", invertInteger(2, 8));
+	return 1;
+	Polynomial * x = createPolynomial(INTEGER, NULL, NULL, 1, 0, 0, 1, 1);
+	Polynomial * y = createPolynomial(INTEGER, NULL, NULL, 1, 0, 0,  -1 );
+
+	QuotientPolynomialRing * ring = createQuotientPolynomialRing(NULL, 8, NULL);
+	Polynomial *a, *b;
+	Polynomial * r = extendedEuclid(ring, x, y, &a, &b);
+	if(r==NULL) 
+	{printDebug("NO I GIT");}
+	
+	freePolynomial(x);
+	freePolynomial(y);
+	//freePolynomial(r);
+	//freePolynomial(a);
+	//freePolynomial(b);
+//	freeQuotientPolynomialRing((ring));STOP_DEBUG
+//	return 1;*/
+
+	srand(time(NULL));
+	KeyPackage k = createKey(167, 3,256, 71);
+	
+	//printPolynomial(k.f, "f: ");
+//	printPolynomial(k.h, "h: ");
+//	printPolynomial(k.f_p_inverse, "f_p_inverse: ");
+	
+	freePolynomial(k.f);freePolynomial(k.h);freePolynomial(k.f_p_inverse);
+	STOP_DEBUG;
+	return 1;
 /* 
 Hashtable* h = createHashtable(fun);
 

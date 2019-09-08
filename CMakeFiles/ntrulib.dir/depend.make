@@ -18,6 +18,17 @@ CMakeFiles/ntrulib.dir/src/memory.c.o: src/memory.c
 CMakeFiles/ntrulib.dir/src/memory.c.o: include/hashtable.h
 CMakeFiles/ntrulib.dir/src/memory.c.o: include/memory.h
 
+CMakeFiles/ntrulib.dir/src/ntru.c.o: src/ntru.c
+CMakeFiles/ntrulib.dir/src/ntru.c.o: include/config.h
+CMakeFiles/ntrulib.dir/src/ntru.c.o: include/debug.h
+CMakeFiles/ntrulib.dir/src/ntru.c.o: include/hashtable.h
+CMakeFiles/ntrulib.dir/src/ntru.c.o: include/integer_arithmetic.h
+CMakeFiles/ntrulib.dir/src/ntru.c.o: include/memory.h
+CMakeFiles/ntrulib.dir/src/ntru.c.o: include/ntru.h
+CMakeFiles/ntrulib.dir/src/ntru.c.o: include/polynomial.h
+CMakeFiles/ntrulib.dir/src/ntru.c.o: include/quotient_polynomial_ring.h
+CMakeFiles/ntrulib.dir/src/ntru.c.o: include/rationals.h
+
 CMakeFiles/ntrulib.dir/src/polynomial.c.o: src/polynomial.c
 CMakeFiles/ntrulib.dir/src/polynomial.c.o: include/config.h
 CMakeFiles/ntrulib.dir/src/polynomial.c.o: include/debug.h

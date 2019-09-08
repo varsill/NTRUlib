@@ -25,6 +25,8 @@ hashtable.h
 /home/tadeusz/Desktop/ntru/tests/src/hashtable.h
 config.h
 /home/tadeusz/Desktop/ntru/tests/src/config.h
+ntru.h
+/home/tadeusz/Desktop/ntru/tests/src/ntru.h
 
 include/config.h
 debug.h
@@ -51,6 +53,16 @@ stdlib.h
 -
 hashtable.h
 include/hashtable.h
+
+include/ntru.h
+stdbool.h
+-
+config.h
+include/config.h
+polynomial.h
+include/polynomial.h
+quotient_polynomial_ring.h
+include/quotient_polynomial_ring.h
 
 include/polynomial.h
 config.h

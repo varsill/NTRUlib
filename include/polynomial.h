@@ -40,7 +40,7 @@
 #define GET_FUNCTION(_1, _2, NAME, ...) NAME
 #define printPolynomial(...) GET_FUNCTION(__VA_ARGS__, _printPolynomialWithExtraMessage, _printPolynomial)(__VA_ARGS__)
 
-typedef enum {INTEGER, REAL, BINARY} Type;
+typedef enum {INTEGER, REAL, BINARY, SIMPLE} Type; //SIMPLE - x^N-1 
 
 typedef struct{
     int degree;
@@ -57,7 +57,9 @@ typedef struct{
 Polynomial * _createPolynomial(unsigned int degree, Type type,QuotientPolynomialRing* ring, int* error, ...);
 Polynomial * createZeroPolynomial(Type type, int * error);
 Polynomial * createRandomPolynomial(Type type, ...);
+Polynomial * createSpecialPolynomial(Type type, ...);
 void freePolynomial(Polynomial * poly);
+Polynomial* copyPolynomial(const Polynomial* poly);
 
 bool comparePolynomials(const QuotientPolynomialRing * ring, const Polynomial * a, const Polynomial *b, int * error);
 
@@ -69,16 +71,16 @@ void moduloPolynomial(Polynomial ** , const Polynomial *, int *error);
 Polynomial* inversePolynomial(const QuotientPolynomialRing* ring, Polynomial* poly);
 Polynomial* extendedEuclid(const QuotientPolynomialRing* ring, const Polynomial *a,const Polynomial *b, Polynomial **u_ref, Polynomial **v_ref );
 void multiplyPolynomialByConstant(Polynomial *poly, Rational* c, QuotientPolynomialRing* ring);
-
+ void moduloRing(Polynomial**poly_ref, const QuotientPolynomialRing* ring);
 
 void _printPolynomial(const Polynomial* poly);
 void _printPolynomialWithExtraMessage(const Polynomial* poly, const char* extra_msg);
 //PRIVATE FUNCTIONS
 static bool isPolynomialValid(Polynomial* poly, bool check_type);
-static void moduloRing(Polynomial**poly_ref, const QuotientPolynomialRing* ring);
+
 static void moduloInteger(Polynomial*poly, int q , int* error);
 static void repairPolynomial(Polynomial * poly);
-static Polynomial* copyPolynomial(const Polynomial* poly);
+
 static Rational inverseOfNumber(Rational number, QuotientPolynomialRing*ring);
 
 

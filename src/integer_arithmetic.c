@@ -22,7 +22,11 @@ int ExtendedIntegerGCD(int a, int b, int* u, int*v)
 int invertInteger(int x, int N)
 {
         int a, b;
-        if(ExtendedIntegerGCD(x, N, &a, &b)!=1)return -1; //x and q are not coprime - cannot calculate inverse
+        if(ExtendedIntegerGCD(x, N, &a, &b)!=1)
+        {
+         //  printf("%d %d \n", x, N);
+            return -1; //x and q are not coprime - cannot calculate inverse
+        }
         return mod(a, N);
 }
 

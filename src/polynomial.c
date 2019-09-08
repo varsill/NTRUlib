@@ -12,7 +12,9 @@ Polynomial * _createPolynomial(unsigned int _degree, Type _type,QuotientPolynomi
 {
    
     SET_ERROR(error, OK);
+    
     Polynomial *p = (Polynomial*) malloc(sizeof(Polynomial));
+    
     p->degree=_degree;
     p->type=_type;
     p->coefficients=(Rational*)malloc(_degree*sizeof(Rational));
@@ -68,9 +70,10 @@ Polynomial * createZeroPolynomial(Type _type, int* error)
 
 Polynomial * createRandomPolynomial(Type type, ...)
 {
-    srand(time(NULL));
+    
+    
     va_list arg_list;
-     Polynomial * result;
+    Polynomial * result;
     if(type==BINARY)
     {
         va_start(arg_list, type);
@@ -90,7 +93,7 @@ Polynomial * createRandomPolynomial(Type type, ...)
         {
             result->coefficients[i]=zero;
         }
-        
+     
         
         int how_many_left=d;
         while(how_many_left>0)
@@ -99,6 +102,7 @@ Polynomial * createRandomPolynomial(Type type, ...)
             if(compareRationals(&result->coefficients[x], &zero)==true)
             {
                 how_many_left--;
+             
                 result->coefficients[x]=one;
             }
         }
@@ -106,8 +110,36 @@ Polynomial * createRandomPolynomial(Type type, ...)
 
 
     }
+    repairPolynomial(result);
     return result;
 }
+
+
+Polynomial * createSpecialPolynomial(Type type, ...)
+{
+    va_list arg_list;
+    Polynomial * result;
+    if(type==SIMPLE)
+    {
+        va_start(arg_list, type);
+        int N = va_arg(arg_list, int);
+        va_end(arg_list);
+
+        result=(Polynomial*)malloc(sizeof(Polynomial));
+        result->degree=N;
+        result->type=INTEGER;
+        result->coefficients=(Rational*)malloc(sizeof(Rational)*result->degree);
+        result->coefficients[0]=createRational(-1, 1);
+        result->coefficients[result->degree-1]=createRational(1, 1);
+        
+    }
+
+    return result;
+
+}
+
+
+
 
 void freePolynomial(Polynomial * p)
 {
@@ -118,6 +150,20 @@ void freePolynomial(Polynomial * p)
         
     
 }
+
+
+Polynomial* copyPolynomial(const Polynomial* p)
+{
+   
+    Polynomial *result = (Polynomial*)malloc(sizeof(Polynomial));
+    result->degree=p->degree;
+    result->type=p->type;
+    result->coefficients=(Rational*)malloc(result->degree*sizeof(Rational));
+    memcpy(result->coefficients, p->coefficients, sizeof(Rational)*result->degree);
+
+    return result;
+}
+
 
 
 bool comparePolynomials(const QuotientPolynomialRing *ring,const Polynomial *p1, const Polynomial *p2, int* error)
@@ -319,17 +365,19 @@ void multiplyPolynomialByConstant(Polynomial *poly, Rational* c, QuotientPolynom
 
 Polynomial * dividePolynomials(const QuotientPolynomialRing *ring, const Polynomial *p1, const Polynomial *p2, Polynomial *rest, int *error)
 {
- 
+     
     SET_ERROR(error, OK);
     if(p1==NULL || p2==NULL) 
     {
           
         SET_ERROR(error,UNITIALIZED_POLYNOMINALS);
+      
         return NULL;   
       
     }
+   
     Polynomial *result = (Polynomial*)malloc(sizeof(Polynomial));
- 
+
     if(p1->type==INTEGER && p2->type==INTEGER && ring!=NULL && ring->q>0) result->type=INTEGER;
     else result->type=REAL;
    
@@ -351,6 +399,7 @@ Polynomial * dividePolynomials(const QuotientPolynomialRing *ring, const Polynom
         result=result_buf; 
         
     } 
+         
   /*  
     if(rest==NULL)
     {
@@ -360,7 +409,7 @@ Polynomial * dividePolynomials(const QuotientPolynomialRing *ring, const Polynom
     if(rest->coefficients==NULL)rest->coefficients=(Rational*)malloc(sizeof(Rational)*(p2->degree-1));
     rest->degree=result->degree;
     rest->type=result->type;
-*/
+*/ 
     bool save_rest;
     if(rest==NULL)
     {
@@ -405,11 +454,19 @@ Polynomial * dividePolynomials(const QuotientPolynomialRing *ring, const Polynom
     }
     else//division in Z_n[x] polynomials ring, where n is ring->q
     {
-      
+       
         for(int i=bufor->degree-1; i>=0; i--)
         { 
             if(i<p2->degree-1)break; 
-            result->coefficients[i-p2->degree+1]=createRational(divideInteger(toInt(&bufor->coefficients[i]), toInt(&p2->coefficients[p2->degree-1]), ring->q), 1);
+            
+            int inv = divideInteger(toInt(&bufor->coefficients[i]), toInt(&p2->coefficients[p2->degree-1]), ring->q);
+           
+            if(inv==-1)
+            {
+                SET_ERROR(error, INDIVERTIBLE_INTEGER);
+                break;
+            }
+            result->coefficients[i-p2->degree+1]=createRational(inv, 1);
           
             for(int j=0; j<p2->degree; j++)    
             {
@@ -420,8 +477,16 @@ Polynomial * dividePolynomials(const QuotientPolynomialRing *ring, const Polynom
                       
             }
         }
+         
     }
-
+     
+    if(error==INDIVERTIBLE_INTEGER)
+    {
+        freePolynomial(bufor);
+        freePolynomial(result);
+  
+        return NULL;
+    }
     
     if(save_rest==true)
     {
@@ -457,7 +522,7 @@ void moduloPolynomial(Polynomial ** divident,const Polynomial * divisor, int* er
         return;   
     }
     Polynomial * rest;
-
+    
     rest=(Polynomial*)malloc(sizeof(Polynomial));
     rest->coefficients=NULL;
     //rest->coefficients=(Rational*)malloc(sizeof(Rational)*(divisor->degree-1));
@@ -482,31 +547,35 @@ Polynomial* extendedEuclid(const QuotientPolynomialRing* ring, const Polynomial 
 {
   //pause();
   
-    Polynomial *r0 = copyPolynomial(a);Polynomial *r1=copyPolynomial(b);     
+  
+    Polynomial *r0 = copyPolynomial(a);Polynomial *r1=copyPolynomial(b);   
     Polynomial * s0= createPolynomial(INTEGER,ring, NULL, 1); Polynomial *s1=createZeroPolynomial(INTEGER, NULL);
-    Polynomial *t0=createZeroPolynomial(INTEGER, NULL); Polynomial * t1= createPolynomial(INTEGER, ring, NULL, 1);
+    Polynomial *t0=createZeroPolynomial(INTEGER, NULL); Polynomial * t1= createPolynomial(INTEGER, ring, NULL, 1); 
     Polynomial *zero = createZeroPolynomial(INTEGER, NULL);
     Polynomial *r2, *s2, *t2, *x, *q;
     r2=s2=t2=x=q=NULL;
-    
+     int error;
     while(comparePolynomials(NULL, r1, zero, NULL)==false)
     {
         //  printf("elo");fflush(stdout);
-      
-        q = dividePolynomials(ring, r0, r1,NULL, NULL);
-       
-     
+         
+  
+        q = dividePolynomials(ring, r0, r1,NULL, &error);
+         
+        if(error==INDIVERTIBLE_INTEGER){break;}
+    
       //  printf("cotam");fflush(stdout);
-
+       
         x = multiplyPolynomials(ring, q, r1, NULL); 
         r2=substractPolynomials(ring, r0,x, NULL);
-     /*    printPolynomial(r0, "r0 ");
+     /*     printPolynomial(r0, "r0 ");
         printPolynomial(r1, "r1 ");
         printPolynomial(r2, "r2 ");
         printPolynomial(q, "q ");
-        printPolynomial(x, "x ");*/
+        printPolynomial(x, "x ");
+        pause();
         freePolynomial(x);
-       
+       */
         x = multiplyPolynomials(ring, q, s1, NULL);
         s2=substractPolynomials(ring, s0,x, NULL);
         freePolynomial(x);
@@ -514,51 +583,71 @@ Polynomial* extendedEuclid(const QuotientPolynomialRing* ring, const Polynomial 
         x = multiplyPolynomials(ring, q, t1, NULL);
         t2=substractPolynomials(ring, t0,x, NULL);
         freePolynomial(x);
-        
+       //  if(comparePolynomials(NULL, q, zero, NULL)==true)break;
         freePolynomial(q);
         freePolynomial(r0);freePolynomial(s0);freePolynomial(t0);
         r0=r1;s0=s1;t0=t1;
         r1=r2;s1=s2;t1=t2;
-        
+       
     }
-
-   
+    
+     if(error==INDIVERTIBLE_INTEGER)
+     {
+         
+         freePolynomial(r0);freePolynomial(s0);freePolynomial(t0);
+         freePolynomial(r1);freePolynomial(s1);freePolynomial(t1);
+       
+         return NULL;
+     }
    
 
     freePolynomial(r1);freePolynomial(s1);freePolynomial(t1);
    // freePolynomial(r2);freePolynomial(s2);freePolynomial(t2);
     freePolynomial(zero);
     //printf("%d", gcdOfPolynomialCoefficients(r0));
+   
     Rational inverse = inverseOfNumber(r0->coefficients[r0->degree-1], ring);
     multiplyPolynomialByConstant(r0,&inverse, ring);
     multiplyPolynomialByConstant(s0,&inverse, ring);
     multiplyPolynomialByConstant(t0,&inverse, ring);
     
     *u_ref=s0;
-    *v_ref=t0;
+    *v_ref=t0; 
     return r0;
 }
 
 
 
 Polynomial * inversePolynomial(const QuotientPolynomialRing* ring, Polynomial* poly)
-{
+{ 
     Polynomial *one = createPolynomial(INTEGER, NULL, NULL, 1);
     Polynomial * a;
     Polynomial * b;
-   
-    Polynomial *gcd = extendedEuclid(ring,poly, ring->ideal, &a, &b);
-   
-//   printPolynomial(gcd, "gcd: ");
-    if(comparePolynomials(NULL, gcd, one,NULL)!=true)return NULL;//Polynomials are not coprime - poly inversion does not exist
+    Polynomial *r;
+    //printPolynomial(poly, "POLY ");
+   // printPolynomial(ring->ideal, "IDEAL ");
     
+    Polynomial *gcd = extendedEuclid(ring,poly, ring->ideal, &a, &b);
+  
+   // printf("%d ", ring->q);
+   //printPolynomial(gcd, "gcd: ");
+  // pause();
+    if(gcd==NULL)//Couldn't divide rational numbers in finite field - q is not prime
+    {
+        freePolynomial(one);
+        return NULL;
+    }
+    else if(comparePolynomials(NULL, gcd, one,NULL)!=true)r=NULL;//Polynomials are not coprime - poly inversion does not exist
+    else r=a;
+   
     freePolynomial(gcd);
     freePolynomial(one);
     freePolynomial(b);
+    
    // freePolynomial(a);
    // printPolynomial(a, "a ");
    // printf("%d ", (int)a);fflush(stdout);
-    return a;
+    return r;
 
 }
 
@@ -606,14 +695,14 @@ static bool isPolynomialValid(Polynomial *p, bool check_type)
 }
 
 
-static void moduloRing(Polynomial **poly, const QuotientPolynomialRing *ring)
+void moduloRing(Polynomial **poly, const QuotientPolynomialRing *ring)
 {
    
     if(ring==NULL) 
     {
         return;
     }
-    //  moduloPolynomial(poly, ring->ideal, NULL);
+      moduloPolynomial(poly, ring->ideal, NULL);
   //  pause();
     moduloInteger(*poly, ring->q, NULL);
   //  pause();
@@ -641,19 +730,6 @@ static void moduloInteger(Polynomial *poly, int q, int *error)
         
         poly->coefficients[i]=createRational(mod(toInt(&poly->coefficients[i]),q), 1);   
     }
-}
-
-
-static Polynomial* copyPolynomial(const Polynomial* p)
-{
-   
-    Polynomial *result = (Polynomial*)malloc(sizeof(Polynomial));
-    result->degree=p->degree;
-    result->type=p->type;
-    result->coefficients=(Rational*)malloc(result->degree*sizeof(Rational));
-    memcpy(result->coefficients, p->coefficients, sizeof(Rational)*result->degree);
-
-    return result;
 }
 
 
