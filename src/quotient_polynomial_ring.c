@@ -12,7 +12,9 @@ QuotientPolynomialRing * createQuotientPolynomialRing(Polynomial *ideal, int q, 
 }
 void freeQuotientPolynomialRing(QuotientPolynomialRing *ring)
 {   
+   
     if(ring==NULL)return;
+    
     freePolynomial(ring->ideal);
     free(ring);
     

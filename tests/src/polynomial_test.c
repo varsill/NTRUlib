@@ -246,31 +246,34 @@ int main(void)
 	freePolynomial(a);freePolynomial(b);
 	//printPolynomial(k.f, "f: ");
 //	printPolynomial(k.h, "h: ");
-//	printPolynomial(k.f_p_inverse, "f_p_inverse: ");
+//	printPolynomial(k.f_p_inverse, "f_p_inverse: ");*/
 
-	STOP_DEBUG;
-	return 1;*/
+srand(time(NULL));
+	int N = 10;
+	int p = 2;
+	int q = 16;
+	int d = 5;
 
-	srand(time(NULL));
-
-
-
-
-	int N = 167;
-	int p = 13;
-	int q = 128;
-	int d = 71;
+	
 	KeyPackage keys = createKey(N, p, q, d);
 
-	Polynomial * m = createPolynomial(INTEGER, NULL, NULL, 1, 3, 3, 7, 2, 1, 3, 7);
-
-	Polynomial * e = encodePolynomial(m, keys.h, N, q, d);
 	
+//	Polynomial * m = createPolynomial(INTEGER, NULL, NULL, 1, 3, 3, 7, 2, 1, 3, 7);
+Polynomial * m = createPolynomial(INTEGER, NULL, NULL, 1, 0, 0, 1, 0, 1, 1);
+
+//fillPolynomialWithLeadingZeros(m, N);
+	
+	
+	Polynomial * e = encodePolynomial(m, keys.h, N, q, d);
+
 	Polynomial * decoded = decodePolynomial(e, keys.f, keys.f_p_inverse, N, p, q, d);
 	printPolynomial(decoded);
 	freePolynomial(decoded);
 	freePolynomial(m);
 	freePolynomial(e);
+
+	freePolynomial(keys.f);freePolynomial(keys.f_p_inverse);freePolynomial(keys.h);
+	STOP_DEBUG
 	return 1;
 /* 
 Hashtable* h = createHashtable(fun);

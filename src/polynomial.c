@@ -129,6 +129,7 @@ Polynomial * createSpecialPolynomial(Type type, ...)
         result->degree=N;
         result->type=INTEGER;
         result->coefficients=(Rational*)malloc(sizeof(Rational)*result->degree);
+        for(int i=0; i<result->degree; i++)result->coefficients[i]=createRational(0,1);
         result->coefficients[0]=createRational(-1, 1);
         result->coefficients[result->degree-1]=createRational(1, 1);
         
@@ -595,6 +596,7 @@ Polynomial* extendedEuclid(const QuotientPolynomialRing* ring, const Polynomial 
     Polynomial *r2, *s2, *t2, *x, *q;
     r2=s2=t2=x=q=NULL;
      int error;
+    
     while(comparePolynomials(NULL, r1, zero, NULL)==false)
     {
         //  printf("elo");fflush(stdout);
@@ -614,8 +616,9 @@ Polynomial* extendedEuclid(const QuotientPolynomialRing* ring, const Polynomial 
         printPolynomial(q, "q ");
         printPolynomial(x, "x ");
         pause();
-        freePolynomial(x);
+        
        */
+      freePolynomial(x);
         x = multiplyPolynomials(ring, q, s1, NULL);
         s2=substractPolynomials(ring, s0,x, NULL);
         freePolynomial(x);
@@ -630,7 +633,7 @@ Polynomial* extendedEuclid(const QuotientPolynomialRing* ring, const Polynomial 
         r1=r2;s1=s2;t1=t2;
        
     }
-    
+   
      if(error==INDIVERTIBLE_INTEGER)
      {
          
@@ -639,18 +642,18 @@ Polynomial* extendedEuclid(const QuotientPolynomialRing* ring, const Polynomial 
        
          return NULL;
      }
-   
+    
 
     freePolynomial(r1);freePolynomial(s1);freePolynomial(t1);
    // freePolynomial(r2);freePolynomial(s2);freePolynomial(t2);
     freePolynomial(zero);
     //printf("%d", gcdOfPolynomialCoefficients(r0));
    
-    Rational inverse = inverseOfNumber(r0->coefficients[r0->degree-1], ring);
+    Rational inverse = inverseOfNumber(r0->coefficients[r0->degree-1], ring); 
     multiplyPolynomialByConstant(r0,&inverse, ring);
     multiplyPolynomialByConstant(s0,&inverse, ring);
     multiplyPolynomialByConstant(t0,&inverse, ring);
-    
+     
     *u_ref=s0;
     *v_ref=t0; 
     return r0;
@@ -666,9 +669,10 @@ Polynomial * inversePolynomial(const QuotientPolynomialRing* ring, Polynomial* p
     Polynomial *r;
     //printPolynomial(poly, "POLY ");
    // printPolynomial(ring->ideal, "IDEAL ");
-    
+   
+   
     Polynomial *gcd = extendedEuclid(ring,poly, ring->ideal, &a, &b);
-  
+   
    // printf("%d ", ring->q);
    //printPolynomial(gcd, "gcd: ");
   // pause();
@@ -683,7 +687,7 @@ Polynomial * inversePolynomial(const QuotientPolynomialRing* ring, Polynomial* p
     freePolynomial(gcd);
     freePolynomial(one);
     freePolynomial(b);
-    
+    if(r==NULL)freePolynomial(a);
    // freePolynomial(a);
    // printPolynomial(a, "a ");
    // printf("%d ", (int)a);fflush(stdout);

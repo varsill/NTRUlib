@@ -47,10 +47,6 @@ KeyPackage createKey(int N, int p, int q, int d)
     Polynomial * h_buf = multiplyPolynomials(ring_q, F, f_q_inverse, NULL);
     Polynomial * h = addPolynomials(ring_q_without_poly, h_buf, g, NULL);
 
-	Polynomial * r = multiplyPolynomials(ring_q, f, f_q_inverse, NULL);
-	//printPolynomial(r,"WINNO BYC 1:");
-
-    freePolynomial(r);
 
 
     freeQuotientPolynomialRing(ring_p);freeQuotientPolynomialRing(ring_q);
@@ -59,15 +55,27 @@ KeyPackage createKey(int N, int p, int q, int d)
     freePolynomial(f_q_inverse);
     freePolynomial(h_buf);
     freePolynomial(F);
-    KeyPackage result = {f, h, f_p_inverse};
+    KeyPackage result;
+    result.f=f; result.f_p_inverse=f_p_inverse; result.h=h;
     return result;
     
 }
 
 
 Polynomial * encodePolynomial(const Polynomial *m, Polynomial *h, int N, int q, int d)
-{
+{  
+    Polynomial * fuzz = createRandomPolynomial(BINARY, N, d);
+  
+    QuotientPolynomialRing * ring = createQuotientPolynomialRing(createSpecialPolynomial(SIMPLE, N), q, NULL);
+    QuotientPolynomialRing * ring_without_ideal = createQuotientPolynomialRing(NULL, q, NULL);
+    Polynomial * r = multiplyPolynomials(ring, h, fuzz, NULL);
+    Polynomial * e = addPolynomials(ring_without_ideal, r, m, NULL);
+    
+    freePolynomial(fuzz);freePolynomial(r);
+    freeQuotientPolynomialRing(ring);
+    freeQuotientPolynomialRing(ring_without_ideal);
 
+/* 
     Polynomial * h_cp=copyPolynomial(h);
     fillPolynomialWithLeadingZeros(h_cp, N);
     Polynomial * h_prim=createSpecialPolynomial(DOUBLE, h_cp);
@@ -86,12 +94,40 @@ Polynomial * encodePolynomial(const Polynomial *m, Polynomial *h, int N, int q, 
     }
     freeQuotientPolynomialRing(ring);
     freePolynomial(h_prim);
+    */
     return e;
 
 }
 
 Polynomial * decodePolynomial(Polynomial *e, Polynomial *f, Polynomial * f_p_inverse, int N, int p, int q, int d)
 {
+    QuotientPolynomialRing * ring_q = createQuotientPolynomialRing(createSpecialPolynomial(SIMPLE, N), q, NULL);
+     QuotientPolynomialRing * ring_p = createQuotientPolynomialRing(createSpecialPolynomial(SIMPLE, N), p, NULL);
+    Polynomial * a = multiplyPolynomials(ring_q, f, e, NULL);
+
+  
+    fillPolynomialWithLeadingZeros(a, N);
+    int s = floor(q/2.0+d*(p-1)+d*d*d*1.0/N);
+    int t = q*floor((d*(p-1)+d*d*d/N)*1.0/q);
+    s=mod(s, q);
+    t=mod(t, p);
+
+    Polynomial * b = createSpecialPolynomial(ZERO, N, INTEGER);
+
+    for(int i=0; i<a->degree; i++)
+    {
+        if(toInt(&a->coefficients[i])<s)b->coefficients[i]=createRational(toInt(&a->coefficients[i])+t, 1);
+        else b->coefficients[i]=createRational(toInt(&a->coefficients[i])+t-q, 1);   
+    }
+
+   
+    
+    Polynomial * n  = multiplyPolynomials(ring_p, b, f_p_inverse, NULL);
+
+    freePolynomial(a);
+    freePolynomial(b);
+    freeQuotientPolynomialRing(ring_p);freeQuotientPolynomialRing(ring_q);
+    /* 
     //we assume, that argument d of this function is equal to the argument d of the function createKey() - which means, that number of ones in binary polynomial f is equal to d
     int * u = (int*)malloc(d*sizeof(int));  
     Rational one = createRational(1, 1);
@@ -173,21 +209,26 @@ Polynomial * decodePolynomial(Polynomial *e, Polynomial *f, Polynomial * f_p_inv
 
     freeQuotientPolynomialRing(ring_p);freeQuotientPolynomialRing(ring_q);
     freePolynomial(v_prim);freePolynomial(e_prim);freePolynomial(b);freePolynomial(a);
+
+    */
     return n;
 
 }
 
 
-static Polynomial * inversePolynomialModuloNotPrime(const QuotientPolynomialRing * ring, Polynomial * a)
+ Polynomial * inversePolynomialModuloNotPrime(const QuotientPolynomialRing * ring, Polynomial * a)
 {
-    
+   
     int p = getPrime(ring->q);
     int e = getExponent(ring->q);
- 
+  
     QuotientPolynomialRing * ring_p = createQuotientPolynomialRing(copyPolynomial(ring->ideal), p, NULL);
+  
     Polynomial * b = inversePolynomial(ring_p, a);
+  
    if(b==NULL){
        freeQuotientPolynomialRing(ring_p);   
+       
        return NULL;
    }
    /* 
@@ -222,7 +263,9 @@ static Polynomial * inversePolynomialModuloNotPrime(const QuotientPolynomialRing
          freePolynomial(tmp);
          freePolynomial(tmp2);
          b=tmp3;
+        
     }
+    
     freePolynomial(p_poly);
     moduloRing(&b, ring);
     freeQuotientPolynomialRing(ring_p);
