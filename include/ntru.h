@@ -17,7 +17,10 @@ typedef struct
 
 KeyPackage createKey(int N, int p, int q, int d);
 static Polynomial * inversePolynomialModuloNotPrime(const QuotientPolynomialRing * ring, Polynomial * p);
+Polynomial * encodePolynomial(const Polynomial *m, Polynomial *h, int N, int q, int d);
+Polynomial * decodePolynomial(Polynomial *e, Polynomial *f, Polynomial * f_p_inverse, int N, int p, int q, int d);
 static int getPrime(int x);
 static int getExponent(int x);
+int * getDistinctRandomNumbers(int from, int to, int how_many);
 
 #endif

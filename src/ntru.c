@@ -19,8 +19,8 @@ KeyPackage createKey(int N, int p, int q, int d)
         f = createRandomPolynomial(BINARY, N,d);
         
         f_p_inverse = inversePolynomialModuloNotPrime(ring_p, f);
-       
         f_q_inverse = inversePolynomialModuloNotPrime(ring_q, f);
+        
          
       //  printPolynomial(f, "f: ");
      //   printPolynomial(f_p_inverse, "f_p_inverse: ");
@@ -62,6 +62,119 @@ KeyPackage createKey(int N, int p, int q, int d)
     KeyPackage result = {f, h, f_p_inverse};
     return result;
     
+}
+
+
+Polynomial * encodePolynomial(const Polynomial *m, Polynomial *h, int N, int q, int d)
+{
+
+    Polynomial * h_cp=copyPolynomial(h);
+    fillPolynomialWithLeadingZeros(h_cp, N);
+    Polynomial * h_prim=createSpecialPolynomial(DOUBLE, h_cp);
+    freePolynomial(h_cp);
+    int *k = getDistinctRandomNumbers(1, N, d);
+    QuotientPolynomialRing * ring = createQuotientPolynomialRing(NULL, q, NULL);
+    Polynomial * e=m;
+    for(int i=0; i<d; i++)
+    {
+        Polynomial *buffer = createSpecialPolynomial(EMPTY, N, INTEGER);
+        for(int j=0; j<buffer->degree; j++)buffer->coefficients[buffer->degree-1-j]=h_prim->coefficients[h_prim->degree-(N+j-k[i])];
+        Polynomial *e_buff = addPolynomials(ring, e, buffer, NULL);
+        if(e!=m)freePolynomial(e);
+        freePolynomial(buffer);
+        e=e_buff;
+    }
+    freeQuotientPolynomialRing(ring);
+    freePolynomial(h_prim);
+    return e;
+
+}
+
+Polynomial * decodePolynomial(Polynomial *e, Polynomial *f, Polynomial * f_p_inverse, int N, int p, int q, int d)
+{
+    //we assume, that argument d of this function is equal to the argument d of the function createKey() - which means, that number of ones in binary polynomial f is equal to d
+    int * u = (int*)malloc(d*sizeof(int));  
+    Rational one = createRational(1, 1);
+    int j=0;
+    for(int i=0; i<f->degree; i++)
+    {
+        if(compareRationals(&f->coefficients[i], &one)==true)
+        {
+           
+            u[j]=i;
+            j++;
+        }
+    }
+
+   
+ 
+    //probably floor xD
+    int s = floor(q/2.0+d*(p-1)+d*d*d*1.0/N);
+    int t = q*floor((d*(p-1)+d*d*d/N)*1.0/q);
+    s=mod(s, q);
+    t=mod(t, p);
+    Polynomial * v = f_p_inverse;
+
+    Polynomial * v_cp = copyPolynomial(v);
+    Polynomial * e_cp = copyPolynomial(e);
+    fillPolynomialWithLeadingZeros(v_cp, N);
+    fillPolynomialWithLeadingZeros(e_cp, N);
+    Polynomial * v_prim = createSpecialPolynomial(DOUBLE, v_cp);
+    Polynomial * e_prim = createSpecialPolynomial(DOUBLE, e_cp);
+    freePolynomial(v_cp);
+    freePolynomial(e_cp);
+    QuotientPolynomialRing * ring_q = createQuotientPolynomialRing(NULL, q, NULL);
+    Polynomial * a = createSpecialPolynomial(ZERO, N, INTEGER);
+
+    
+      
+    for(int i=0; i<d; i++)
+    {
+        Polynomial *buffer = createSpecialPolynomial(EMPTY, N, INTEGER);
+       
+        for(int j=0; j<buffer->degree; j++)buffer->coefficients[buffer->degree-1-j]=e_prim->coefficients[e_prim->degree-1-(N+j-1-u[i])];
+        
+        
+        Polynomial *a_buff = addPolynomials(ring_q, a, buffer, NULL); 
+        freePolynomial(a);
+        freePolynomial(buffer);
+        
+        a=a_buff; 
+     
+    }
+
+    Polynomial * b = createSpecialPolynomial(EMPTY, N, INTEGER);
+    fillPolynomialWithLeadingZeros(a, N);
+    for(int i=0; i<a->degree; i++)
+    {
+        if(toInt(&a->coefficients[i])<s)b->coefficients[i]=createRational(toInt(&a->coefficients[i])+t, 1);
+        else b->coefficients[i]=createRational(toInt(&a->coefficients[i])+t-q, 1);   
+    }
+
+    QuotientPolynomialRing * ring_p = createQuotientPolynomialRing(NULL, p, NULL);
+    Polynomial *n=createZeroPolynomial(INTEGER, NULL);
+    fillPolynomialWithLeadingZeros(b, N);
+    printPolynomial(v_prim, "V:");
+    printPolynomial(b, "b: ");
+    for(int i=0; i<N; i++)
+    {
+
+        Polynomial * l = createSpecialPolynomial(EMPTY, N, INTEGER);
+        for(int j=0; j<l->degree; j++)l->coefficients[l->degree-1-j]=v_prim->coefficients[v_prim->degree-(N+j-i)];
+        printPolynomial(l, "l: ");
+        multiplyPolynomialByConstant(l, &b->coefficients[b->degree-1-i], ring_p);
+        Polynomial * n_buff = addPolynomials(ring_p, l, n, NULL);
+        freePolynomial(n);
+        freePolynomial(l);
+        n=n_buff; 
+         printPolynomial(n, "n: ");  
+    //    printPolynomial(n);
+    } 
+
+    freeQuotientPolynomialRing(ring_p);freeQuotientPolynomialRing(ring_q);
+    freePolynomial(v_prim);freePolynomial(e_prim);freePolynomial(b);freePolynomial(a);
+    return n;
+
 }
 
 
@@ -136,4 +249,41 @@ static int getExponent(int x)
         x=x/r;
     }
     return i;
+}
+
+
+ int* getDistinctRandomNumbers(int from, int to, int how_many)
+{
+    int n  = to-from+1;
+    if(how_many>n)return NULL;//cannot choose distinct numbers
+    bool * tab = (bool*)malloc(n*sizeof(bool));
+    int * result = malloc(how_many*sizeof(int));
+    for(int i=0; i<n; i++)tab[i]=false;
+    while(how_many>0)
+    {
+        int x = rand()%n;
+      
+        if(tab[x]==false)
+        {
+            tab[x]=true;
+            how_many--;
+        }
+    }
+    int j=0;
+    
+    for(int i=0; i<n; i++)
+    {
+        if(tab[i]==true)
+        {
+             
+            result[j]=from+i;
+            j++;
+        }
+    }
+
+    free(tab);
+    return result;
+
+   
+
 }

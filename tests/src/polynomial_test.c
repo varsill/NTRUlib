@@ -236,17 +236,41 @@ int main(void)
 	//freePolynomial(a);
 	//freePolynomial(b);
 //	freeQuotientPolynomialRing((ring));STOP_DEBUG
-//	return 1;*/
+//	return 1;
 
 	srand(time(NULL));
-	KeyPackage k = createKey(167, 3,256, 71);
 	
+	Polynomial * a = createPolynomial(INTEGER, NULL, NULL, 1, 2,3,4,5,6);
+	Polynomial *b = createSpecialPolynomial(DOUBLE, a);
+	printPolynomial(b);
+	freePolynomial(a);freePolynomial(b);
 	//printPolynomial(k.f, "f: ");
 //	printPolynomial(k.h, "h: ");
 //	printPolynomial(k.f_p_inverse, "f_p_inverse: ");
-	
-	freePolynomial(k.f);freePolynomial(k.h);freePolynomial(k.f_p_inverse);
+
 	STOP_DEBUG;
+	return 1;*/
+
+	srand(time(NULL));
+
+
+
+
+	int N = 167;
+	int p = 13;
+	int q = 128;
+	int d = 71;
+	KeyPackage keys = createKey(N, p, q, d);
+
+	Polynomial * m = createPolynomial(INTEGER, NULL, NULL, 1, 3, 3, 7, 2, 1, 3, 7);
+
+	Polynomial * e = encodePolynomial(m, keys.h, N, q, d);
+	
+	Polynomial * decoded = decodePolynomial(e, keys.f, keys.f_p_inverse, N, p, q, d);
+	printPolynomial(decoded);
+	freePolynomial(decoded);
+	freePolynomial(m);
+	freePolynomial(e);
 	return 1;
 /* 
 Hashtable* h = createHashtable(fun);

@@ -40,7 +40,7 @@
 #define GET_FUNCTION(_1, _2, NAME, ...) NAME
 #define printPolynomial(...) GET_FUNCTION(__VA_ARGS__, _printPolynomialWithExtraMessage, _printPolynomial)(__VA_ARGS__)
 
-typedef enum {INTEGER, REAL, BINARY, SIMPLE} Type; //SIMPLE - x^N-1 
+typedef enum {INTEGER, REAL, BINARY, SIMPLE, DOUBLE, EMPTY, ZERO} Type; //SIMPLE - x^N-1 
 
 typedef struct{
     int degree;
@@ -62,7 +62,7 @@ void freePolynomial(Polynomial * poly);
 Polynomial* copyPolynomial(const Polynomial* poly);
 
 bool comparePolynomials(const QuotientPolynomialRing * ring, const Polynomial * a, const Polynomial *b, int * error);
-
+void fillPolynomialWithLeadingZeros(Polynomial *p, int N);
 Polynomial * addPolynomials(const QuotientPolynomialRing *ring, const Polynomial *a, const Polynomial *b, int* error);
 Polynomial * substractPolynomials(const QuotientPolynomialRing *, const Polynomial *, const Polynomial *, int* error);
 Polynomial * multiplyPolynomials(const QuotientPolynomialRing *, const Polynomial *, const Polynomial *, int* error);

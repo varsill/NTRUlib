@@ -133,7 +133,44 @@ Polynomial * createSpecialPolynomial(Type type, ...)
         result->coefficients[result->degree-1]=createRational(1, 1);
         
     }
+    else if(type==DOUBLE)
+    {
+        va_start(arg_list, type);
+        Polynomial * x= va_arg(arg_list, Polynomial*);
+        va_end(arg_list);
+        
+        result=(Polynomial*)malloc(sizeof(Polynomial));
+        result->degree=x->degree*2-1; 
+        result->type=x->type;
+        result->coefficients=(Rational*)malloc(result->degree*sizeof(Rational));
+        memcpy(result->coefficients+x->degree-1, x->coefficients, x->degree*sizeof(Rational));
+        memcpy(result->coefficients, x->coefficients+1, (x->degree-1)*sizeof(Rational));
+    }
+    else if(type==EMPTY)
+    {
+        va_start(arg_list, type);
+        int d = va_arg(arg_list, int);
+        Type t = va_arg(arg_list, Type);
+        va_end(arg_list);
 
+        result=(Polynomial*)malloc(sizeof(Polynomial));
+        result->degree=d;
+        result->type=t;
+        result->coefficients=(Rational*)malloc(d*sizeof(Rational));
+    }
+    else if(type==ZERO)
+    {
+         va_start(arg_list, type);
+        int d = va_arg(arg_list, int);
+        Type t = va_arg(arg_list, Type);
+        va_end(arg_list);
+
+        result=(Polynomial*)malloc(sizeof(Polynomial));
+        result->degree=d;
+        result->type=t;
+        result->coefficients=(Rational*)malloc(d*sizeof(Rational));
+        for(int i=0; i<result->degree; i++)result->coefficients[i]=createRational(0, 1);
+    }
     return result;
 
 }
@@ -179,6 +216,7 @@ bool comparePolynomials(const QuotientPolynomialRing *ring,const Polynomial *p1,
     
     if(ring==NULL)
     {
+       
         if(p1->degree != p2->degree)return false;    
         for(int i=0; i<p1->degree; i++) if(compareRationals(&p1->coefficients[i], &p2->coefficients[i])==false) return false;    
         return true;
@@ -399,7 +437,7 @@ Polynomial * dividePolynomials(const QuotientPolynomialRing *ring, const Polynom
         result=result_buf; 
         
     } 
-         
+      
   /*  
     if(rest==NULL)
     {
@@ -430,12 +468,14 @@ Polynomial * dividePolynomials(const QuotientPolynomialRing *ring, const Polynom
      */
 
     Polynomial *bufor = copyPolynomial(p1);
+
+ 
     if(ring==NULL || ring->q<=0)//division in Q[x] polynomials ring
     {
-          
+            
         for(int i=bufor->degree-1; i>=0; i--)
         {
-             
+          
             if(i<p2->degree-1)break;
             result->coefficients[i-p2->degree+1]=divideRationals(&bufor->coefficients[i], &p2->coefficients[p2->degree-1]);
            // printf("COEF: %d \n",result->coefficients[i-p2->degree+1]);
@@ -447,9 +487,9 @@ Polynomial * dividePolynomials(const QuotientPolynomialRing *ring, const Polynom
                 bufor->coefficients[j+(i-p2->degree+1)]=substractRationals(&bufor->coefficients[j+(i-p2->degree+1)], &x);
              
             }
-          
+         
         }
-          
+           
     
     }
     else//division in Z_n[x] polynomials ring, where n is ring->q
@@ -479,7 +519,7 @@ Polynomial * dividePolynomials(const QuotientPolynomialRing *ring, const Polynom
         }
          
     }
-     
+      
     if(error==INDIVERTIBLE_INTEGER)
     {
         freePolynomial(bufor);
@@ -504,7 +544,7 @@ Polynomial * dividePolynomials(const QuotientPolynomialRing *ring, const Polynom
     freePolynomial(bufor);
   
     moduloRing(&result, ring);
-    
+
    // repairPolynomial(result);
     return result;
 
@@ -652,6 +692,25 @@ Polynomial * inversePolynomial(const QuotientPolynomialRing* ring, Polynomial* p
 }
 
 
+
+void fillPolynomialWithLeadingZeros(Polynomial *p, int N)
+{
+    Rational *x = (Rational*)malloc(N*sizeof(Rational));
+
+    memcpy(x, p->coefficients, p->degree*sizeof(Rational));
+
+    for(int i=p->degree; i<N; i++)x[i]=createRational(0, 1);
+
+    Rational * buf = p->coefficients;
+    p->coefficients=x;
+    p->degree=N;
+    free(buf);
+    
+
+}
+
+
+
 void _printPolynomialWithExtraMessage(const Polynomial* poly, const char* text)
 {
     if(poly==NULL) 
@@ -735,6 +794,7 @@ static void moduloInteger(Polynomial *poly, int q, int *error)
 
 static void repairPolynomial(Polynomial* p)
 {
+    
     if(p->type==REAL)
     {
     //    for(int i=0; i<p->degree; i++)p->coefficients[i]=roundf(1000*p->coefficients[i])/1000;//round to 3th decimal 
@@ -747,6 +807,7 @@ static void repairPolynomial(Polynomial* p)
    
 
 }
+
 
 
 static Rational inverseOfNumber(Rational number, QuotientPolynomialRing*ring)
