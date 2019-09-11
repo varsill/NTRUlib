@@ -259,12 +259,12 @@ srand(time(NULL));
 
 	
 //	Polynomial * m = createPolynomial(INTEGER, NULL, NULL, 1, 3, 3, 7, 2, 1, 3, 7);
-Polynomial * m = createPolynomial(INTEGER, NULL, NULL, 1, 0, 0, 1, 0, 1, 1);
+Polynomial * m = createPolynomial(INTEGER, NULL, NULL, 1, 2, 0, 1, 0, 1, 1);
 
 //fillPolynomialWithLeadingZeros(m, N);
 	
 	
-	Polynomial * e = encodePolynomial(m, keys.h, N, q, d);
+	Polynomial * e = encodePolynomial(m, keys.h, N, q, p);
 
 	Polynomial * decoded = decodePolynomial(e, keys.f, keys.f_p_inverse, N, p, q, d);
 	printPolynomial(decoded);

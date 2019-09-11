@@ -40,7 +40,7 @@
 #define GET_FUNCTION(_1, _2, NAME, ...) NAME
 #define printPolynomial(...) GET_FUNCTION(__VA_ARGS__, _printPolynomialWithExtraMessage, _printPolynomial)(__VA_ARGS__)
 
-typedef enum {INTEGER, REAL, BINARY, SIMPLE, DOUBLE, EMPTY, ZERO} Type; //SIMPLE - x^N-1 
+typedef enum {INTEGER, REAL, BINARY, SIMPLE, DOUBLE, EMPTY, ZERO, MODULAR} Type; //SIMPLE - x^N-1 
 
 typedef struct{
     int degree;

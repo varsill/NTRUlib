@@ -110,6 +110,25 @@ Polynomial * createRandomPolynomial(Type type, ...)
 
 
     }
+    else if(type==MODULAR)
+    {
+        va_start(arg_list, type);
+        int N = va_arg(arg_list, int);
+        int q = va_arg(arg_list, int);
+        va_end(arg_list);
+
+        result = (Polynomial*)malloc(sizeof(Polynomial));
+
+        result->type=INTEGER;
+        result->degree=N;
+        result->coefficients=(Rational*)malloc(sizeof(Rational)*result->degree);
+      
+
+        for(int i=0; i<result->degree; i++)
+        {
+            result->coefficients[i]=createRational(rand()%q, 1);
+        }
+    }
     repairPolynomial(result);
     return result;
 }

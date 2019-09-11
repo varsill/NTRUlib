@@ -7,7 +7,7 @@ KeyPackage createKey(int N, int p, int q, int d)
     bool further;
     QuotientPolynomialRing * ring_p = createQuotientPolynomialRing(createSpecialPolynomial(SIMPLE, N), p , NULL);
     QuotientPolynomialRing * ring_q = createQuotientPolynomialRing(createSpecialPolynomial(SIMPLE, N), q , NULL);
-    Polynomial *g = createRandomPolynomial(BINARY, N, d);
+    Polynomial *g = createRandomPolynomial(MODULAR, N, p);
     Polynomial *f;
     Polynomial *f_p_inverse;
     Polynomial *f_q_inverse;
@@ -16,7 +16,7 @@ KeyPackage createKey(int N, int p, int q, int d)
     {
         further=false;
        
-        f = createRandomPolynomial(BINARY, N,d);
+        f = createRandomPolynomial(MODULAR, N,p);
         
         f_p_inverse = inversePolynomialModuloNotPrime(ring_p, f);
         f_q_inverse = inversePolynomialModuloNotPrime(ring_q, f);
@@ -39,22 +39,19 @@ KeyPackage createKey(int N, int p, int q, int d)
       
     }while(further);
  
-    Polynomial * F = multiplyPolynomials(ring_p, f, g, NULL);//czy multiply liczy modulo polynomial?!
-    QuotientPolynomialRing * ring_p_without_poly = createQuotientPolynomialRing(NULL, p, NULL);
-    QuotientPolynomialRing * ring_q_without_poly = createQuotientPolynomialRing(NULL, q, NULL);
-    Rational minus_one = createRational(-1, 1);
-    multiplyPolynomialByConstant(F, &minus_one, ring_p_without_poly);
-    Polynomial * h_buf = multiplyPolynomials(ring_q, F, f_q_inverse, NULL);
-    Polynomial * h = addPolynomials(ring_q_without_poly, h_buf, g, NULL);
+    Polynomial * h = multiplyPolynomials(ring_q, f_q_inverse, g, NULL);//czy multiply liczy modulo polynomial?!
+  
 
-
-
+    for(int i=0; i<h->degree; i++)
+    {
+        if(toInt(&h->coefficients[i])<0)h->coefficients[i]=createRational(toInt(&h->coefficients[i])+q,1);
+        h->coefficients[i]=createRational(mod(toInt(&h->coefficients[i])*p, q), 1);
+    }
+    
     freeQuotientPolynomialRing(ring_p);freeQuotientPolynomialRing(ring_q);
-    freeQuotientPolynomialRing(ring_p_without_poly);freeQuotientPolynomialRing(ring_q_without_poly);
     freePolynomial(g);
     freePolynomial(f_q_inverse);
-    freePolynomial(h_buf);
-    freePolynomial(F);
+
     KeyPackage result;
     result.f=f; result.f_p_inverse=f_p_inverse; result.h=h;
     return result;
@@ -62,18 +59,19 @@ KeyPackage createKey(int N, int p, int q, int d)
 }
 
 
-Polynomial * encodePolynomial(const Polynomial *m, Polynomial *h, int N, int q, int d)
+Polynomial * encodePolynomial(const Polynomial *m, Polynomial *h, int N, int q, int p)
 {  
-    Polynomial * fuzz = createRandomPolynomial(BINARY, N, d);
-  
-    QuotientPolynomialRing * ring = createQuotientPolynomialRing(createSpecialPolynomial(SIMPLE, N), q, NULL);
-    QuotientPolynomialRing * ring_without_ideal = createQuotientPolynomialRing(NULL, q, NULL);
-    Polynomial * r = multiplyPolynomials(ring, h, fuzz, NULL);
-    Polynomial * e = addPolynomials(ring_without_ideal, r, m, NULL);
+    Polynomial * r = createRandomPolynomial(MODULAR, N, p);
     
-    freePolynomial(fuzz);freePolynomial(r);
+    QuotientPolynomialRing * ring = createQuotientPolynomialRing(createSpecialPolynomial(SIMPLE, N), q, NULL);
+    Rational p_rat = createRational(p, 1);
+    multiplyPolynomialByConstant(r, &p_rat, ring);
+    Polynomial * buff = multiplyPolynomials(ring,h,r, NULL);
+    Polynomial * e = addPolynomials(ring, buff, m, NULL);
+    
+    freePolynomial(r);freePolynomial(buff);
     freeQuotientPolynomialRing(ring);
-    freeQuotientPolynomialRing(ring_without_ideal);
+    
 
 /* 
     Polynomial * h_cp=copyPolynomial(h);
@@ -116,8 +114,8 @@ Polynomial * decodePolynomial(Polynomial *e, Polynomial *f, Polynomial * f_p_inv
 
     for(int i=0; i<a->degree; i++)
     {
-        if(toInt(&a->coefficients[i])<s)b->coefficients[i]=createRational(toInt(&a->coefficients[i])+t, 1);
-        else b->coefficients[i]=createRational(toInt(&a->coefficients[i])+t-q, 1);   
+        if(toInt(&a->coefficients[i])<0)b->coefficients[i]=createRational(toInt(&a->coefficients[i])+q, 1);
+        if(toInt(&a->coefficients[i])>q/2) b->coefficients[i]=createRational(toInt(&a->coefficients[i])-q, 1);   
     }
 
    
