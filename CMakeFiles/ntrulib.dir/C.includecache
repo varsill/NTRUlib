@@ -93,6 +93,8 @@ polynomial.h
 include/polynomial.h
 quotient_polynomial_ring.h
 include/quotient_polynomial_ring.h
+stdint.h
+-
 
 include/polynomial.h
 config.h

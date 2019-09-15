@@ -137,6 +137,19 @@ polynomial_test/fast:
 .PHONY : polynomial_test/fast
 
 #=============================================================================
+# Target rules for targets named ntru_test
+
+# Build rule for target.
+ntru_test: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 ntru_test
+.PHONY : ntru_test
+
+# fast build rule for target.
+ntru_test/fast:
+	$(MAKE) -f tests/CMakeFiles/ntru_test.dir/build.make tests/CMakeFiles/ntru_test.dir/build
+.PHONY : ntru_test/fast
+
+#=============================================================================
 # Target rules for targets named rationals_test
 
 # Build rule for target.
@@ -402,6 +415,7 @@ help:
 	@echo "... ntrulib"
 	@echo "... edit_cache"
 	@echo "... polynomial_test"
+	@echo "... ntru_test"
 	@echo "... rationals_test"
 	@echo "... src/debug.o"
 	@echo "... src/debug.i"

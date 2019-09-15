@@ -1,0 +1,1 @@
+/usr/bin/cc   -rdynamic CMakeFiles/ntru_test.dir/src/ntru_test.c.o  -o ntru_test ../libntrulib.a -lpthread -lcheck -lrt -lsubunit -lpthread -lm 

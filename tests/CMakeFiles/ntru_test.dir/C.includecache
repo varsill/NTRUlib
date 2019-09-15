@@ -6,25 +6,13 @@
 
 #IncludeRegexTransform: 
 
-/home/tadeusz/Desktop/ntru/tests/src/polynomial_test.c
+/home/tadeusz/Desktop/ntru/tests/src/ntru_test.c
+config.h
+/home/tadeusz/Desktop/ntru/tests/src/config.h
 check.h
 -
-stdlib.h
--
-stdio.h
--
-quotient_polynomial_ring.h
-/home/tadeusz/Desktop/ntru/tests/src/quotient_polynomial_ring.h
-polynomial.h
-/home/tadeusz/Desktop/ntru/tests/src/polynomial.h
 stdbool.h
 -
-config.h
-/home/tadeusz/Desktop/ntru/tests/src/config.h
-hashtable.h
-/home/tadeusz/Desktop/ntru/tests/src/hashtable.h
-config.h
-/home/tadeusz/Desktop/ntru/tests/src/config.h
 ntru.h
 /home/tadeusz/Desktop/ntru/tests/src/ntru.h
 

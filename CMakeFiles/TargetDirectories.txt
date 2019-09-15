@@ -4,4 +4,5 @@
 /home/tadeusz/Desktop/ntru/tests/CMakeFiles/rebuild_cache.dir
 /home/tadeusz/Desktop/ntru/tests/CMakeFiles/edit_cache.dir
 /home/tadeusz/Desktop/ntru/tests/CMakeFiles/polynomial_test.dir
+/home/tadeusz/Desktop/ntru/tests/CMakeFiles/ntru_test.dir
 /home/tadeusz/Desktop/ntru/tests/CMakeFiles/rationals_test.dir

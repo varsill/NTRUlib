@@ -126,6 +126,21 @@ polynomial_test/fast:
 .PHONY : polynomial_test/fast
 
 # Convenience name for target.
+tests/CMakeFiles/ntru_test.dir/rule:
+	cd /home/tadeusz/Desktop/ntru && $(MAKE) -f CMakeFiles/Makefile2 tests/CMakeFiles/ntru_test.dir/rule
+.PHONY : tests/CMakeFiles/ntru_test.dir/rule
+
+# Convenience name for target.
+ntru_test: tests/CMakeFiles/ntru_test.dir/rule
+
+.PHONY : ntru_test
+
+# fast build rule for target.
+ntru_test/fast:
+	cd /home/tadeusz/Desktop/ntru && $(MAKE) -f tests/CMakeFiles/ntru_test.dir/build.make tests/CMakeFiles/ntru_test.dir/build
+.PHONY : ntru_test/fast
+
+# Convenience name for target.
 tests/CMakeFiles/rationals_test.dir/rule:
 	cd /home/tadeusz/Desktop/ntru && $(MAKE) -f CMakeFiles/Makefile2 tests/CMakeFiles/rationals_test.dir/rule
 .PHONY : tests/CMakeFiles/rationals_test.dir/rule
@@ -139,6 +154,33 @@ rationals_test: tests/CMakeFiles/rationals_test.dir/rule
 rationals_test/fast:
 	cd /home/tadeusz/Desktop/ntru && $(MAKE) -f tests/CMakeFiles/rationals_test.dir/build.make tests/CMakeFiles/rationals_test.dir/build
 .PHONY : rationals_test/fast
+
+src/ntru_test.o: src/ntru_test.c.o
+
+.PHONY : src/ntru_test.o
+
+# target to build an object file
+src/ntru_test.c.o:
+	cd /home/tadeusz/Desktop/ntru && $(MAKE) -f tests/CMakeFiles/ntru_test.dir/build.make tests/CMakeFiles/ntru_test.dir/src/ntru_test.c.o
+.PHONY : src/ntru_test.c.o
+
+src/ntru_test.i: src/ntru_test.c.i
+
+.PHONY : src/ntru_test.i
+
+# target to preprocess a source file
+src/ntru_test.c.i:
+	cd /home/tadeusz/Desktop/ntru && $(MAKE) -f tests/CMakeFiles/ntru_test.dir/build.make tests/CMakeFiles/ntru_test.dir/src/ntru_test.c.i
+.PHONY : src/ntru_test.c.i
+
+src/ntru_test.s: src/ntru_test.c.s
+
+.PHONY : src/ntru_test.s
+
+# target to generate assembly for a file
+src/ntru_test.c.s:
+	cd /home/tadeusz/Desktop/ntru && $(MAKE) -f tests/CMakeFiles/ntru_test.dir/build.make tests/CMakeFiles/ntru_test.dir/src/ntru_test.c.s
+.PHONY : src/ntru_test.c.s
 
 src/polynomial_test.o: src/polynomial_test.c.o
 
@@ -203,7 +245,11 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
 	@echo "... polynomial_test"
+	@echo "... ntru_test"
 	@echo "... rationals_test"
+	@echo "... src/ntru_test.o"
+	@echo "... src/ntru_test.i"
+	@echo "... src/ntru_test.s"
 	@echo "... src/polynomial_test.o"
 	@echo "... src/polynomial_test.i"
 	@echo "... src/polynomial_test.s"

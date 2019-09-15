@@ -237,23 +237,7 @@ Polynomial * decodePolynomial(Polynomial *e, Polynomial *f, Polynomial * f_p_inv
        
        return NULL;
    }
-   /* 
-    int n=p;
-    while(n<=e)
-    {  
-        ring_p->q=pow(p, n);
    
-        Polynomial * buffer = multiplyPolynomials(ring_p, b, b, NULL);
-        Polynomial * buffer2 = multiplyPolynomials(ring_p, a, buffer, NULL);
-        Rational p_rat = createRational(p, 1);
-       multiplyPolynomialByConstant(b, &p_rat, ring_p); 
-        Polynomial * buffer3=substractPolynomials(ring_p, b, buffer2, NULL);
- 
-        freePolynomial(b); b=buffer3;
-        freePolynomial(buffer);freePolynomial(buffer2);
-        n=n*p;
-    }
-   */
 
     int v = p;
     Polynomial * p_poly =createPolynomial(INTEGER, NULL, NULL, p);
@@ -334,5 +318,48 @@ static int getExponent(int x)
     return result;
 
    
+
+}
+
+
+
+crc generateCRC(crc msg[], int N)
+{
+
+
+    crc  remainder = 0;	
+
+
+    for (int byte = 0; byte < N; ++byte)
+    {
+       
+        remainder ^= (msg[byte] << (WIDTH - 8));
+
+     
+        for (uint8_t bit = 8; bit > 0; --bit)
+        {
+          
+            if (remainder & TOPBIT)
+            {
+                remainder = (remainder << 1) ^ POLYNOMIAL;
+            }
+            else
+            {
+                remainder = (remainder << 1);
+            }
+        }
+    }
+
+    return (remainder);
+
+} 
+
+
+bool checkCRC(crc msg[], int N, crc x)
+{
+
+    crc r = generateCRC(msg, N);
+    if(x==r) return true;
+    return false;
 
 }

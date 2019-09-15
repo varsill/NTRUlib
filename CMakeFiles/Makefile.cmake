@@ -54,5 +54,6 @@ set(CMAKE_MAKEFILE_PRODUCTS
 set(CMAKE_DEPEND_INFO_FILES
   "CMakeFiles/ntrulib.dir/DependInfo.cmake"
   "tests/CMakeFiles/polynomial_test.dir/DependInfo.cmake"
+  "tests/CMakeFiles/ntru_test.dir/DependInfo.cmake"
   "tests/CMakeFiles/rationals_test.dir/DependInfo.cmake"
   )
