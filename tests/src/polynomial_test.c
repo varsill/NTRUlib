@@ -249,24 +249,26 @@ int main(void)
 //	printPolynomial(k.f_p_inverse, "f_p_inverse: ");*/
 
 srand(time(NULL));
-	int N = 10;
-	int p = 2;
-	int q = 16;
-	int d = 5;
+	int N = 167;
+	int p = 7;
+	int q = 512;
+	int d = 71;
 
 	
 	KeyPackage keys = createKey(N, p, q, d);
 
 	
 //	Polynomial * m = createPolynomial(INTEGER, NULL, NULL, 1, 3, 3, 7, 2, 1, 3, 7);
-Polynomial * m = createPolynomial(INTEGER, NULL, NULL, 1, 2, 0, 1, 0, 1, 1);
+//Polynomial * m = createPolynomial(INTEGER, NULL, NULL, 1, 1, 0, 1, 0, 1, 1);
 
+Polynomial *m = createRandomPolynomial(MODULAR, N, p);
 //fillPolynomialWithLeadingZeros(m, N);
+printPolynomial(m);
 	
-	
-	Polynomial * e = encodePolynomial(m, keys.h, N, q, p);
+	Polynomial * e = encodePolynomial(m, keys.h, N, p, q, d);
 
 	Polynomial * decoded = decodePolynomial(e, keys.f, keys.f_p_inverse, N, p, q, d);
+	
 	printPolynomial(decoded);
 	freePolynomial(decoded);
 	freePolynomial(m);

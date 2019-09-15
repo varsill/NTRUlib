@@ -5,9 +5,9 @@
 KeyPackage createKey(int N, int p, int q, int d)
 {
     bool further;
-    QuotientPolynomialRing * ring_p = createQuotientPolynomialRing(createSpecialPolynomial(SIMPLE, N), p , NULL);
-    QuotientPolynomialRing * ring_q = createQuotientPolynomialRing(createSpecialPolynomial(SIMPLE, N), q , NULL);
-    Polynomial *g = createRandomPolynomial(MODULAR, N, p);
+    QuotientPolynomialRing * ring_p = createQuotientPolynomialRing(createSpecialPolynomial(SIMPLE, N+1), p , NULL);
+    QuotientPolynomialRing * ring_q = createQuotientPolynomialRing(createSpecialPolynomial(SIMPLE, N+1), q , NULL);
+    Polynomial *g = createRandomPolynomial(BINARY, N, d);
     Polynomial *f;
     Polynomial *f_p_inverse;
     Polynomial *f_q_inverse;
@@ -16,16 +16,11 @@ KeyPackage createKey(int N, int p, int q, int d)
     {
         further=false;
        
-        f = createRandomPolynomial(MODULAR, N,p);
+        f = createRandomPolynomial(BINARY, N,d);
         
         f_p_inverse = inversePolynomialModuloNotPrime(ring_p, f);
         f_q_inverse = inversePolynomialModuloNotPrime(ring_q, f);
         
-         
-      //  printPolynomial(f, "f: ");
-     //   printPolynomial(f_p_inverse, "f_p_inverse: ");
-      //  printPolynomial(f_q_inverse, "f_q_inverse: ");
-       // pause();
         if(f_p_inverse==NULL || f_q_inverse==NULL)
         {
             
@@ -38,18 +33,15 @@ KeyPackage createKey(int N, int p, int q, int d)
         }
       
     }while(further);
- 
-    Polynomial * h = multiplyPolynomials(ring_q, f_q_inverse, g, NULL);//czy multiply liczy modulo polynomial?!
-  
-
-    for(int i=0; i<h->degree; i++)
-    {
-        if(toInt(&h->coefficients[i])<0)h->coefficients[i]=createRational(toInt(&h->coefficients[i])+q,1);
-        h->coefficients[i]=createRational(mod(toInt(&h->coefficients[i])*p, q), 1);
-    }
+   
+    Rational minus_one = createRational(-1, 1);
+    Polynomial * PI = multiplyPolynomials(ring_q, f, g, NULL);//czy multiply liczy modulo polynomial?!
+    multiplyPolynomialByConstant(PI, &minus_one, ring_p);
+    Polynomial *buff=multiplyPolynomials(ring_q, PI, f_q_inverse, NULL);
+    Polynomial *h=addPolynomials(ring_q, buff, g, NULL);
     
     freeQuotientPolynomialRing(ring_p);freeQuotientPolynomialRing(ring_q);
-    freePolynomial(g);
+    freePolynomial(g);freePolynomial(PI);freePolynomial(buff);
     freePolynomial(f_q_inverse);
 
     KeyPackage result;
@@ -59,19 +51,18 @@ KeyPackage createKey(int N, int p, int q, int d)
 }
 
 
-Polynomial * encodePolynomial(const Polynomial *m, Polynomial *h, int N, int q, int p)
+Polynomial * encodePolynomial(const Polynomial *m, Polynomial *h, int N, int p, int q, int d)
 {  
-    Polynomial * r = createRandomPolynomial(MODULAR, N, p);
+    Polynomial * fuzz = createRandomPolynomial(BINARY, N, d);
     
-    QuotientPolynomialRing * ring = createQuotientPolynomialRing(createSpecialPolynomial(SIMPLE, N), q, NULL);
-    Rational p_rat = createRational(p, 1);
-    multiplyPolynomialByConstant(r, &p_rat, ring);
-    Polynomial * buff = multiplyPolynomials(ring,h,r, NULL);
-    Polynomial * e = addPolynomials(ring, buff, m, NULL);
+    QuotientPolynomialRing * ring_q = createQuotientPolynomialRing(createSpecialPolynomial(SIMPLE, N+1), q, NULL);
+   
+    Polynomial * buff = multiplyPolynomials(ring_q,h,fuzz, NULL);
+    Polynomial * e = addPolynomials(ring_q, buff, m, NULL);
     
-    freePolynomial(r);freePolynomial(buff);
-    freeQuotientPolynomialRing(ring);
-    
+    freePolynomial(fuzz);freePolynomial(buff);
+    freeQuotientPolynomialRing(ring_q);
+    return e;
 
 /* 
     Polynomial * h_cp=copyPolynomial(h);
@@ -93,39 +84,54 @@ Polynomial * encodePolynomial(const Polynomial *m, Polynomial *h, int N, int q, 
     freeQuotientPolynomialRing(ring);
     freePolynomial(h_prim);
     */
-    return e;
+  
 
 }
 
 Polynomial * decodePolynomial(Polynomial *e, Polynomial *f, Polynomial * f_p_inverse, int N, int p, int q, int d)
 {
-    QuotientPolynomialRing * ring_q = createQuotientPolynomialRing(createSpecialPolynomial(SIMPLE, N), q, NULL);
-     QuotientPolynomialRing * ring_p = createQuotientPolynomialRing(createSpecialPolynomial(SIMPLE, N), p, NULL);
+    QuotientPolynomialRing * ring_q = createQuotientPolynomialRing(createSpecialPolynomial(SIMPLE, N+1), q, NULL);
+    QuotientPolynomialRing * ring_p = createQuotientPolynomialRing(createSpecialPolynomial(SIMPLE, N+1), p, NULL);
     Polynomial * a = multiplyPolynomials(ring_q, f, e, NULL);
-
-  
-    fillPolynomialWithLeadingZeros(a, N);
-    int s = floor(q/2.0+d*(p-1)+d*d*d*1.0/N);
-    int t = q*floor((d*(p-1)+d*d*d/N)*1.0/q);
+    
+    int s = floor(q/2.0+d*(p-1)+d*d*d*1.0/(N));
+    int t = q*floor((d*(p-1)+d*d*d*1.0/(N))*1.0/q);
     s=mod(s, q);
     t=mod(t, p);
+ 
+   // t=0;
+    
+    
+    
 
-    Polynomial * b = createSpecialPolynomial(ZERO, N, INTEGER);
-
+         
+    
+    
+    
+   // Polynomial * b = createSpecialPolynomial(ZERO, N, INTEGER);
+ //   printPolynomial(a, "PRZED REDUKCJA:");
     for(int i=0; i<a->degree; i++)
     {
-        if(toInt(&a->coefficients[i])<0)b->coefficients[i]=createRational(toInt(&a->coefficients[i])+q, 1);
-        if(toInt(&a->coefficients[i])>q/2) b->coefficients[i]=createRational(toInt(&a->coefficients[i])-q, 1);   
+       // a->coefficients[i]=createRational(toInt(&a->coefficients[i])+t, 1);   
+        if(toInt(&a->coefficients[i])<s) a->coefficients[i]=createRational(toInt(&a->coefficients[i])+t, 1);   
+        else a->coefficients[i]=createRational(toInt(&a->coefficients[i])+t-q, 1);   
     }
-
-   
     
-    Polynomial * n  = multiplyPolynomials(ring_p, b, f_p_inverse, NULL);
+  //  printPolynomial(a, "PO REDUKCJI:   ");
+    
+  
+   
+  Polynomial * n = multiplyPolynomials(ring_p,a, f_p_inverse, NULL);
 
-    freePolynomial(a);
-    freePolynomial(b);
+
+  
+
+
     freeQuotientPolynomialRing(ring_p);freeQuotientPolynomialRing(ring_q);
+    freePolynomial(a);
+    return n;
     /* 
+    {
     //we assume, that argument d of this function is equal to the argument d of the function createKey() - which means, that number of ones in binary polynomial f is equal to d
     int * u = (int*)malloc(d*sizeof(int));  
     Rational one = createRational(1, 1);
@@ -208,6 +214,8 @@ Polynomial * decodePolynomial(Polynomial *e, Polynomial *f, Polynomial * f_p_inv
     freeQuotientPolynomialRing(ring_p);freeQuotientPolynomialRing(ring_q);
     freePolynomial(v_prim);freePolynomial(e_prim);freePolynomial(b);freePolynomial(a);
 
+    }
+    
     */
     return n;
 

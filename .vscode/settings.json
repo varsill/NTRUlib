@@ -1,6 +1,7 @@
 {
     "files.associations": {
         "type_traits": "c",
-        "quotient_polynomial_ring.h": "c"
+        "quotient_polynomial_ring.h": "c",
+        "cmath": "c"
     }
 }
