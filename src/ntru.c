@@ -363,3 +363,9 @@ bool checkCRC(crc msg[], int N, crc x)
     return false;
 
 }
+
+KeyPackage generateKey(ParametersPack pack)
+{
+
+    return createKey(pack.N, pack.p, pack.q, pack.d);
+}

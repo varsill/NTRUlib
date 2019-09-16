@@ -71,22 +71,125 @@ START_TEST(encode_test2)
 
 
 }
-
-
-
-
 END_TEST
+
+
+START_TEST(binary_to_polynomial_test)
+{
+    int length=8;
+    int p=5;
+    int r_lenght;
+    uint8_t * t = {2, 3, 4, 1, 2, 3, 1, 3};
+
+    Polynomial * p = getPolynomialFromBinary(t, length, p);
+    
+    uint8_t * r=getBinaryFromPolynomial(p, &r_lenght);
+    ck_assert(length==r_length);
+    for(int i=0; i<length; i++)
+    {
+        ck_assert(t[i]==r[i]);
+    }
+}
+END_TEST
+
+
+
+START_TEST(translation)
+{
+
+    int length=8;
+    int p;
+    int N;
+    int r_length;
+    int poly_array_length;
+    uint8_t * t = {42, 413, 134, 451, 31, 34, 11, 23};
+
+    p=3;
+    N=10;
+    Polynomial ** array1 = translateBinaryToPolynomials(t, length, N, p, false, &poly_array_length);
+    uint8_t *r1=translatePolynomialsToBinary(array1, poly_array_length, p, false, &r_length);
+    for(int i=0; i<poly_array_length; i++)freePolynomial(array1[i]);
+    ck_assert(length==r_length);
+    for(int i=0; i<length; i++)
+    {
+        ck_assert(t[i]==r1[i]);
+    }
+
+    p=7;
+    N=167;
+    Polynomial ** array2 = translateBinaryToPolynomials(t, length, N, p, false, &poly_array_length);
+    uint8_t *r2=translatePolynomialsToBinary(array2, poly_array_length, p, false, &r_length);
+    for(int i=0; i<poly_array_length; i++)freePolynomial(array1[i]);
+    ck_assert(length==r_length);
+    for(int i=0; i<length; i++)
+    {
+        ck_assert(t[i]==r2[i]);
+    }
+
+
+    
+
+}
+END_TEST
+
+
+START_TEST(translation_with_crc)
+{
+
+    int length=8;
+    int p;
+    int N;
+    int r_length;
+    int poly_array_length;
+    uint8_t * t = {42, 413, 134, 451, 31, 34, 11, 23};
+
+    p=3;
+    N=10;
+    Polynomial ** array1 = translateBinaryToPolynomials(t, length, N, p, true, &poly_array_length);
+    uint8_t *r1=translatePolynomialsToBinary(array1, poly_array_length, p, true, &r_length);
+    for(int i=0; i<poly_array_length; i++)freePolynomial(array1[i]);
+    ck_assert(length==r_length);
+    for(int i=0; i<length; i++)
+    {
+        ck_assert(t[i]==r1[i]);
+    }
+
+    p=7;
+    N=167;
+    Polynomial ** array2 = translateBinaryToPolynomials(t, length, N, p, true, &poly_array_length);
+    uint8_t *r2=translatePolynomialsToBinary(array2, poly_array_length, p, true, &r_length);
+    for(int i=0; i<poly_array_length; i++)freePolynomial(array1[i]);
+    ck_assert(length==r_length);
+    for(int i=0; i<length; i++)
+    {
+        ck_assert(t[i]==r2[i]);
+    }
+
+
+    
+}
+END_TEST
+
 
 Suite * ntru_suite(void)
 {
 	Suite * s;
 	TCase * tc_crc;
 	TCase * tc_encrypt;
+    TCase * tc_binary_to_poly;
 	s=suite_create("NTRUEncrypt testing suite");
 
 	tc_crc=tcase_create("Check Cyclic Redundancy Code");
 	tcase_add_test(tc_crc, crc_test);
 	suite_add_tcase(s, tc_crc);
+
+
+
+    tc_binary_to_poly = tcase_create("Check conversion beetween binary and polynomials");
+    tcase_add_test(tc_binary_to_poly, binary_to_polynomial_test);
+    tcase_add_test(tc_binary_to_poly, translation);
+    tcase_add_test(tc_binary_to_poly, translation_with_crc);
+
 
     tc_encrypt=tcase_create("Check whether NTRU can encrypt and decrypt the message");
     tcase_add_test(tc_encrypt, encode_test1);
