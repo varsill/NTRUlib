@@ -216,9 +216,47 @@ Suite * polynomial_suite(void)
 
 
 #include "ntru.h"
+#define LENGTH 8
 int main(void)
 {START_DEBUG
+ 
+ uint8_t *t = malloc(sizeof(uint8_t)*LENGTH);
 
+for(int i=0; i<LENGTH; i++)t[i]=i*i;
+for(int i=0; i<8*LENGTH; i++)
+{
+	if(i%8==0)printDebug(" ");
+	printf("%d", GET_BIT(t, i));
+}
+int l;
+printDebug("\n");
+/*
+Polynomial *pp = getPolynomialFromBinary(t, 0, LENGTH*8,11);
+printDebug("\n");
+printPolynomial(pp);
+
+
+uint8_t *tres = getBinaryFromPolynomial(pp,11, &l);
+
+for(int i=0; i<8*LENGTH; i++)
+{
+	if(i%8==0)printDebug(" ");
+	printf("%d", GET_BIT(tres, i));
+}
+
+*/
+
+Polynomial ** pb =translateBinaryToPolynomials(t, 8*LENGTH, 10, 14, false, &l);
+for(int i=0; i<l; i++)printPolynomial(pb[i]);
+int x;
+uint8_t *r=translatePolynomialsToBinary(pb, l, 14, false, &x);
+for(int i=0; i<x; i++)
+{
+	if(i%8==0)printDebug(" ");
+	printf("%d", GET_BIT(r, i));
+}
+STOP_DEBUG
+return 1;
 /* 	printf("%d", invertInteger(2, 8));
 	return 1;
 	Polynomial * x = createPolynomial(INTEGER, NULL, NULL, 1, 0, 0, 1, 1);
@@ -262,6 +300,7 @@ srand(time(NULL));
 //Polynomial * m = createPolynomial(INTEGER, NULL, NULL, 1, 1, 0, 1, 0, 1, 1);
 
 Polynomial *m = createRandomPolynomial(MODULAR, N, p);
+m->coefficients[m->degree-1]=createRational(0, 1);
 //fillPolynomialWithLeadingZeros(m, N);
 printPolynomial(m);
 	

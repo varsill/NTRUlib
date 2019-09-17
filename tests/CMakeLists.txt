@@ -3,7 +3,7 @@ project(UnitTestProject)
 file(GLOB TESTS_SOURCE_FILES )
 add_executable(polynomial_test ${PROJECT_SOURCE_DIR}/src/polynomial_test.c)
 add_executable(rationals_test ${PROJECT_SOURCE_DIR}/src/rationals_test.c)
-add_executable(ntru_test ${PROJECT_SOURCE_DIR}/src/ntru_test.c)
+add_executable(ntru_test ${PROJECT_SOURCE_DIR}/src/rationals_test.c)
 #dependencies to the main program - NTRU library  
 include_directories(${CMAKE_SOURCE_DIR}/include})
 target_link_libraries(polynomial_test ntrulib)

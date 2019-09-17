@@ -6,15 +6,17 @@
 
 #IncludeRegexTransform: 
 
-/home/tadeusz/Desktop/ntru/tests/src/ntru_test.c
-config.h
-/home/tadeusz/Desktop/ntru/tests/src/config.h
+/home/tadeusz/Desktop/ntru/tests/src/rationals_test.c
+rationals.h
+/home/tadeusz/Desktop/ntru/tests/src/rationals.h
 check.h
+-
+stdlib.h
+-
+stdio.h
 -
 stdbool.h
 -
-ntru.h
-/home/tadeusz/Desktop/ntru/tests/src/ntru.h
 
 include/config.h
 debug.h
@@ -41,40 +43,6 @@ stdlib.h
 -
 hashtable.h
 include/hashtable.h
-
-include/ntru.h
-stdbool.h
--
-config.h
-include/config.h
-polynomial.h
-include/polynomial.h
-quotient_polynomial_ring.h
-include/quotient_polynomial_ring.h
-stdint.h
--
-
-include/polynomial.h
-config.h
-include/config.h
-stdbool.h
--
-integer_arithmetic.h
-include/integer_arithmetic.h
-rationals.h
-include/rationals.h
-time.h
--
-math.h
--
-
-include/quotient_polynomial_ring.h
-polynomial.h
-include/polynomial.h
-stdlib.h
-include/stdlib.h
-config.h
-include/config.h
 
 include/rationals.h
 float.h

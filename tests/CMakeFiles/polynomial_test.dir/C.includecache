@@ -65,6 +65,10 @@ quotient_polynomial_ring.h
 include/quotient_polynomial_ring.h
 stdint.h
 -
+math.h
+-
+memory.h
+-
 
 include/polynomial.h
 config.h

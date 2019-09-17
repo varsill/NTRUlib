@@ -8,10 +8,15 @@
 #include "quotient_polynomial_ring.h"
 #include <stdint.h>
 #include <math.h>
+#include <memory.h>
 
 #define WIDTH  (8 * sizeof(crc))
 #define TOPBIT (1 << (WIDTH - 1))
 #define POLYNOMIAL 0xD8  
+
+#define SET_BIT(t, i) t[(i)/8]|=(1<<((i)%8))
+
+#define GET_BIT(t, i) ((t[(i)/8] & (1<<((i)%8)) )>0)
 
 typedef struct 
 {
@@ -30,17 +35,16 @@ typedef struct
 
 typedef uint8_t crc;
 
-static KeyPackage createKey(int N, int p, int q, int d);
+KeyPackage createKey(int N, int p, int q, int d);
 KeyPackage generateKey(ParametersPack pack);
 Polynomial * inversePolynomialModuloNotPrime(const QuotientPolynomialRing * ring, Polynomial * p);
 Polynomial * encodePolynomial(const Polynomial *m, Polynomial *h, int N, int p, int q, int d);
 Polynomial * decodePolynomial(Polynomial *e, Polynomial *f, Polynomial * f_p_inverse, int N, int p, int q, int d);
 
-Polynomial * getPolynomialFromBinary(uint8_t *t, int length, int p);
-
-uint8_t * getBinaryFromPolynomial(Polynomial * p, int* result_length);
-
-Polynomial ** translateBinaryToPolynomials(uint8_t *t, int lenght, int N, int p, bool use_crc, int* poly_array_lenght);
+Polynomial * getPolynomialFromBinary(uint8_t *t, int s, int e, int p);
+uint8_t * getBinaryFromPolynomial(Polynomial * poly,int p, int* result_length);
+void add_crc8(const uint8_t *data, uint16_t number_of_bits);
+Polynomial ** translateBinaryToPolynomials(uint8_t *t, int number_of_bits, int N, int p, bool use_crc, int* poly_array_length);
 uint8_t *translatePolynomialsToBinary(Polynomial ** poly_array, int poly_array_length, int p, bool use_crc,  int* result_length);
 
 crc generateCRC(crc msg[], int N);

@@ -1,5 +1,5 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/ntru_test.dir/src/ntru_test.c.o"
+  "CMakeFiles/ntru_test.dir/src/rationals_test.c.o"
   "ntru_test.pdb"
   "ntru_test"
 )

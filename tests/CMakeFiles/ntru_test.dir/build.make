@@ -57,38 +57,38 @@ include tests/CMakeFiles/ntru_test.dir/progress.make
 # Include the compile flags for this target's objects.
 include tests/CMakeFiles/ntru_test.dir/flags.make
 
-tests/CMakeFiles/ntru_test.dir/src/ntru_test.c.o: tests/CMakeFiles/ntru_test.dir/flags.make
-tests/CMakeFiles/ntru_test.dir/src/ntru_test.c.o: tests/src/ntru_test.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/tadeusz/Desktop/ntru/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object tests/CMakeFiles/ntru_test.dir/src/ntru_test.c.o"
-	cd /home/tadeusz/Desktop/ntru/tests && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/ntru_test.dir/src/ntru_test.c.o   -c /home/tadeusz/Desktop/ntru/tests/src/ntru_test.c
+tests/CMakeFiles/ntru_test.dir/src/rationals_test.c.o: tests/CMakeFiles/ntru_test.dir/flags.make
+tests/CMakeFiles/ntru_test.dir/src/rationals_test.c.o: tests/src/rationals_test.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/tadeusz/Desktop/ntru/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object tests/CMakeFiles/ntru_test.dir/src/rationals_test.c.o"
+	cd /home/tadeusz/Desktop/ntru/tests && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/ntru_test.dir/src/rationals_test.c.o   -c /home/tadeusz/Desktop/ntru/tests/src/rationals_test.c
 
-tests/CMakeFiles/ntru_test.dir/src/ntru_test.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/ntru_test.dir/src/ntru_test.c.i"
-	cd /home/tadeusz/Desktop/ntru/tests && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/tadeusz/Desktop/ntru/tests/src/ntru_test.c > CMakeFiles/ntru_test.dir/src/ntru_test.c.i
+tests/CMakeFiles/ntru_test.dir/src/rationals_test.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/ntru_test.dir/src/rationals_test.c.i"
+	cd /home/tadeusz/Desktop/ntru/tests && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/tadeusz/Desktop/ntru/tests/src/rationals_test.c > CMakeFiles/ntru_test.dir/src/rationals_test.c.i
 
-tests/CMakeFiles/ntru_test.dir/src/ntru_test.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/ntru_test.dir/src/ntru_test.c.s"
-	cd /home/tadeusz/Desktop/ntru/tests && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/tadeusz/Desktop/ntru/tests/src/ntru_test.c -o CMakeFiles/ntru_test.dir/src/ntru_test.c.s
+tests/CMakeFiles/ntru_test.dir/src/rationals_test.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/ntru_test.dir/src/rationals_test.c.s"
+	cd /home/tadeusz/Desktop/ntru/tests && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/tadeusz/Desktop/ntru/tests/src/rationals_test.c -o CMakeFiles/ntru_test.dir/src/rationals_test.c.s
 
-tests/CMakeFiles/ntru_test.dir/src/ntru_test.c.o.requires:
+tests/CMakeFiles/ntru_test.dir/src/rationals_test.c.o.requires:
 
-.PHONY : tests/CMakeFiles/ntru_test.dir/src/ntru_test.c.o.requires
+.PHONY : tests/CMakeFiles/ntru_test.dir/src/rationals_test.c.o.requires
 
-tests/CMakeFiles/ntru_test.dir/src/ntru_test.c.o.provides: tests/CMakeFiles/ntru_test.dir/src/ntru_test.c.o.requires
-	$(MAKE) -f tests/CMakeFiles/ntru_test.dir/build.make tests/CMakeFiles/ntru_test.dir/src/ntru_test.c.o.provides.build
-.PHONY : tests/CMakeFiles/ntru_test.dir/src/ntru_test.c.o.provides
+tests/CMakeFiles/ntru_test.dir/src/rationals_test.c.o.provides: tests/CMakeFiles/ntru_test.dir/src/rationals_test.c.o.requires
+	$(MAKE) -f tests/CMakeFiles/ntru_test.dir/build.make tests/CMakeFiles/ntru_test.dir/src/rationals_test.c.o.provides.build
+.PHONY : tests/CMakeFiles/ntru_test.dir/src/rationals_test.c.o.provides
 
-tests/CMakeFiles/ntru_test.dir/src/ntru_test.c.o.provides.build: tests/CMakeFiles/ntru_test.dir/src/ntru_test.c.o
+tests/CMakeFiles/ntru_test.dir/src/rationals_test.c.o.provides.build: tests/CMakeFiles/ntru_test.dir/src/rationals_test.c.o
 
 
 # Object files for target ntru_test
 ntru_test_OBJECTS = \
-"CMakeFiles/ntru_test.dir/src/ntru_test.c.o"
+"CMakeFiles/ntru_test.dir/src/rationals_test.c.o"
 
 # External object files for target ntru_test
 ntru_test_EXTERNAL_OBJECTS =
 
-tests/ntru_test: tests/CMakeFiles/ntru_test.dir/src/ntru_test.c.o
+tests/ntru_test: tests/CMakeFiles/ntru_test.dir/src/rationals_test.c.o
 tests/ntru_test: tests/CMakeFiles/ntru_test.dir/build.make
 tests/ntru_test: libntrulib.a
 tests/ntru_test: tests/CMakeFiles/ntru_test.dir/link.txt
@@ -100,7 +100,7 @@ tests/CMakeFiles/ntru_test.dir/build: tests/ntru_test
 
 .PHONY : tests/CMakeFiles/ntru_test.dir/build
 
-tests/CMakeFiles/ntru_test.dir/requires: tests/CMakeFiles/ntru_test.dir/src/ntru_test.c.o.requires
+tests/CMakeFiles/ntru_test.dir/requires: tests/CMakeFiles/ntru_test.dir/src/rationals_test.c.o.requires
 
 .PHONY : tests/CMakeFiles/ntru_test.dir/requires
 

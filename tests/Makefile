@@ -155,33 +155,6 @@ rationals_test/fast:
 	cd /home/tadeusz/Desktop/ntru && $(MAKE) -f tests/CMakeFiles/rationals_test.dir/build.make tests/CMakeFiles/rationals_test.dir/build
 .PHONY : rationals_test/fast
 
-src/ntru_test.o: src/ntru_test.c.o
-
-.PHONY : src/ntru_test.o
-
-# target to build an object file
-src/ntru_test.c.o:
-	cd /home/tadeusz/Desktop/ntru && $(MAKE) -f tests/CMakeFiles/ntru_test.dir/build.make tests/CMakeFiles/ntru_test.dir/src/ntru_test.c.o
-.PHONY : src/ntru_test.c.o
-
-src/ntru_test.i: src/ntru_test.c.i
-
-.PHONY : src/ntru_test.i
-
-# target to preprocess a source file
-src/ntru_test.c.i:
-	cd /home/tadeusz/Desktop/ntru && $(MAKE) -f tests/CMakeFiles/ntru_test.dir/build.make tests/CMakeFiles/ntru_test.dir/src/ntru_test.c.i
-.PHONY : src/ntru_test.c.i
-
-src/ntru_test.s: src/ntru_test.c.s
-
-.PHONY : src/ntru_test.s
-
-# target to generate assembly for a file
-src/ntru_test.c.s:
-	cd /home/tadeusz/Desktop/ntru && $(MAKE) -f tests/CMakeFiles/ntru_test.dir/build.make tests/CMakeFiles/ntru_test.dir/src/ntru_test.c.s
-.PHONY : src/ntru_test.c.s
-
 src/polynomial_test.o: src/polynomial_test.c.o
 
 .PHONY : src/polynomial_test.o
@@ -215,6 +188,7 @@ src/rationals_test.o: src/rationals_test.c.o
 
 # target to build an object file
 src/rationals_test.c.o:
+	cd /home/tadeusz/Desktop/ntru && $(MAKE) -f tests/CMakeFiles/ntru_test.dir/build.make tests/CMakeFiles/ntru_test.dir/src/rationals_test.c.o
 	cd /home/tadeusz/Desktop/ntru && $(MAKE) -f tests/CMakeFiles/rationals_test.dir/build.make tests/CMakeFiles/rationals_test.dir/src/rationals_test.c.o
 .PHONY : src/rationals_test.c.o
 
@@ -224,6 +198,7 @@ src/rationals_test.i: src/rationals_test.c.i
 
 # target to preprocess a source file
 src/rationals_test.c.i:
+	cd /home/tadeusz/Desktop/ntru && $(MAKE) -f tests/CMakeFiles/ntru_test.dir/build.make tests/CMakeFiles/ntru_test.dir/src/rationals_test.c.i
 	cd /home/tadeusz/Desktop/ntru && $(MAKE) -f tests/CMakeFiles/rationals_test.dir/build.make tests/CMakeFiles/rationals_test.dir/src/rationals_test.c.i
 .PHONY : src/rationals_test.c.i
 
@@ -233,6 +208,7 @@ src/rationals_test.s: src/rationals_test.c.s
 
 # target to generate assembly for a file
 src/rationals_test.c.s:
+	cd /home/tadeusz/Desktop/ntru && $(MAKE) -f tests/CMakeFiles/ntru_test.dir/build.make tests/CMakeFiles/ntru_test.dir/src/rationals_test.c.s
 	cd /home/tadeusz/Desktop/ntru && $(MAKE) -f tests/CMakeFiles/rationals_test.dir/build.make tests/CMakeFiles/rationals_test.dir/src/rationals_test.c.s
 .PHONY : src/rationals_test.c.s
 
@@ -247,9 +223,6 @@ help:
 	@echo "... polynomial_test"
 	@echo "... ntru_test"
 	@echo "... rationals_test"
-	@echo "... src/ntru_test.o"
-	@echo "... src/ntru_test.i"
-	@echo "... src/ntru_test.s"
 	@echo "... src/polynomial_test.o"
 	@echo "... src/polynomial_test.i"
 	@echo "... src/polynomial_test.s"
