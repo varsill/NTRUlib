@@ -322,40 +322,57 @@ static int getExponent(int x)
 }
 
 
-Polynomial * getPolynomialFromBinary(uint8_t *t, int s, int e, int p)
+Polynomial * getPolynomialFromBinary(uint8_t *t, int s, int e, int p, bool is_crc)
 {
     int bits_per_poly_coefficient = log2(p);
- 
-   int number_of_bits=e-s;
+    uint8_t *b=NULL;
+    if(is_crc)
+    {
+        b=malloc(sizeof(uint8_t)*(e-s+8));
+        for(int i=0; i<e-s; i++){COPY_BIT(t, (s+i), b, i);}
+        uint8_t crc = getCRC(b, 0, e-s);
+        //printf("%d\n", crc);
+       
+        for(int i=0; i<8; i++){COPY_BIT((&crc), 7-i,b, (e-s)+i);}
+        
+        t=b;
+        e=e-s+8;
+        s=0;
+    }
+    int number_of_bits=e-s;
     int N=ceil(number_of_bits*1.0/bits_per_poly_coefficient);
    
     Polynomial * r=createSpecialPolynomial(ZERO, N);
+    //printPolynomial(r, "HAHAHAH:");
+    //printf("DUPA: %d", N);
     int j=0;
+  //  printf("s: %dm e: %d \n", s, e);
     while(s<e)
     {   
         
         for(int i=0; i<bits_per_poly_coefficient; i++)
-        {   
-          
+        {    
+           //if(s>=e)break;
+           //printf("%d",GET_BIT(t, s));
            r->coefficients[j]=createRational(2*toInt(&r->coefficients[j]), 1);   
            r->coefficients[j]=createRational(GET_BIT(t, s)+toInt(&r->coefficients[j]), 1);
            s++;
         }
         j++;
      
-       
-
     }
+    
+    free(b);
     return r;
 }
 
 
-uint8_t * getBinaryFromPolynomial(Polynomial * poly,int p, int* result_length)
+uint8_t * getBinaryFromPolynomial(Polynomial * poly,int p, bool is_crc, int* result_length, bool * is_crc_ok)
 {
      int bits_per_poly_coefficient = log2(p);
      *result_length=bits_per_poly_coefficient*poly->degree;//probably floor
-     uint8_t * result =(uint8_t*)malloc(sizeof(uint8_t)*ceil(*result_length/8));
-     for(int i=0; i<ceil(*result_length/8); i++)result[i]=0;
+     uint8_t * result =(uint8_t*)malloc(sizeof(uint8_t)*ceil(*result_length/8.0));
+     for(int i=0; i<ceil(*result_length/8.0); i++)result[i]=0;//bylo 8 zamiast 8.0 
      for(int i=0; i<poly->degree; i++)
      {
         for(int j=bits_per_poly_coefficient-1;j>=0; j--)
@@ -366,25 +383,53 @@ uint8_t * getBinaryFromPolynomial(Polynomial * poly,int p, int* result_length)
         }
 
      }
-
+    //printf("\nRESULT LENGTH1: %d ", *result_length);
+     if(is_crc)
+     {
+         uint8_t crc = checkCRC(result, 0, *result_length);
+         if(crc==0)*is_crc_ok=true;
+         else *is_crc_ok=false;
+        (*result_length)-=8;
+      
+         uint8_t* result2 = malloc(sizeof(uint8_t)*ceil(*result_length/8.0));
+         for(int i=0; i<*result_length; i++)
+         {
+             
+          //  printf("%d", GET_BIT(result, i));
+            COPY_BIT(result, i, result2, i);
+         }
+         printf(" ");
+        
+         free(result);
+         result=result2;
+     }
+ // printf("RESULT LENGTH2: %d \n", *result_length);
     return result;
 }
 
 
-Polynomial ** translateBinaryToPolynomials(uint8_t *t, int number_of_bits, int N, int p, bool use_crc, int* n_of_polys)
+Polynomial ** translateBinaryToPolynomials(uint8_t *t, int number_of_bits, int N, int p, bool is_crc, int* n_of_polys)
 {
+    
     int bits_per_poly = floor(log2(p))*N;
+    if(is_crc)bits_per_poly-=8;
+    if(bits_per_poly<=0)
+    {
+        printDebug("Couldn't apply crc with such a chose of N and p parameters.");
+        return;
+    }
     *n_of_polys =  ceil(number_of_bits*1.0/(bits_per_poly));
 
-
+    
    Polynomial ** polys = (Polynomial**)malloc(sizeof(Polynomial*)*(*n_of_polys));
-
+   
+//   uint8_t * b = (uint8_t*)malloc(sizeof(uint8_t)*ceil(bits_per_poly/8.0));
    for(int i=0; i<*n_of_polys; i++)
    {
-
-       polys[i]=getPolynomialFromBinary(t,i*bits_per_poly, (i+1)*bits_per_poly,p);
+       int e = (i+1)*bits_per_poly>number_of_bits?number_of_bits:(i+1)*bits_per_poly; 
+       polys[i]=getPolynomialFromBinary(t,i*bits_per_poly, e,p, is_crc);
    }
-
+    
     return polys;
 
 
@@ -392,7 +437,7 @@ Polynomial ** translateBinaryToPolynomials(uint8_t *t, int number_of_bits, int N
 }
 
 
-uint8_t * translatePolynomialsToBinary(Polynomial ** poly_array, int poly_array_length, int p, bool use_crc,  int* result_length)
+uint8_t * translatePolynomialsToBinary(Polynomial ** poly_array, int poly_array_length, int p,  bool is_crc, int* result_length)
 {
     int bits_per_poly = floor(log2(p))*poly_array[0]->degree;
     int bytes_per_poly = floor(bits_per_poly/8.0);
@@ -403,64 +448,114 @@ uint8_t * translatePolynomialsToBinary(Polynomial ** poly_array, int poly_array_
     for(int i=0; i<poly_array_length; i++)
     {
         int l;
-        uint8_t * t = getBinaryFromPolynomial(poly_array[i], p, &l);
-        for(int j=0; j<l; j++)if(GET_BIT(t, j))SET_BIT(result, (r+j));
+        bool is_crc_valid;
+        uint8_t * t = getBinaryFromPolynomial(poly_array[i], p,is_crc, &l, &is_crc_valid);
+      // for(int i=0; i<l; i++)    printf("%d", GET_BIT(t, i));
+      //  printf(" ");
+      if(!is_crc_valid)printDebug("\n BLADD!! ERROR!!!! \n")
+        for(int j=0; j<l; j++){COPY_BIT(t, j,result, (r+j));}
         r=r+l;
         free(t);
     }
+    if(is_crc)*result_length-=poly_array_length*8;
 
     return result;
 }   
 
 
-#define CRC8 0xD5
 
-void add_crc16(const uint8_t *data, uint16_t number_of_bits)
+
+
+
+uint8_t getCRC(uint8_t msg[], int s, int e)
 {
-   
+//terrible implementation
+int LENGTH=8;
+uint8_t * cp = (uint8_t*)malloc(sizeof(uint8_t)*(e-s+8));
+for(int i=0; i<e-s+8; i++) CLEAR_BIT(cp, i);
+
+for(int i=0; i<e-s; i++)
+{
+    if(GET_BIT(msg, (s+i)))SET_BIT(cp, i);
 }
 
 
-crc generateCRC(crc msg[], int N)
+
+for(int i=0; i<e-s; i++)
 {
-
-
-    crc  remainder = 0;	
-
-
-    for (int byte = 0; byte < N; ++byte)
+if(GET_BIT(cp, i))
+{
+    for(int j=0; j<8; j++)
     {
-       
-        remainder ^= (msg[byte] << (WIDTH - 8));
+        if(GET_BIT(cp, (j+i)) == GET_NTH_BIT(CRC8, 7-j))CLEAR_BIT(cp, (j+i));
+        else SET_BIT(cp, (j+i));
+    }
+}
 
-     
-        for (uint8_t bit = 8; bit > 0; --bit)
-        {
-          
-            if (remainder & TOPBIT)
-            {
-                remainder = (remainder << 1) ^ POLYNOMIAL;
-            }
-            else
-            {
-                remainder = (remainder << 1);
-            }
-        }
+
+}
+
+uint8_t result = 0;
+for(int i=e-s; i<e-s+8; i++)
+{
+    result*=2;
+    result+=GET_BIT(cp, i);
+}
+
+
+
+free(cp);
+return result;
+
+}
+
+
+uint8_t checkCRC(uint8_t msg[], int s, int e)
+{
+//terrible implementation
+int LENGTH=8;
+uint8_t * cp = (uint8_t*)malloc(sizeof(uint8_t)*(e-s));
+for(int i=0; i<e-s; i++) CLEAR_BIT(cp, i);
+
+for(int i=0; i<e-s; i++)
+{
+    if(GET_BIT(msg, (s+i)))SET_BIT(cp, i);
+}
+
+
+
+for(int i=0; i<e-s-8; i++)
+{
+if(GET_BIT(cp, i))
+{
+    for(int j=0; j<8; j++)
+    {
+        if(GET_BIT(cp, (j+i)) == GET_NTH_BIT(CRC8, 7-j))CLEAR_BIT(cp, (j+i));
+        else SET_BIT(cp, (j+i));
     }
 
-    return (remainder);
-
-} 
+}
 
 
-bool checkCRC(crc msg[], int N, crc x)
-{
-
-    crc r = generateCRC(msg, N);
-    if(x==r) return true;
-    return false;
 
 }
+
+uint8_t result = 0;
+for(int i=e-s-8; i<e-s; i++)
+{
+    result*=2;
+    result+=GET_BIT(cp, i);
+}
+
+
+
+free(cp);
+return result;
+
+}
+
+
+
 
 
 KeyPackage generateKey(ParametersPack pack)

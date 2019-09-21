@@ -220,16 +220,44 @@ Suite * polynomial_suite(void)
 int main(void)
 {START_DEBUG
  
- uint8_t *t = malloc(sizeof(uint8_t)*LENGTH);
 
-for(int i=0; i<LENGTH; i++)t[i]=i*i;
-for(int i=0; i<8*LENGTH; i++)
+
+
+
+ 
+
+ uint8_t *t = malloc(sizeof(uint8_t)*LENGTH);
+ uint8_t *b = malloc(sizeof(uint8_t)*LENGTH);
+printf("\n");
+for(int i=0; i<LENGTH; i++)t[i]=i*i+12;
+uint8_t lw = 13;
+
+for(int i=0; i<64; i++)
 {
-	if(i%8==0)printDebug(" ");
+	//if(i%8==0)printDebug(" ");
+	//printf("%d", GET_BIT(t, i));
+	//COPY_BIT((&lw),i, b, 7-i);
 	printf("%d", GET_BIT(t, i));
 }
 int l;
+
+
 printDebug("\n");
+
+Polynomial ** pb =translateBinaryToPolynomials(t, 8*LENGTH, 7,4, true, &l);
+printDebug("\n");
+for(int i=0; i<l; i++)printPolynomial(pb[i]);
+int x;
+uint8_t *r=translatePolynomialsToBinary(pb, l, 4,true,  &x);
+printDebug("\n");
+for(int i=0; i<x; i++)
+{
+	//if(i%8==0)printDebug(" ");
+	printf("%d", GET_BIT(r, i));
+}
+return 1;
+
+
 /*
 Polynomial *pp = getPolynomialFromBinary(t, 0, LENGTH*8,11);
 printDebug("\n");
@@ -246,15 +274,7 @@ for(int i=0; i<8*LENGTH; i++)
 
 */
 
-Polynomial ** pb =translateBinaryToPolynomials(t, 8*LENGTH, 10, 14, false, &l);
-for(int i=0; i<l; i++)printPolynomial(pb[i]);
-int x;
-uint8_t *r=translatePolynomialsToBinary(pb, l, 14, false, &x);
-for(int i=0; i<x; i++)
-{
-	if(i%8==0)printDebug(" ");
-	printf("%d", GET_BIT(r, i));
-}
+
 STOP_DEBUG
 return 1;
 /* 	printf("%d", invertInteger(2, 8));
